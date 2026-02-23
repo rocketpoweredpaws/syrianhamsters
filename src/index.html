@@ -1,15 +1,15 @@
 <div class="shp">
     <label>Sex of Offspring:</label>
     <select id="offspringssex">
-        <option value="female">Female</option>
         <option value="male">Male</option>
+        <option value="female" selected>Female</option>
     </select>
 </div>
 
 <div class="shpdropdown">
     <label>Breeding Male (Father) Coat Color:</label>
     <select id="dad">
-        <option value="++">Golden (+)</option>
+        <option value="++" selected>Golden (+)</option>
         <option value="aa">Black (aa)</option>
         <option value="pp">Cinnamon (pp)</option>
         <option value="ee">Cream (ee)</option>
@@ -27,7 +27,7 @@
 <div class="shpdropdown">
     <label>Dam (Mother) Coat Color:</label>
     <select id="mom">
-        <option value="++">Golden (+)</option>
+        <option value="++" selected>Golden (+)</option>
         <option value="aa">Black (aa)</option>
         <option value="pp">Cinnamon (pp)</option>
         <option value="ee">Cream (ee)</option>
@@ -47,74 +47,63 @@
 <div class="shpdropdown">
     <label>Coat Type:</label>
     <select id="coat-type">
-        <option value="Shorthair">Shorthair</option>
-        <option value="ll">Longhair</option>
-        <option value="Sasa">Satin</option>
-        <option value="rxrx">Rex</option>
+        <option value="++" selected>Shorthair (++)</option>
+        <option value="ll">Longhair (ll)</option>
+        <option value="rxrx">Rex (rxrx)</option>
+        <option value="Sasa">Satin (Sasa)</option>
+        <option value="hrhr">Hairless (hrhr)</option>
     </select>
 </div>
 
 <div class="shpdropdown">
-    <label>Pattern & Dilution:</label>
+    <label>Pattern:</label>
     <select id="pattern">
-        <option value="none">None (Solid)</option>
-        <option value="Ba_">Banded</option>
-        <option value="Dsds">Dominant Spot</option>
-        <option value="Toto">Tortoiseshell (Females Only)</option>
-        <option value="dgdg">Dark Grey (Dilution)</option>
+        <option value="++" selected>None (Solid)</option>
+        <option value="Ba_">Banded (Ba_)</option>
+        <option value="Dsds">Dominant Spot (Dsds)</option>
+        <option value="rdrd">Recessive Dappled (rdrd)</option>
+        <option value="Whwh">Roan / White Bellied (Whwh)</option>
+        <option value="ss">Piebald (ss)</option>
+        <option value="Toto">Tortoiseshell (Toto - Females Only)</option>
     </select>
 </div>
 
 <div class="shpdropdown">
     <label>Eye Color:</label>
     <select id="eye-color">
-        <option value="black">Black</option>
+        <option value="black" selected>Black</option>
         <option value="red">Red-OR-Pink</option>
     </select>
 </div>
 
 <div id="combination-lookup" style="display: none;">
     <select id="offspring-phenotype-list">
-        <option value="bbdgdg">Beige (bbdgdg)</option>
-        <option value="bbLglg">Black Eyed Blonde (bbLglg)</option>
-        <option value="bbToTo">Black Eyed Honey (bbToTo/bbToY)</option>
-        <option value="dgdgee">Black Eyed Ivory (dgdgee/eeLglg/eeSgsg)</option>
-        <option value="eeSgSg">Black Eyed White (eeSgSg)</option>
-        <option value="Lglgpp">Blonde (Lglgpp)</option>
-        <option value="ppSgSg">Blonde - Sg var. (ppSgSg)</option>
-        <option value="dgdgeeppU_">Blue Mink (dgdgeeppU_)</option>
-        <option value="aabbpp">Champagne (aabbpp)</option>
-        <option value="aabb">Chocolate - Black var. (aabb)</option>
-        <option value="bbeeU_">Chocolate - Sable var. (bbeeU_)</option>
-        <option value="bbeeppU_">Copper (bbeeppU_)</option>
-        <option value="dgdgeeU_">Dark Grey Sable (dgdgeeU_)</option>
-        <option value="aaSg_">Dingy Black (aaSg_)</option>
-        <option value="aapp">Dove (aapp)</option>
-        <option value="cdcdpp">Flesh Eared White (cdcdpp)</option>
-        <option value="ppToTo">Honey (ppToTo/ppToY)</option>
-        <option value="eeLglgU_">Light Grey Sable (eeLglgU_)</option>
-        <option value="dgdgpp">Lilac (dgdgpp)</option>
-        <option value="dgdgppToTo">Lilac Pearl (dgdgppToTo/dgdgppToY)</option>
-        <option value="eeppU_">Mink / Caramel (eeppU_)</option>
-        <option value="bbee">Pale Eared Cream (bbee)</option>
-        <option value="eepp">Red Eyed Cream (eepp)</option>
-        <option value="dgdgeepp">Red Eyed Ivory (dgdgeepp/eeLglgpp/eeppSgsg)</option>
-        <option value="eeU_">Sable (eeU_)</option>
-        <option value="eeSgSgU_">Silver Sable (eeSgSgU_)</option>
-        <option value="dgdgToTo">Smoke Pearl (dgdgToTo/dgdgToY)</option>
-        <option value="aaToTo">Yellow Black (aaToTo/aaToY)</option>
-    </select>
+        <option value="bbdgdg">Beige</option>
+        <option value="bbLglg">Black Eyed Blonde</option>
+        <option value="bbToTo">Black Eyed Honey</option>
+        <option value="dgdgee">Black Eyed Ivory</option>
+        <option value="eeSgSg">Black Eyed White</option>
+        <option value="Lglgpp">Blonde</option>
+        <option value="ppSgSg">Blonde (Sg var.)</option>
+        <option value="aabbpp">Champagne</option>
+        <option value="aabb">Chocolate</option>
+        <option value="aapp">Dove</option>
+        <option value="dgdgpp">Lilac</option>
+        <option value="eepp">Red Eyed Cream</option>
+        <option value="eeU_">Sable</option>
+        </select>
 </div>
 
 <div id="result-display">
     <h3>Predicted Offspring:</h3>
-    <div id="offspring-result-name">--</div>
-    <img id="offspring-visual" src="" alt="" style="max-width: 200px; display: none;">
+    <div id="offspring-result-name">Golden Agouti Shorthair</div>
+    <div id="genotype-label" style="font-size: 0.8em; color: gray;"></div>
+    <img id="offspring-visual" src="images/++.png" alt="Hamster" style="max-width: 200px; display: block;">
 </div>
 
 <script>
-// 1. DATA: Genetic rules
 const geneRules = {
+    // Colors
     "a": { type: "recessive", name: "Black" },
     "p": { type: "recessive", name: "Cinnamon" },
     "e": { type: "recessive", name: "Cream" },
@@ -122,102 +111,102 @@ const geneRules = {
     "dg": { type: "recessive", name: "Dark Grey" },
     "ce": { type: "recessive", name: "Extreme Dilute" },
     "cd": { type: "recessive", name: "Dark Eared White" },
+    // Coats
     "l": { type: "recessive", name: "Longhair" },
     "rx": { type: "recessive", name: "Rex" },
+    "Sa": { type: "dominant", name: "Satin" },
+    "hr": { type: "recessive", name: "Hairless" },
+    // Patterns
     "Ba": { type: "dominant", name: "Banded" },
     "Ds": { type: "dominant", name: "Dominant Spot" },
-    "Sa": { type: "dominant", name: "Satin" },
+    "rd": { type: "recessive", name: "Recessive Dappled" },
+    "Wh": { type: "dominant", name: "Roan" },
+    "s": { type: "recessive", name: "Piebald" },
+    // Specials
     "Sg": { type: "incomplete_dominant", name: "Silver Grey" },
     "Lg": { type: "incomplete_dominant", name: "Light Grey" },
     "To": { type: "sex_linked", name: "Yellow" }
 };
 
-// 2. LOGIC: Determining phenotype based on sex and rules
+
+
 function determineAppearance(genotype, sex) {
-    let phenotype = [];
+    let phenotypeTraits = [];
     const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
 
     for (let gene in geneRules) {
         const rule = geneRules[gene];
 
-        // Handle Sex-Linked Yellow (ToY vs ToTo vs Toto)
         if (rule.type === "sex_linked") {
             const toCount = count("To");
-            if (sex === "male") {
-                if (toCount >= 1) phenotype.push("ToY"); 
-            } else {
-                if (toCount >= 2) phenotype.push("ToTo"); 
-                else if (toCount === 1) phenotype.push("Toto"); 
+            if (sex === "male" && toCount >= 1) phenotypeTraits.push("ToY");
+            else if (sex === "female") {
+                if (toCount >= 2) phenotypeTraits.push("ToTo");
+                else if (toCount === 1) phenotypeTraits.push("Toto");
             }
             continue;
         }
 
-        if (rule.type === "recessive") {
-            if (count(gene) >= 2) phenotype.push(gene);
-        } 
-        else if (rule.type === "dominant") {
-            if (count(gene) >= 1) phenotype.push(gene);
-        } 
+        if (rule.type === "recessive" && count(gene) >= 2) phenotypeTraits.push(gene);
+        else if (rule.type === "dominant" && count(gene) >= 1) phenotypeTraits.push(gene);
         else if (rule.type === "incomplete_dominant") {
-            if (count(gene) >= 2) {
-                phenotype.push(gene + gene);
-            } else if (count(gene) === 1) {
-                phenotype.push(gene);
-            }
+            if (count(gene) >= 2) phenotypeTraits.push(gene + gene);
+            else if (count(gene) === 1) phenotypeTraits.push(gene);
         }
     }
 
-    let finalGenotype = phenotype.sort().join('');
-    if (finalGenotype === "") finalGenotype = "++";
-    return finalGenotype;
+    return phenotypeTraits;
 }
 
-// 3. EVENT LISTENERS: Auto-updating the display
 const inputs = ['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color'];
-
-inputs.forEach(id => {
-    document.getElementById(id).addEventListener('change', updateResult);
-});
+inputs.forEach(id => document.getElementById(id).addEventListener('change', updateResult));
 
 function updateResult() {
     const sex = document.getElementById('offspringssex').value;
-    const dadVal = document.getElementById('dad').value;
-    const momVal = document.getElementById('mom').value;
-    
-    // Combine genetic inputs
-    let combinedGenotype = dadVal + momVal;
-    
-    // Determine visual code
-    const appearanceGenotype = determineAppearance(combinedGenotype, sex);
-    
-    // Search the lookup table
-    const lookupList = document.getElementById('offspring-phenotype-list');
-    let displayName = "";
+    const combinedGenes = document.getElementById('dad').value + 
+                          document.getElementById('mom').value + 
+                          document.getElementById('coat-type').value + 
+                          document.getElementById('pattern').value;
 
+    const traits = determineAppearance(combinedGenes, sex);
+    
+    // Sort traits to find base color vs patterns
+    let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('');
+    if (baseGenotype === "") baseGenotype = "++";
+
+    // Lookup Base Color Name
+    let baseName = "Golden Agouti";
+    const lookupList = document.getElementById('offspring-phenotype-list');
     for (let i = 0; i < lookupList.options.length; i++) {
-        if (lookupList.options[i].value === appearanceGenotype) {
-            displayName = lookupList.options[i].text;
+        if (lookupList.options[i].value === baseGenotype) {
+            baseName = lookupList.options[i].text;
             break;
         }
     }
 
-    // Fallback to base color names if not a combination
-    if (!displayName) {
-        if (appearanceGenotype === "++") {
-            displayName = "Golden (++)";
-        } else {
-            displayName = "Resulting Genotype: " + appearanceGenotype;
-        }
-    }
-
-    // Update the HTML
-    document.getElementById('offspring-result-name').innerText = displayName;
+    // Add Patterns and Texture Names
+    let modifiers = [];
+    if (traits.includes("Ba")) modifiers.push("Banded");
+    if (traits.includes("Ds")) modifiers.push("Dominant Spot");
+    if (traits.includes("Wh")) modifiers.push("Roan");
+    if (traits.includes("Toto") && sex === "female") modifiers.push("Tortoiseshell");
     
-    // Update Image (assuming images are named like 'aa.png' or 'bbdgdg.png')
+    let texture = "Shorthair";
+    if (traits.includes("ll")) texture = "Longhair";
+    if (traits.includes("rxrx")) texture = "Rex";
+    if (traits.includes("Sasa")) texture = "Satin";
+    if (traits.includes("hrhr")) texture = "Hairless";
+
+    // Final Display
+    const fullName = `${baseName} ${modifiers.join(' ')} ${texture}`.replace(/\s+/g, ' ').trim();
+    document.getElementById('offspring-result-name').innerText = fullName;
+    document.getElementById('genotype-label').innerText = `Genotype: ${traits.join(' ')}`;
+    
     const imgElement = document.getElementById('offspring-visual');
-    imgElement.src = `images/${appearanceGenotype}.png`;
+    imgElement.src = `images/${baseGenotype}.png`; 
     imgElement.style.display = "block";
 }
 
+// Set defaults on load
 updateResult();
 </script>
