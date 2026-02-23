@@ -1,70 +1,87 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-  body {
-    background: #f4f4f4;
-    font-family: Arial, sans-serif;
-    padding: 30px;
-  }
-  .dropdown {
-    margin-bottom: 15px;
-  }
-  select {
-    width: 300px;
-    padding: 12px 16px;
-    border-radius: 25px;
-    border: none;
-    background: #e0e0e0;
-    font-size: 16px;
-    appearance: none;
-    outline: none;
-    cursor: pointer;
-  }
-</style>
-</head>
+// --- SECTION 1: DATA ---
+const SYRIAN_GENES = {
+    self: { name: "Black", allele: "a" },
+    cinnamon: { name: "Cinnamon", allele: "p" },
+    cream: { name: "Cream", allele: "e" },
+    grey: { name: "Dark Grey", allele: "dg" }
+};
 
-<body>
+// --- SECTION 2: THE BUSINESS RULES ---
+const GeneticRules = {
+    // RULE: Parent Order & Combination
+    formatGenotype: (g1, g2) => {
+        if (g1 === "++" && g2 === "++") return "++";
+        let combined = (g1 + g2).replace(/\+/g, "");
+        return combined.split('').sort().join('');
+    },
 
-<div class="dropdown">
-  <select>
-    <option selected disabled>+/+ non rec.red</option>
-    <option>Option 1</option>
-    <option>Option 2</option>
-    <option>Option 3</option>
-  </select>
-</div>
+    // RULE: Eye Color Dependency (Cinnamon 'p' forces red eyes)
+    getRequiredEyeColor: (genotype) => {
+        return genotype.includes('p') ? 'red' : 'black';
+    },
 
-<div class="dropdown">
-  <select>
-    <option selected disabled>+/+ blue</option>
-    <option>Option A</option>
-    <option>Option B</option>
-    <option>Option C</option>
-  </select>
-</div>
+    // RULE: Syrian Color Map (Phenotypes)
+    getPhenotype: (genotype, pattern, sex) => {
+        const hasBlack = (genotype.match(/a/g) || []).length >= 2;
+        const hasCinnamon = (genotype.match(/p/g) || []).length >= 2;
+        const hasCream = (genotype.match(/e/g) || []).length >= 2;
 
-<div class="dropdown">
-  <select id="trait-bar">
-    <option selected disabled>+/+ bar</option>
-    <option value="pp">Cinnamon</option>
-    <option>Choice 2</option>
-    <option>Choice 3</option>
-  </select>
-</div>
+        let baseColor = "Golden (Wild Type)";
 
-<img id="gene-display" style="display:block; margin-top:20px; max-width:400px;">
+        // Combination Rules
+        if (hasBlack && hasCinnamon) baseColor = "Dove";
+        else if (hasBlack && hasCream) baseColor = "Black Eyed Ivory";
+        else if (hasBlack) baseColor = "Black";
+        else if (hasCinnamon) baseColor = "Cinnamon";
+        else if (hasCream) baseColor = "Black Eyed Cream";
 
-<script>
-  const traitMenu = document.getElementById('trait-bar');
-  const displayImg = document.getElementById('gene-display');
+        // Tortoiseshell Business Rule
+        let finalPattern = pattern === "none" ? "" : " " + pattern;
+        if (pattern === "Toto") {
+            if (sex === "male") {
+                baseColor = "Yellow"; // Males with 'To' gene appear Yellow
+                finalPattern = "";
+            } else {
+                finalPattern = " Tortoiseshell";
+            }
+        }
 
-  traitMenu.onchange = () => {
-    displayImg.src = traitMenu.value === "pp" ? "cinnamon_gene_list.jpg" : "";
-    displayImg.alt = traitMenu.value === "pp" ? "Cinnamon Gene Info" : "";
-  };
-</script>
+        return baseColor + finalPattern;
+    }
+};
 
-</body>
-</html>
+// --- SECTION 3: THE TRIGGER ---
+function updateCalculator() {
+    const dadVal = document.getElementById('dad').value;
+    const momVal = document.getElementById('mom').value;
+    const sex = document.getElementById('offspring-sex').value;
+    const coatType = document.getElementById('coat-type').value;
+    const pattern = document.getElementById('pattern').value;
+    const eyeDropdown = document.getElementById('eye-color');
+
+    // 1. Calculate Genotype
+    const genotype = GeneticRules.formatGenotype(dadVal, momVal);
+
+    // 2. Business Rule: Force Eye Color if Cinnamon is present
+    const eyeColor = GeneticRules.getRequiredEyeColor(genotype);
+    eyeDropdown.value = eyeColor;
+
+    // 3. Get Phenotype Description
+    const colorDesc = GeneticRules.getPhenotype(genotype, pattern, sex);
+    
+    // 4. Update UI
+    document.getElementById('result-display').innerHTML = `
+        <strong>Genotype:</strong> ${genotype} <br>
+        <strong>Offspring:</strong> ${sex.toUpperCase()} ${colorDesc} (${coatType}) <br>
+        <strong>Eyes:</strong> ${eyeColor.toUpperCase()}
+    `;
+}
+
+// Attach Listeners to all menus
+const allMenus = ['dad', 'mom', 'offspring-sex', 'coat-type', 'pattern'];
+allMenus.forEach(id => {
+    document.getElementById(id).addEventListener('change', updateCalculator);
+});
+
+// Run once on load
+updateCalculator();
