@@ -1,14 +1,67 @@
-import { renderHtml } from "./renderHtml";
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body {
+  background: #f4f4f4;
+  font-family: Arial, sans-serif;
+  padding: 30px;
+}
 
-export default {
-	async fetch(request, env) {
-		const stmt = env.DB.prepare("SELECT * FROM comments LIMIT 3");
-		const { results } = await stmt.all();
+.dropdown {
+  margin-bottom: 15px;
+}
 
-		return new Response(renderHtml(JSON.stringify(results, null, 2)), {
-			headers: {
-				"content-type": "text/html",
-			},
-		});
-	},
-} satisfies ExportedHandler<Env>;
+select {
+  width: 300px;
+  padding: 12px 16px;
+  border-radius: 25px;
+  border: none;
+  background: #e0e0e0;
+  font-size: 16px;
+  appearance: none;
+  outline: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="dropdown">
+  <select>
+    <option selected disabled>+/+ non rec.red</option>
+    <option>Option 1</option>
+    <option>Option 2</option>
+    <option>Option 3</option>
+  </select>
+</div>
+
+<div class="dropdown">
+  <select>
+    <option selected disabled>+/+ blue</option>
+    <option>Option A</option>
+    <option>Option B</option>
+    <option>Option C</option>
+  </select>
+</div>
+
+<div class="dropdown">
+  <select>
+    <option selected disabled>+/+ bar</option>
+    <option>Choice 1</option>
+    <option>Choice 2</option>
+    <option>Choice 3</option>
+  </select>
+</div>
+
+<script>
+document.querySelectorAll("select").forEach(select => {
+  select.addEventListener("change", e => {
+    console.log(e.target.value);
+  });
+});
+</script>
+
+</body>
+</html>
