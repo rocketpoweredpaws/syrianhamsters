@@ -111,3 +111,51 @@
     <div id="offspring-result-name">--</div>
     <img id="offspring-visual" src="" alt="" style="max-width: 200px; display: none;">
 </div>
+
+<script>
+// 1. DATA: How genes are inherited
+const geneRules = {
+    "a": { type: "recessive", name: "Black" },
+    "p": { type: "recessive", name: "Cinnamon" },
+    "e": { type: "recessive", name: "Cream" },
+    "b": { type: "recessive", name: "Rust" },
+    "dg": { type: "recessive", name: "Dark Grey" },
+    "ce": { type: "recessive", name: "Extreme Dilute" },
+    "cd": { type: "recessive", name: "Dark Eared White" },
+    "l": { type: "recessive", name: "Longhair" },
+    "rx": { type: "recessive", name: "Rex" },
+    "Ba": { type: "dominant", name: "Banded" },
+    "Ds": { type: "dominant", name: "Dominant Spot" },
+    "Sa": { type: "dominant", name: "Satin" },
+    "Sg": { type: "incomplete_dominant", name: "Silver Grey" },
+    "Lg": { type: "incomplete_dominant", name: "Light Grey" },
+    "To": { type: "sex_linked", name: "Yellow" }
+};
+
+// 2. LOGIC: Determining what the hamster looks like based on rules
+function determineAppearance(genotype) {
+    let phenotype = [];
+    const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
+
+    for (let gene in geneRules) {
+        const rule = geneRules[gene];
+        if (rule.type === "recessive") {
+            if (count(gene) >= 2) phenotype.push(gene);
+        } 
+        else if (rule.type === "dominant") {
+            if (count(gene) >= 1) phenotype.push(gene);
+        } 
+        else if (rule.type === "incomplete_dominant") {
+            if (count(gene) >= 2) {
+                phenotype.push(gene + gene);
+            } else if (count(gene) === 1) {
+                phenotype.push(gene);
+            }
+        }
+    }
+
+    let finalGenotype = phenotype.sort().join('');
+    if (finalGenotype === "") finalGenotype = "++";
+    return finalGenotype;
+}
+</script>
