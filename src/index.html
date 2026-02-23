@@ -9,37 +9,36 @@
 <div class="shpdropdown">
     <label>Breeding Male (Father) Coat Color:</label>
     <select id="dad">
-<option value="++">Golden (+)</option>
-<option value="aa">Black (aa)</option>
-<option value="pp">Cinnamon (pp)</option>
-<option value="ee">Cream (ee)</option>
-<option value="aapp">Dove (aapp)</option>
-<option value="cdcd">Dark Eared White (cdcd)</option>
-<option value="dgdg">Dark Grey (dgdg)</option>
-<option value="cece">Extreme Dilute (cece)</option>
-<option value="Lglg">Light Grey (Lglg)</option>
-<option value="bb">Rust (bb)</option>
-<option value="SgSg">Silver Grey (SgSg)</option>
-<option value="ToTo">Yellow (ToTo)</option>
+        <option value="++">Golden (+)</option>
+        <option value="aa">Black (aa)</option>
+        <option value="pp">Cinnamon (pp)</option>
+        <option value="ee">Cream (ee)</option>
+        <option value="aapp">Dove (aapp)</option>
+        <option value="cdcd">Dark Eared White (cdcd)</option>
+        <option value="dgdg">Dark Grey (dgdg)</option>
+        <option value="cece">Extreme Dilute (cece)</option>
+        <option value="Lglg">Light Grey (Lglg)</option>
+        <option value="bb">Rust (bb)</option>
+        <option value="SgSg">Silver Grey (SgSg)</option>
+        <option value="ToTo">Yellow (ToTo)</option>
     </select>
 </div>
 
 <div class="shpdropdown">
     <label>Dam (Mother) Coat Color:</label>
     <select id="mom">
-       <option value="++">
-<option value="++">Golden (+)</option>
-<option value="aa">Black (aa)</option>
-<option value="pp">Cinnamon (pp)</option>
-<option value="ee">Cream (ee)</option>
-<option value="aapp">Dove (aapp)</option>
-<option value="cdcd">Dark Eared White (cdcd)</option>
-<option value="dgdg">Dark Grey (dgdg)</option>
-<option value="cece">Extreme Dilute (cece)</option>
-<option value="Lglg">Light Grey (Lglg)</option>
-<option value="bb">Rust (bb)</option>
-<option value="SgSg">Silver Grey (SgSg)</option>
-<option value="ToTo">Yellow (ToTo/ToY)</option>
+        <option value="++">Golden (+)</option>
+        <option value="aa">Black (aa)</option>
+        <option value="pp">Cinnamon (pp)</option>
+        <option value="ee">Cream (ee)</option>
+        <option value="aapp">Dove (aapp)</option>
+        <option value="cdcd">Dark Eared White (cdcd)</option>
+        <option value="dgdg">Dark Grey (dgdg)</option>
+        <option value="cece">Extreme Dilute (cece)</option>
+        <option value="Lglg">Light Grey (Lglg)</option>
+        <option value="bb">Rust (bb)</option>
+        <option value="SgSg">Silver Grey (SgSg)</option>
+        <option value="ToTo">Yellow (ToTo/ToY)</option>
     </select>
 </div>
 
@@ -74,4 +73,41 @@
     </select>
 </div>
 
-<div id="result-display">Offspring: --</div>
+<div id="combination-lookup" style="display: none;">
+    <select id="offspring-phenotype-list">
+        <option value="bbdgdg">Beige (bbdgdg)</option>
+        <option value="bbLglg">Black Eyed Blonde (bbLglg)</option>
+        <option value="bbToTo">Black Eyed Honey (bbToTo/bbToY)</option>
+        <option value="dgdgee">Black Eyed Ivory (dgdgee/eeLglg/eeSgsg)</option>
+        <option value="eeSgSg">Black Eyed White (eeSgSg)</option>
+        <option value="Lglgpp">Blonde (Lglgpp)</option>
+        <option value="ppSgSg">Blonde - Sg var. (ppSgSg)</option>
+        <option value="dgdgeeppU_">Blue Mink (dgdgeeppU_)</option>
+        <option value="aabbpp">Champagne (aabbpp)</option>
+        <option value="aabb">Chocolate - Black var. (aabb)</option>
+        <option value="bbeeU_">Chocolate - Sable var. (bbeeU_)</option>
+        <option value="bbeeppU_">Copper (bbeeppU_)</option>
+        <option value="dgdgeeU_">Dark Grey Sable (dgdgeeU_)</option>
+        <option value="aaSg_">Dingy Black (aaSg_)</option>
+        <option value="aapp">Dove (aapp)</option>
+        <option value="cdcdpp">Flesh Eared White (cdcdpp)</option>
+        <option value="ppToTo">Honey (ppToTo/ppToY)</option>
+        <option value="eeLglgU_">Light Grey Sable (eeLglgU_)</option>
+        <option value="dgdgpp">Lilac (dgdgpp)</option>
+        <option value="dgdgppToTo">Lilac Pearl (dgdgppToTo/dgdgppToY)</option>
+        <option value="eeppU_">Mink / Caramel (eeppU_)</option>
+        <option value="bbee">Pale Eared Cream (bbee)</option>
+        <option value="eepp">Red Eyed Cream (eepp)</option>
+        <option value="dgdgeepp">Red Eyed Ivory (dgdgeepp/eeLglgpp/eeppSgsg)</option>
+        <option value="eeU_">Sable (eeU_)</option>
+        <option value="eeSgSgU_">Silver Sable (eeSgSgU_)</option>
+        <option value="dgdgToTo">Smoke Pearl (dgdgToTo/dgdgToY)</option>
+        <option value="aaToTo">Yellow Black (aaToTo/aaToY)</option>
+    </select>
+</div>
+
+<div id="result-display">
+    <h3>Predicted Offspring:</h3>
+    <div id="offspring-result-name">--</div>
+    <img id="offspring-visual" src="" alt="" style="max-width: 200px; display: none;">
+</div>
