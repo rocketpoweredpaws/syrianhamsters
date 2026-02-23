@@ -46,41 +46,24 @@
 </div>
 
 <div class="dropdown">
-  <select>
+  <select id="trait-bar">
     <option selected disabled>+/+ bar</option>
-    <option>Choice 1</option>
+    <option value="pp">Cinnamon</option>
     <option>Choice 2</option>
     <option>Choice 3</option>
   </select>
 </div>
 
+<img id="gene-display" style="display:block; margin-top:20px; max-width:400px;">
+
 <script>
-  const traitspics = document.createElement('img');
-  traitspics.id = "gene-display";
-  traitspics.style.display = "block";
-  traitspics.style.marginTop = "20px";
-  traitspics.style.maxWidth = "400px"; 
-  document.body.appendChild(traitspics);
+  const traitMenu = document.getElementById('trait-bar');
+  const displayImg = document.getElementById('gene-display');
 
-  const dropdowns = document.querySelectorAll('select');
-  const traitmenu = dropdowns[2];
-
-  for (let option of traitmenu.options) {
-    if (option.text === "Choice 1") {
-      option.text = "Cinnamon";
-      option.value = "pp"; 
-    }
-  }
-
-  traitmenu.addEventListener('change', function() {
-    if (this.value === "pp") {
-      traitspics.src = "cinnamon_gene_list.jpg"; 
-      traitspics.alt = "Cinnamon Gene Info";
-      console.log("Linked: Cinnamon (pp) image triggered.");
-    } else {
-      traitspics.src = "";
-    }
-  });
+  traitMenu.onchange = () => {
+    displayImg.src = traitMenu.value === "pp" ? "cinnamon_gene_list.jpg" : "";
+    displayImg.alt = traitMenu.value === "pp" ? "Cinnamon Gene Info" : "";
+  };
 </script>
 
 </body>
