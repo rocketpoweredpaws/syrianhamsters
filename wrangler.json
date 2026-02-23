@@ -1,0 +1,16 @@
+{
+	"compatibility_date": "2025-10-08",
+	"main": "src/index.ts",
+	"name": "syrianhamsters",
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_id": "bdddcaaf-bd43-49cd-b27f-e86a2c3d9d45",
+			"database_name": "hamsters"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}
