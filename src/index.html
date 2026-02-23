@@ -38,7 +38,7 @@
         <option value="Lglg">Light Grey (Lglg)</option>
         <option value="bb">Rust (bb)</option>
         <option value="SgSg">Silver Grey (SgSg)</option>
-        <option value="ToTo">Tortoiseshell (ToTo)</option>
+        <option value="ToTo">Yellow (ToTo)</option>
     </select>
 </div>
 
@@ -113,7 +113,7 @@
 </div>
 
 <script>
-// 1. DATA: How genes are inherited
+// 1. DATA: Genetic rules
 const geneRules = {
     "a": { type: "recessive", name: "Black" },
     "p": { type: "recessive", name: "Cinnamon" },
@@ -132,13 +132,26 @@ const geneRules = {
     "To": { type: "sex_linked", name: "Yellow" }
 };
 
-// 2. LOGIC: Determining what the hamster looks like based on rules
-function determineAppearance(genotype) {
+// 2. LOGIC: Determining phenotype based on sex and rules
+function determineAppearance(genotype, sex) {
     let phenotype = [];
     const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
 
     for (let gene in geneRules) {
         const rule = geneRules[gene];
+
+        // Handle Sex-Linked Yellow (ToY vs ToTo vs Toto)
+        if (rule.type === "sex_linked") {
+            const toCount = count("To");
+            if (sex === "male") {
+                if (toCount >= 1) phenotype.push("ToY"); 
+            } else {
+                if (toCount >= 2) phenotype.push("ToTo"); 
+                else if (toCount === 1) phenotype.push("Toto"); 
+            }
+            continue;
+        }
+
         if (rule.type === "recessive") {
             if (count(gene) >= 2) phenotype.push(gene);
         } 
@@ -158,4 +171,53 @@ function determineAppearance(genotype) {
     if (finalGenotype === "") finalGenotype = "++";
     return finalGenotype;
 }
+
+// 3. EVENT LISTENERS: Auto-updating the display
+const inputs = ['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color'];
+
+inputs.forEach(id => {
+    document.getElementById(id).addEventListener('change', updateResult);
+});
+
+function updateResult() {
+    const sex = document.getElementById('offspringssex').value;
+    const dadVal = document.getElementById('dad').value;
+    const momVal = document.getElementById('mom').value;
+    
+    // Combine genetic inputs
+    let combinedGenotype = dadVal + momVal;
+    
+    // Determine visual code
+    const appearanceGenotype = determineAppearance(combinedGenotype, sex);
+    
+    // Search the lookup table
+    const lookupList = document.getElementById('offspring-phenotype-list');
+    let displayName = "";
+
+    for (let i = 0; i < lookupList.options.length; i++) {
+        if (lookupList.options[i].value === appearanceGenotype) {
+            displayName = lookupList.options[i].text;
+            break;
+        }
+    }
+
+    // Fallback to base color names if not a combination
+    if (!displayName) {
+        if (appearanceGenotype === "++") {
+            displayName = "Golden (++)";
+        } else {
+            displayName = "Resulting Genotype: " + appearanceGenotype;
+        }
+    }
+
+    // Update the HTML
+    document.getElementById('offspring-result-name').innerText = displayName;
+    
+    // Update Image (assuming images are named like 'aa.png' or 'bbdgdg.png')
+    const imgElement = document.getElementById('offspring-visual');
+    imgElement.src = `images/${appearanceGenotype}.png`;
+    imgElement.style.display = "block";
+}
+
+updateResult();
 </script>
