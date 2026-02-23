@@ -18,7 +18,7 @@ select {
   padding: 12px 16px;
   border-radius: 25px;
   border: none;
-  background: #e0e0e0;
+  background: #e0e0e0; /* slightly darker than background */
   font-size: 16px;
   appearance: none;
   outline: none;
@@ -54,14 +54,6 @@ select {
     <option>Choice 3</option>
   </select>
 </div>
-
-<script>
-document.querySelectorAll("select").forEach(select => {
-  select.addEventListener("change", e => {
-    console.log(e.target.value);
-  });
-});
-</script>
 
 </body>
 </html>
