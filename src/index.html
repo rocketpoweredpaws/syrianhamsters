@@ -1,75 +1,106 @@
 <script>
 const SHP = {
-    "a": { type : "recessive", name: "Black" },
-    "p": { type: "recessive", name: "Cinnamon" },
-    "e": { type: "recessive", name: "Cream" },
-    "b": { type: "recessive", name: "Rust" },
-    "dg": { type: "recessive", name: "Dark Grey" },
-    "ce": { type: "recessive", name: "Extreme Dilute" },
-    "cd": { type: "recessive", name: "Dark Eared White" },
-    "l": { type: "recessive", name: "Longhair" },
-    "rx": { type: "recessive", name: "Rex" },
-    "Sa": { type: "dominant", name: "Satin" },
-    "hr": { type: "recessive", name: "Hairless" },
-    "Ba": {  type: "dominant", name: "Banded" },
-    "Ds": { type: "dominant", name: "Dominant Spot" },
-    "rd": { type: "recessive", name: "Recessive Dappled" },
-    "Wh": {  type: "dominant", name: "Roan" },
-    "s": { type: "recessive", name: "Piebald" },
-    "Sg": { type: "incomplete_dominant", name: "Silver Grey" },
-    "Lg": { type: "incomplete_dominant", name: "Light Grey" },
-    "To": { type: "sex_linked", name: "Yellow" }
+    "a": { type: "recessive", name: "Black" },
+    "p": { type: "recessive", name: "Cinnamon" },
+    "e": { type: "recessive", name: "Cream" },
+    "b": { type: "recessive", name: "Rust" },
+    "dg": { type: "recessive", name: "Dark Grey" },
+    "ce": { type: "recessive", name: "Extreme Dilute" },
+    "cd": { type: "recessive", name: "Dark Eared White" },
+    "l": { type: "recessive", name: "Longhair" },
+    "rx": { type: "recessive", name: "Rex" },
+    "Sa": { type: "dominant", name: "Satin" },
+    "hr": { type: "recessive", name: "Hairless" },
+    "Ba": { type: "dominant", name: "Banded" },
+    "Ds": { type: "dominant", name: "Dominant Spot" },
+    "rd": { type: "recessive", name: "Recessive Dappled" },
+    "Wh": { type: "dominant", name: "Roan" },
+    "s": { type: "recessive", name: "Piebald" },
+    "Sg": { type: "incomplete_dominant", name: "Silver Grey" },
+    "Lg": { type: "incomplete_dominant", name: "Light Grey" },
+    "To": { type: "sex_linked", name: "Yellow" }
 };
 
 function children(genotype, sex) {
-    let phenotypeTraits = [];
-    const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
+    let phenotypeTraits = [];
+    const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
 
-    for (let gene in SHP) {
-        const rule = SHP[gene];
-        if (rule.type === "sex_linked") {
-            const toCount = count("To");
-            if (sex === "male" && toCount >= 1) phenotypeTraits.push("ToY");
-            else if (sex === "female") {
-                if (toCount >= 2) phenotypeTraits.push("ToTo");
-                else if (toCount === 1) phenotypeTraits.push("Toto");
-            }
-            continue;
-        }
-        if (rule.type === "recessive" && count(gene) >= 2) phenotypeTraits.push(gene);
-        else if (rule.type === "dominant" && count(gene) >= 1) phenotypeTraits.push(gene);
-        else if (rule.type === "incomplete_dominant") {
-            if (count(gene) >= 2) phenotypeTraits.push(gene + gene);
-            else if (count(gene) === 1) phenotypeTraits.push(gene);
-        }
-    }
-    return phenotypeTraits;
+    for (let gene in SHP) {
+        const rule = SHP[gene];
+        if (rule.type === "sex_linked") {
+            const toCount = count("To");
+            if (sex === "male" && toCount >= 1) phenotypeTraits.push("ToY");
+            else if (sex === "female") {
+                if (toCount >= 2) phenotypeTraits.push("ToTo");
+                else if (toCount === 1) phenotypeTraits.push("Toto");
+            }
+            continue;
+        }
+        if (rule.type === "recessive" && count(gene) >= 2) phenotypeTraits.push(gene);
+        else if (rule.type === "dominant" && count(gene) >= 1) phenotypeTraits.push(gene);
+        else if (rule.type === "incomplete_dominant") {
+            if (count(gene) >= 2) phenotypeTraits.push(gene + gene);
+            else if (count(gene) === 1) phenotypeTraits.push(gene);
+        }
+    }
+    return phenotypeTraits;
 }
 
 function updateResult() {
-    const sex = document.getElementById('offspringssex').value;
-    const combined = ['dad', 'mom', 'coat-type', 'pattern'].map(id => document.getElementById(id).value).join('');
-    const traits = children(combined, sex);
-    
-    let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
+    const sex = document.getElementById('offspringssex').value;
+    const dadVal = document.getElementById('dad').value;
+    const momVal = document.getElementById('mom').value;
+    const coatVal = document.getElementById('coat-type').value;
+    const patVal = document.getElementById('pattern').value;
+    
+    // Combine genetic inputs
+    const combined = dadVal + momVal + coatVal + patVal;
+    
+    // 1. LETHAL CHECKS (Count occurrences across parents)
+    const countLg = (combined.match(/Lg/g) || []).length;
+    const countDs = (combined.match(/Ds/g) || []).length;
+    const countWh = (combined.match(/Wh/g) || []).length; // Anophthalmic White (WhWh) check
 
-    let baseName = "Golden Agouti";
-    const lookup = document.getElementById('offspring-phenotype-list');
-    for (let opt of lookup.options) {
-        if (opt.value === baseGenotype) { baseName = opt.text; break; }
-    }
+    let lethalWarning = "";
+    let litterReduction = 0;
 
-    let modifiers = [];
-    if (traits.includes("Ba")) modifiers.push("Banded");
-    if (traits.includes("Ds")) modifiers.push("Dominant Spot");
-    if (traits.includes("Wh")) modifiers.push("Roan");
-    if (traits.includes("Toto")) modifiers.push("Tortoiseshell");
-    
-    let texture = traits.includes("ll") ? "Longhair" : traits.includes("rxrx") ? "Rex" : traits.includes("Sasa") ? "Satin" : traits.includes("hrhr") ? "Hairless" : "Shorthair";
+    // Check for 25% reduction (Homozygous Dominant)
+    if (countLg >= 2) { lethalWarning = "Homozygous Light Grey (LgLg) is lethal."; litterReduction = 25; }
+    if (countDs >= 2) { lethalWarning = "Homozygous Dominant Spot (DsDs) is lethal."; litterReduction = 25; }
+    if (countWh >= 2) { lethalWarning = "Homozygous Roan (WhWh) results in Anophthalmic White (eyeless) pups."; }
 
-    document.getElementById('offspring-result-name').innerText = `${baseName} ${modifiers.join(' ')} ${texture}`.replace(/\s+/g, ' ').trim();
-    document.getElementById('genotype-label').innerText = `Genotype: ${traits.join(' ')}`;
-    document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
+    // 2. Determine Phenotype
+    const traits = children(combined, sex);
+    let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
+
+    let baseName = "Golden Agouti";
+    const lookup = document.getElementById('offspring-phenotype-list');
+    for (let opt of lookup.options) {
+        if (opt.value === baseGenotype) { baseName = opt.text; break; }
+    }
+
+    // 3. Modifiers
+    let modifiers = [];
+    if (traits.includes("Ba")) modifiers.push("Banded");
+    if (traits.includes("Ds")) modifiers.push("Dominant Spot");
+    if (traits.includes("Wh")) modifiers.push("Roan");
+    if (traits.includes("Toto")) modifiers.push("Tortoiseshell");
+    
+    let texture = traits.includes("ll") ? "Longhair" : traits.includes("rxrx") ? "Rex" : traits.includes("Sasa") ? "Satin" : traits.includes("hrhr") ? "Hairless" : "Shorthair";
+
+    // 4. Update UI
+    document.getElementById('offspring-result-name').innerText = `${baseName} ${modifiers.join(' ')} ${texture}`.replace(/\s+/g, ' ').trim();
+    
+    // Update labels with lethal info if applicable
+    let labelText = `Genotype: ${traits.join(' ')}`;
+    if (litterReduction > 0) {
+        labelText += ` | warn: ${lethalWarning} Expected litter size reduced by ${litterReduction}%.`;
+    } else if (countWh >= 2) {
+        labelText += ` | warn: ${lethalWarning}`;
+    }
+    
+    document.getElementById('genotype-label').innerText = labelText;
+    document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
 }
 
 ['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color'].forEach(id => document.getElementById(id).onchange = updateResult);
