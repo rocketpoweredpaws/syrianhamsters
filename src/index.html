@@ -58,7 +58,7 @@ const BASE_OPTIONS = [
     { val: "Lglg", text: "Light Grey (Lglg)" }, 
     { val: "bb", text: "Rust (bb)" }, 
     { val: "SgSg", text: "Silver Grey (SgSg)" },
-    { val: "ToY", text: "Yellow (ToY)" }
+    { val: "To", text: "Yellow" }
 ];
 
 const COAT_OPTIONS = [
@@ -116,7 +116,14 @@ const PHENOTYPES = [
 function setup() {
     document.querySelectorAll('.base-sel').forEach(s => {
         if(s.classList.contains('blankable')) s.add(new Option("None", ""));
-        BASE_OPTIONS.forEach(o => s.add(new Option(o.text, o.val)));
+        BASE_OPTIONS.forEach(o => {
+            let label = o.text;
+            // Shorthand logic for parents
+            if (o.val === "To") {
+                label = s.id.includes("dad") ? "Yellow (ToY)" : "Yellow (ToTo)";
+            }
+            s.add(new Option(label, o.val));
+        });
     });
     document.querySelectorAll('.coat-sel').forEach(s => COAT_OPTIONS.forEach(o => s.add(new Option(o.text, o.val))));
     
@@ -143,7 +150,7 @@ function calc() {
 
     for (let i = 0; i < total; i++) {
         let isM = Math.random() > 0.5;
-        let pSex = isM ? "Male" : "Female";
+        let pSexDisplay = isM ? "Male" : "Female";
         let inherited = [];
         
         ["aa", "ee", "pp", "bb", "U_", "SgSg", "dgdg", "Lglg", "cece", "cdcd", "Sgsg"].forEach(g => {
@@ -153,16 +160,25 @@ function calc() {
         let yLabel = ""; let yCode = "";
         if (pool.includes("To") || mPatVal === "Toto") {
             if (isM) {
+               // Male logic
                if((mVal.includes("To") || mPatVal === "Toto") && Math.random() > 0.4) { 
                    yCode = "ToY"; inherited.push("To"); 
-                   pSex = "Yellow (Male)";
+                   pSexDisplay = "Yellow (Male)";
                }
             } else {
+               // Female logic
                let dTo = dVal.includes("To") ? 1 : 0;
                let mTo = (mVal.includes("To") || mPatVal === "Toto") ? 1 : 0;
                let count = (dTo && Math.random() > 0.5 ? 1 : 0) + (mTo && Math.random() > 0.5 ? 1 : 0);
-               if(count === 2) { yLabel = "Yellow (ToTo) "; yCode = "ToTo"; inherited.push("To"); }
-               else if(count === 1) { yLabel = "Tortoiseshell (Toto) "; yCode = "Toto"; }
+               if(count === 2) { 
+                   yLabel = "Yellow (ToTo) "; 
+                   yCode = "ToTo"; 
+                   inherited.push("To"); 
+               }
+               else if(count === 1) { 
+                   yLabel = "Tortoiseshell (Toto) "; 
+                   yCode = "Toto"; 
+               }
             }
         }
 
@@ -181,10 +197,14 @@ function calc() {
         PATTERN_OPTIONS.forEach(p => {
             if(p.val && pool.includes(p.val) && Math.random() > 0.5) inheritedPatterns.push(p.text);
         });
-        if (!isM && yCode === "Toto") inheritedPatterns.push("Tortoiseshell (Toto)");
-        let pLabel = inheritedPatterns.length > 0 ? inheritedPatterns.join(" ") : "Solid";
         
+        if (!isM && yCode === "Toto") {
+            inheritedPatterns.push("Tortoiseshell (Toto)");
+        }
+        
+        let pLabel = inheritedPatterns.length > 0 ? inheritedPatterns.join(" ") : "Solid";
         let pCodes = PATTERN_OPTIONS.filter(p => inheritedPatterns.includes(p.text)).map(p => p.val).join("");
+        
         if (!isM && yCode === "Toto") pCodes += "Toto";
 
         let geno = (inherited.join('') + yCode + cType + pCodes).replace(/\+\+/g, '+');
@@ -193,7 +213,7 @@ function calc() {
             <div class="pcrd">
                 <span class="pnm">${yLabel}${base} ${pLabel}</span>
                 <span class="pgn">${geno}</span>
-                <strong>Sex:</strong> ${pSex}<br>
+                <strong>Sex:</strong> ${pSexDisplay}<br>
                 <strong>Coat:</strong> ${cType}<br>
                 <div class="pdsc">To be added</div>
             </div>`;
