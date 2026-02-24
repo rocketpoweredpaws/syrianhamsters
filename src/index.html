@@ -73,42 +73,42 @@ const PATTERN_OPTIONS = [
     { val: "Ds", text: "Dominant Spot (Ds)" },
     { val: "rdrd", text: "Recessive Dappled (rd)" },
     { val: "Wh", text: "Roan / White Bellied (Wh)" }, 
-    { val: "ss", text: "Piebald (s)" }
+    { val: "ss", text: "Piebald (ss)" }
 ];
 
 const PHENOTYPES = [
-    { id: "bbdgdg", name: "Beige" },
-    { id: "bbLglg", name: "Black Eyed Blonde" },
-    { id: "bbTo", name: "Black Eyed Honey" },
-    { id: "dgdgee", name: "Black Eyed Ivory" },
-    { id: "eeLglg", name: "Black Eyed Ivory" },
-    { id: "eeSgsg", name: "Black Eyed Ivory" },
-    { id: "eeSgSg", name: "Black Eyed White" },
-    { id: "Lglgpp", name: "Blonde" },
-    { id: "ppSgSg", name: "Blonde (Sg var.)" },
-    { id: "dgdgeeppU", name: "Blue Mink" },
-    { id: "aabbpp", name: "Champagne" },
-    { id: "aabb", name: "Chocolate (Black var.)" },
-    { id: "bbeeU", name: "Chocolate (Sable var.)" },
-    { id: "bbeeppU", name: "Copper" },
-    { id: "dgdgeeU", name: "Dark Grey Sable" },
-    { id: "aaSg", name: "Dingy Black" },
-    { id: "aapp", name: "Dove" },
-    { id: "cdcdpp", name: "Flesh Eared White" },
-    { id: "ppTo", name: "Honey" },
-    { id: "eeLglgU", name: "Light Grey Sable" },
-    { id: "dgdgpp", name: "Lilac" },
-    { id: "dgdgppTo", name: "Lilac Pearl" },
-    { id: "eeppU", name: "Mink (Caramel)" },
-    { id: "bbee", name: "Pale Eared Cream" },
-    { id: "eepp", name: "Red Eyed Cream" },
-    { id: "dgdgeepp", name: "Red Eyed Ivory" },
-    { id: "eeLglgpp", name: "Red Eyed Ivory" },
-    { id: "eeppSgsg", name: "Red Eyed Ivory" },
-    { id: "eeU", name: "Sable" },
-    { id: "eeSgSgU", name: "Silver Sable" },
-    { id: "dgdgTo", name: "Smoke Pearl" },
-    { id: "aaTo", name: "Yellow Black" }
+    { id: "bbdgdg", name: "Beige (bbdgdg)" },
+    { id: "bbLglg", name: "Black Eyed Blonde (bbLglg)" },
+    { id: "bbTo", name: "Black Eyed Honey (bbTo)" },
+    { id: "dgdgee", name: "Black Eyed Ivory (dgdgee)" },
+    { id: "eeLglg", name: "Black Eyed Ivory (eeLglg)" },
+    { id: "eeSgsg", name: "Black Eyed Ivory (eeSgsg)" },
+    { id: "eeSgSg", name: "Black Eyed White (eeSgSg)" },
+    { id: "Lglgpp", name: "Blonde (Lglgpp)" },
+    { id: "ppSgSg", name: "Blonde (ppSgSg)" },
+    { id: "dgdgeeppU", name: "Blue Mink (dgdgeeppU)" },
+    { id: "aabbpp", name: "Champagne (aabbpp)" },
+    { id: "aabb", name: "Chocolate (aabb)" },
+    { id: "bbeeU", name: "Chocolate Sable (bbeeU)" },
+    { id: "bbeeppU", name: "Copper (bbeeppU)" },
+    { id: "dgdgeeU", name: "Dark Grey Sable (dgdgeeU)" },
+    { id: "aaSg", name: "Dingy Black (aaSg)" },
+    { id: "aapp", name: "Dove (aapp)" },
+    { id: "cdcdpp", name: "Flesh Eared White (cdcdpp)" },
+    { id: "ppTo", name: "Honey (ppTo)" },
+    { id: "eeLglgU", name: "Light Grey Sable (eeLglgU)" },
+    { id: "dgdgpp", name: "Lilac (dgdgpp)" },
+    { id: "dgdgppTo", name: "Lilac Pearl (dgdgppTo)" },
+    { id: "eeppU", name: "Mink (eeppU)" },
+    { id: "bbee", name: "Pale Eared Cream (bbee)" },
+    { id: "eepp", name: "Red Eyed Cream (eepp)" },
+    { id: "dgdgeepp", name: "Red Eyed Ivory (dgdgeepp)" },
+    { id: "eeLglgpp", name: "Red Eyed Ivory (eeLglgpp)" },
+    { id: "eeppSgsg", name: "Red Eyed Ivory (eeppSgsg)" },
+    { id: "eeU", name: "Sable (eeU)" },
+    { id: "eeSgSgU", name: "Silver Sable (eeSgSgU)" },
+    { id: "dgdgTo", name: "Smoke Pearl (dgdgTo)" },
+    { id: "aaTo", name: "Yellow Black (aaTo)" }
 ];
 
 function setup() {
@@ -152,18 +152,18 @@ function calc() {
         if (pool.includes("To") || mPatVal === "Toto") {
             if (isM) {
                if((mVal.includes("To") || mPatVal === "Toto") && Math.random() > 0.4) { 
-                   yLabel = "Yellow "; yCode = "ToY"; inherited.push("To"); 
+                   yLabel = "Yellow (ToY) "; yCode = "ToY"; inherited.push("To"); 
                }
             } else {
                let dTo = dVal.includes("To") ? 1 : 0;
                let mTo = (mVal.includes("To") || mPatVal === "Toto") ? 1 : 0;
                let count = (dTo && Math.random() > 0.5 ? 1 : 0) + (mTo && Math.random() > 0.5 ? 1 : 0);
-               if(count === 2) { yLabel = "Yellow "; yCode = "ToTo"; inherited.push("To"); }
-               else if(count === 1) { yLabel = "Tortoiseshell "; yCode = "Toto"; }
+               if(count === 2) { yLabel = "Yellow (ToTo) "; yCode = "ToTo"; inherited.push("To"); }
+               else if(count === 1) { yLabel = "Tortoiseshell (Toto) "; yCode = "Toto"; }
             }
         }
 
-        let base = "Golden";
+        let base = "Golden (++)";
         let match = PHENOTYPES.sort((a,b) => b.id.length - a.id.length).find(p => inherited.join('').includes(p.id.replace('To','')));
         if(match) base = match.name;
         
