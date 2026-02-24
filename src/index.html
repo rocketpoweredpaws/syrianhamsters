@@ -1,0 +1,71 @@
+
+
+const LOCI = {
+  // Base color loci
+    aa:      { name: "Black", alleles: ["a", "a"] },
+  ee:      { name: "Black Eyed Cream", alleles: ["e", "e"] },
+  pp:      { name: "Cinnamon", alleles: ["p", "p"] },
+  cdcd:    { name: "Dark Eared White", alleles: ["cd", "cd"] },
+  dgdg:    { name: "Dark Grey", alleles: ["dg", "dg"] },
+  cece:    { name: "Extreme Dilute", alleles: ["ce", "ce"] },
+  "++":    { name: "Golden", alleles: ["+", "+"] },
+  Lglg:    { name: "Light Grey", alleles: ["Lg", "Lg"] },
+  bb:      { name: "Rust", alleles: ["b", "b"] },
+  SgSg:    { name: "Silver Grey", alleles: ["Sg", "Sg"] },
+
+  // Sex-linked yellow/tortoiseshell
+  To:      { name: "Yellow/Tortoiseshell", alleles: ["To", "to", "Y"] },
+
+  // Combination phenotypes
+  bbdgdg:      { name: "Beige", alleles: ["bb", "dgdg"] },
+  bbLglg:      { name: "Black Eyed Blonde", alleles: ["bb", "Lglg"] },
+  bbToTo:      { name: "Black Eyed Honey", alleles: ["bb", "ToTo"] }, 
+  bbToY:       { name: "Black Eyed Honey", alleles: ["bb", "ToY"] }, 
+  dgdgee:      { name: "Black Eyed Ivory", alleles: ["dgdg", "ee"] },
+  eeLglg:      { name: "Black Eyed Ivory", alleles: ["ee", "Lglg"] },
+  eeSgsg:      { name: "Black Eyed Ivory", alleles: ["ee", "Sgsg"] },
+  eeSgSg:      { name: "Black Eyed White", alleles: ["ee", "SgSg"] },
+  Lglgpp:      { name: "Blonde", alleles: ["Lglg", "pp"] },
+  ppSgSg:      { name: "Blonde (Sg var.)", alleles: ["pp", "SgSg"] },
+  dgdgeeppU_:  { name: "Blue Mink", alleles: ["dgdg", "ee", "pp", "U_"] },
+  aabbpp:      { name: "Champagne", alleles: ["aa", "bb", "pp"] },
+  aabb:        { name: "Chocolate (Black var.)", alleles: ["aa", "bb"] },
+  bbeeU_:      { name: "Chocolate (Sable var.)", alleles: ["bb", "ee", "U_"] },
+  bbeeppU_:    { name: "Copper", alleles: ["bb", "ee", "pp", "U_"] },
+  dgdgeeU_:    { name: "Dark Grey Sable", alleles: ["dgdg", "ee", "U_"] },
+  aaSg_:       { name: "Dingy Black", alleles: ["aa", "Sg_"] },
+  aapp:        { name: "Dove", alleles: ["aa", "pp"] },
+  cdcdpp:      { name: "Flesh Eared White", alleles: ["cdcd", "pp"] },
+  ppToTo:      { name: "Honey", alleles: ["pp", "ToTo"] },
+  ppToY:       { name: "Honey", alleles: ["pp", "ToY"] },
+  eeLglgU_:    { name: "Light Grey Sable", alleles: ["ee", "Lglg", "U_"] },
+  dgdgpp:      { name: "Lilac", alleles: ["dgdg", "pp"] },
+  dgdgppToTo:  { name: "Lilac Pearl", alleles: ["dgdg", "pp", "ToTo"] },
+  dgdgppToY:   { name: "Lilac Pearl", alleles: ["dgdg", "pp", "ToY"] },
+  eeppU_:      { name: "Mink (Caramel)", alleles: ["ee", "pp", "U_"] },
+  bbee:        { name: "Pale Eared Cream", alleles: ["bb", "ee"] },
+  eepp:        { name: "Red Eyed Cream", alleles: ["ee", "pp"] },
+  dgdgeepp:    { name: "Red Eyed Ivory", alleles: ["dgdg", "ee", "pp"] },
+  eeU_:        { name: "Sable", alleles: ["ee", "U_"] },
+  eeSgSgU_:    { name: "Silver Sable", alleles: ["ee", "SgSg", "U_"] },
+  dgdgToTo:    { name: "Smoke Pearl", alleles: ["dgdg", "ToTo"] },
+  dgdgToY:     { name: "Smoke Pearl", alleles: ["dgdg", "ToY"] },
+  aaToTo:      { name: "Yellow Black", alleles: ["aa", "ToTo"] },
+  aaToY:       { name: "Yellow Black", alleles: ["aa", "ToY"] },
+
+  // Coat types
+ "Shorthair++": { name: "Shorthair", alleles: ["+", "+"] },
+  ll:   { name: "Longhair", alleles: ["l", "l"] },
+  rxrx:{ name: "Rex", alleles: ["rx", "rx"] },
+  Sasa:{ name: "Satin", alleles: ["Sa", "Sa"] },
+  hrhr:{ name: "Hairless", alleles: ["hr", "hr"] },
+
+  // Patterns
+  BaBa: { name: "Banded", alleles: ["Ba", "Ba"] },
+  Baba: { name: "Banded", alleles: ["Ba", "Ba"] },
+  Dsds: { name: "Dominant Spot", alleles: ["Ds", "ds"] },
+  rdrd: { name: "Recessive Dappled", alleles: ["rd", "rd"] },
+  Whwh: { name: "Roan/White Bellied", alleles: ["Wh", "wh"] },
+  ss:   { name: "Piebald", alleles: ["s", "s"] },
+  Toto: { name: "Tortoiseshell", alleles: ["To", "to"] }
+};
