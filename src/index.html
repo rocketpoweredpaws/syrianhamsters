@@ -1,205 +1,208 @@
 <style>
-    .pc { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin: 0; padding: 0; font-family: sans-serif; }
-    .pcmn { flex: 1; min-width: 300px; background: #fdfdfd; border-radius: 8px; margin: 0; padding: 0; }
-    .shpdd { margin: 0; padding: 0; display: flex; flex-direction: column; }
-    .shpdd label { font-size: 0.7em; font-weight: bold; text-transform: uppercase; color: #777; margin: 0; padding: 0; }
-    .gn-inp { border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em; background: #fff; margin: 0; padding: 0; }
-    
-    #litter-box { margin: 0; padding: 0; background: #fff; border-radius: 12px; }
-    .offspring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0; padding: 0; }
-    
-    .pcrd { border-radius: 8px; background: #fafafa; font-size: 0.85em; box-shadow: 1px 1px 6px rgba(0,0,0,0.05); margin: 0; padding: 0; }
-    .pnm { font-weight: bold; color: #b45309; display: block; font-size: 1em; margin: 0; padding: 0; }
-    .pgn { font-size: 0.75em; color: #888; display: block; margin: 0; padding: 0; font-family: 'Arial', sans-serif; }
-    .pdsc { margin: 0; font-style: italic; color: #555; padding: 0; }
-    
-    .wrnbnnr { border-radius: 6px; font-weight: bold; margin: 0; padding: 0; display: none; text-align: center; background: #fee2e2; color: #991b1b; }
+    @import url('https://fonts.googleapis.com/css2?family=Whackadoo&display=swap');
+
+    .pc { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin: 0; padding: 0; font-family: 'Whackadoo', 'Comic Sans MS', sans-serif; }
+    .pcmn { flex: 1; min-width: 300px; background: #fdfdfd; border-radius: 8px; margin: 0; padding: 0; }
+    .shpdd { margin: 0; padding: 0; display: flex; flex-direction: column; }
+    .shpdd label { font-size: 0.7em; font-weight: bold; text-transform: uppercase; color: #777; margin: 0; padding: 0; }
+    .gn-inp { border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em; background: #fff; margin: 0; padding: 0; font-family: inherit; }
+    
+    #litter-box { margin: 0; padding: 0; background: #fff; border-radius: 12px; font-family: 'Whackadoo', sans-serif; }
+    .offspring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0; padding: 0; }
+    
+    .pcrd { border-radius: 8px; background: #fafafa; font-size: 0.85em; box-shadow: 1px 1px 6px rgba(0,0,0,0.05); margin: 0; padding: 0; }
+    .pnm { font-weight: bold; color: #b45309; display: block; font-size: 1em; margin: 0; padding: 0; }
+    .pgn { font-size: 0.75em; color: #888; display: block; margin: 0; padding: 0; font-family: inherit; }
+    .pdsc { margin: 0; font-style: italic; color: #555; padding: 0; }
+    
+    .wrnbnnr { border-radius: 6px; font-weight: bold; margin: 0; padding: 0; display: none; text-align: center; background: #fee2e2; color: #991b1b; }
 </style>
 
 <div class="pc">
-    <div class="pcmn">
-        <h3>Father (Male)</h3>
-        <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="dad-1"></select></div>
-        <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="dad-2"></select></div>
-        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="dad-3"></select></div>
-        <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="dad-coat"></select></div>
-        <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="dad-pat"></select></div>
-        <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="dad-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
-    </div>
+    <div class="pcmn">
+        <h3>Father (Male)</h3>
+        <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="dad-1"></select></div>
+        <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="dad-2"></select></div>
+        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="dad-3"></select></div>
+        <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="dad-coat"></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="dad-pat"></select></div>
+        <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="dad-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
+    </div>
 
-    <div class="pcmn">
-        <h3>Mother (Female)</h3>
-        <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="mom-1"></select></div>
-        <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="mom-2"></select></div>
-        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="mom-3"></select></div>
-        <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="mom-coat"></select></div>
-        <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="mom-pat-female"></select></div>
-        <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="mom-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
-    </div>
+    <div class="pcmn">
+        <h3>Mother (Female)</h3>
+        <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="mom-1"></select></div>
+        <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="mom-2"></select></div>
+        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="mom-3"></select></div>
+        <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="mom-coat"></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="mom-pat-female"></select></div>
+        <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="mom-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
+    </div>
 </div>
 
 <div id="litter-box">
-    <div id="lethal-banner" class="wrnbnnr">LETHAL TRAIT DETECTED: Litter size reduced by 25% (DsDs, LgLg, or WhWh)</div>
-    <h3 style="margin:0;">Potential Litter Results</h3>
-    <div id="offspring-grid" class="offspring-grid"></div>
+    <div id="lethal-banner" class="wrnbnnr">LETHAL TRAIT DETECTED: Litter size reduced by 25% (DsDs, LgLg, or WhWh)</div>
+    <h3 style="margin:0;">Potential Litter Results</h3>
+    <div id="offspring-grid" class="offspring-grid"></div>
 </div>
 
 <script>
 const BASE_OPTIONS = [
-    { val: "++", text: "Golden (++)" }, 
-    { val: "aa", text: "Black (aa)" }, 
-    { val: "ee", text: "Black Eyed Cream (ee)" },
-    { val: "pp", text: "Cinnamon (pp)" }, 
-    { val: "cdcd", text: "Dark Eared White (cdcd)" }, 
-    { val: "dgdg", text: "Dark Grey (dgdg)" },
-    { val: "cece", text: "Extreme Dilute (cece)" },
-    { val: "Lglg", text: "Light Grey (Lglg)" }, 
-    { val: "bb", text: "Rust (bb)" }, 
-    { val: "SgSg", text: "Silver Grey (SgSg)" },
-    { val: "To", text: "Yellow (To)" }
+    { val: "++", text: "Golden (++)" }, 
+    { val: "aa", text: "Black (aa)" }, 
+    { val: "ee", text: "Black Eyed Cream (ee)" },
+    { val: "pp", text: "Cinnamon (pp)" }, 
+    { val: "cdcd", text: "Dark Eared White (cdcd)" }, 
+    { val: "dgdg", text: "Dark Grey (dgdg)" },
+    { val: "cece", text: "Extreme Dilute (cece)" },
+    { val: "Lglg", text: "Light Grey (Lglg)" }, 
+    { val: "bb", text: "Rust (bb)" }, 
+    { val: "SgSg", text: "Silver Grey (SgSg)" },
+    { val: "ToY", text: "Yellow (ToY)" }
 ];
 
 const COAT_OPTIONS = [
-    { val: "Sh", text: "Shorthair (Sh)" }, 
-    { val: "ll", text: "Longhair (ll)" }, 
-    { val: "rxrx", text: "Rex (rxrx)" }, 
-    { val: "Sasa", text: "Satin (Sasa)" }, 
-    { val: "hrhr", text: "Hairless (hrhr)" }
+    { val: "Sh", text: "Shorthair (Sh)" }, 
+    { val: "ll", text: "Longhair (ll)" }, 
+    { val: "rxrx", text: "Rex (rxrx)" }, 
+    { val: "Sasa", text: "Satin (Sasa)" }, 
+    { val: "hrhr", text: "Hairless (hrhr)" }
 ];
 
 const PATTERN_OPTIONS = [
-    { val: "", text: "Solid" }, 
-    { val: "Ba", text: "Banded (Ba)" }, 
-    { val: "Ds", text: "Dominant Spot (Ds)" },
-    { val: "rdrd", text: "Recessive Dappled (rdrd)" },
-    { val: "Wh", text: "Roan/White Bellied (Wh)" }, 
-    { val: "ss", text: "Piebald (ss)" }
+    { val: "", text: "Solid" }, 
+    { val: "Ba", text: "Banded (Ba)" }, 
+    { val: "Ds", text: "Dominant Spot (Ds)" },
+    { val: "rdrd", text: "Recessive Dappled (rdrd)" },
+    { val: "Wh", text: "Roan/White Bellied (Wh)" }, 
+    { val: "ss", text: "Piebald (ss)" }
 ];
 
 const PHENOTYPES = [
-    { id: "bbdgdg", name: "Beige (bbdgdg)" },
-    { id: "bbLglg", name: "Black Eyed Blonde (bbLglg)" },
-    { id: "bbTo", name: "Black Eyed Honey (bbTo)" },
-    { id: "dgdgee", name: "Black Eyed Ivory (dgdgee)" },
-    { id: "eeLglg", name: "Black Eyed Ivory (eeLglg)" },
-    { id: "eeSgsg", name: "Black Eyed Ivory (eeSgsg)" },
-    { id: "eeSgSg", name: "Black Eyed White (eeSgSg)" },
-    { id: "Lglgpp", name: "Blonde (Lglgpp)" },
-    { id: "ppSgSg", name: "Blonde (ppSgSg)" },
-    { id: "dgdgeeppU_", name: "Blue Mink (dgdgeeppU_)" },
-    { id: "aabbpp", name: "Champagne (aabbpp)" },
-    { id: "aabb", name: "Chocolate (aabb)" },
-    { id: "bbeeU_", name: "Chocolate Sable (bbeeU_)" },
-    { id: "bbeeppU_", name: "Copper (bbeeppU_)" },
-    { id: "dgdgeeU_", name: "Dark Grey Sable (dgdgeeU_)" },
-    { id: "aaSg", name: "Dingy Black (aaSg)" },
-    { id: "aapp", name: "Dove (aapp)" },
-    { id: "cdcdpp", name: "Flesh Eared White (cdcdpp)" },
-    { id: "ppTo", name: "Honey (ppTo)" },
-    { id: "eeLglgU_", name: "Light Grey Sable (eeLglgU_)" },
-    { id: "dgdgpp", name: "Lilac (dgdgpp)" },
-    { id: "dgdgppTo", name: "Lilac Pearl (dgdgppTo)" },
-    { id: "eeppU_", name: "Mink (eeppU_)" },
-    { id: "bbee", name: "Pale Eared Cream (bbee)" },
-    { id: "eepp", name: "Red Eyed Cream (eepp)" },
-    { id: "dgdgeepp", name: "Red Eyed Ivory (dgdgeepp)" },
-    { id: "eeLglgpp", name: "Red Eyed Ivory (eeLglgpp)" },
-    { id: "eeppSgsg", name: "Red Eyed Ivory (eeppSgsg)" },
-    { id: "eeU_", name: "Sable (eeU_)" },
-    { id: "eeSgSgU_", name: "Silver Sable (eeSgSgU_)" },
-    { id: "dgdgTo", name: "Smoke Pearl (dgdgTo)" },
-    { id: "aaTo", name: "Yellow Black (aaTo)" }
+    { id: "bbdgdg", name: "Beige (bbdgdg)" },
+    { id: "bbLglg", name: "Black Eyed Blonde (bbLglg)" },
+    { id: "bbTo", name: "Black Eyed Honey (bbTo)" },
+    { id: "dgdgee", name: "Black Eyed Ivory (dgdgee)" },
+    { id: "eeLglg", name: "Black Eyed Ivory (eeLglg)" },
+    { id: "eeSgsg", name: "Black Eyed Ivory (eeSgsg)" },
+    { id: "eeSgSg", name: "Black Eyed White (eeSgSg)" },
+    { id: "Lglgpp", name: "Blonde (Lglgpp)" },
+    { id: "ppSgSg", name: "Blonde (ppSgSg)" },
+    { id: "dgdgeeppU_", name: "Blue Mink (dgdgeeppU_)" },
+    { id: "aabbpp", name: "Champagne (aabbpp)" },
+    { id: "aabb", name: "Chocolate (aabb)" },
+    { id: "bbeeU_", name: "Chocolate Sable (bbeeU_)" },
+    { id: "bbeeppU_", name: "Copper (bbeeppU_)" },
+    { id: "dgdgeeU_", name: "Dark Grey Sable (dgdgeeU_)" },
+    { id: "aaSg", name: "Dingy Black (aaSg)" },
+    { id: "aapp", name: "Dove (aapp)" },
+    { id: "cdcdpp", name: "Flesh Eared White (cdcdpp)" },
+    { id: "ppTo", name: "Honey (ppTo)" },
+    { id: "eeLglgU_", name: "Light Grey Sable (eeLglgU_)" },
+    { id: "dgdgpp", name: "Lilac (dgdgpp)" },
+    { id: "dgdgppTo", name: "Lilac Pearl (dgdgppTo)" },
+    { id: "eeppU_", name: "Mink (eeppU_)" },
+    { id: "bbee", name: "Pale Eared Cream (bbee)" },
+    { id: "eepp", name: "Red Eyed Cream (eepp)" },
+    { id: "dgdgeepp", name: "Red Eyed Ivory (dgdgeepp)" },
+    { id: "eeLglgpp", name: "Red Eyed Ivory (eeLglgpp)" },
+    { id: "eeppSgsg", name: "Red Eyed Ivory (eeppSgsg)" },
+    { id: "eeU_", name: "Sable (eeU_)" },
+    { id: "eeSgSgU_", name: "Silver Sable (eeSgSgU_)" },
+    { id: "dgdgTo", name: "Smoke Pearl (dgdgTo)" },
+    { id: "aaTo", name: "Yellow Black (aaTo)" }
 ];
 
 function setup() {
-    document.querySelectorAll('.base-sel').forEach(s => {
-        if(s.classList.contains('blankable')) s.add(new Option("None", ""));
-        BASE_OPTIONS.forEach(o => s.add(new Option(o.text, o.val)));
-    });
-    document.querySelectorAll('.coat-sel').forEach(s => COAT_OPTIONS.forEach(o => s.add(new Option(o.text, o.val))));
-    
-    const dPat = document.getElementById('dad-pat');
-    PATTERN_OPTIONS.forEach(o => dPat.add(new Option(o.text, o.val)));
-    
-    const mPat = document.getElementById('mom-pat-female');
-    PATTERN_OPTIONS.forEach(o => mPat.add(new Option(o.text, o.val)));
-    mPat.add(new Option("Tortoiseshell (ToTo)", "ToTo"));
+    document.querySelectorAll('.base-sel').forEach(s => {
+        if(s.classList.contains('blankable')) s.add(new Option("None", ""));
+        BASE_OPTIONS.forEach(o => s.add(new Option(o.text, o.val)));
+    });
+    document.querySelectorAll('.coat-sel').forEach(s => COAT_OPTIONS.forEach(o => s.add(new Option(o.text, o.val))));
+    
+    const dPat = document.getElementById('dad-pat');
+    PATTERN_OPTIONS.forEach(o => dPat.add(new Option(o.text, o.val)));
+    
+    const mPat = document.getElementById('mom-pat-female');
+    PATTERN_OPTIONS.forEach(o => mPat.add(new Option(o.text, o.val)));
+    mPat.add(new Option("Tortoiseshell (Toto)", "Toto"));
 }
 
 function calc() {
-    const dVal = Array.from(document.querySelectorAll('[id^="dad-"]')).map(i => i.value).join('');
-    const mVal = Array.from(document.querySelectorAll('[id^="mom-"]')).map(i => i.value).join('');
-    const mPatVal = document.getElementById('mom-pat-female').value;
-    const pool = dVal + mVal + mPatVal;
+    const dVal = Array.from(document.querySelectorAll('[id^="dad-"]')).map(i => i.value).join('');
+    const mVal = Array.from(document.querySelectorAll('[id^="mom-"]')).map(i => i.value).join('');
+    const mPatVal = document.getElementById('mom-pat-female').value;
+    const pool = dVal + mVal + mPatVal;
 
-    const lethal = (pool.match(/Ds/g) || []).length >= 2 || (pool.match(/Lg/g) || []).length >= 2 || (pool.match(/Wh/g) || []).length >= 2;
-    document.getElementById('lethal-banner').style.display = lethal ? 'block' : 'none';
-    
-    const grid = document.getElementById('offspring-grid');
-    grid.innerHTML = '';
-    const total = lethal ? 9 : 12;
+    const lethal = (pool.match(/Ds/g) || []).length >= 2 || (pool.match(/Lg/g) || []).length >= 2 || (pool.match(/Wh/g) || []).length >= 2;
+    document.getElementById('lethal-banner').style.display = lethal ? 'block' : 'none';
+    
+    const grid = document.getElementById('offspring-grid');
+    grid.innerHTML = '';
+    const total = lethal ? 9 : 12;
 
-    for (let i = 0; i < total; i++) {
-        let isM = Math.random() > 0.5;
-        let pSex = isM ? "Male" : "Female";
-        let inherited = [];
-        
-        ["aa", "ee", "pp", "bb", "U_", "SgSg", "dgdg", "Lglg", "cece", "cdcd", "Sgsg"].forEach(g => {
-            if(pool.includes(g) && Math.random() > 0.4) inherited.push(g);
-        });
+    for (let i = 0; i < total; i++) {
+        let isM = Math.random() > 0.5;
+        let pSex = isM ? "Male" : "Female";
+        let inherited = [];
+        
+        ["aa", "ee", "pp", "bb", "U_", "SgSg", "dgdg", "Lglg", "cece", "cdcd", "Sgsg"].forEach(g => {
+            if(pool.includes(g) && Math.random() > 0.4) inherited.push(g);
+        });
 
-        let yLabel = ""; let yCode = "";
-        if (pool.includes("To") || mPatVal === "ToTo") {
-            if (isM) {
-               if((mVal.includes("To") || mPatVal === "ToTo") && Math.random() > 0.4) { 
-                   yLabel = "Yellow (ToY) "; yCode = "ToY"; inherited.push("To"); 
-               }
-            } else {
-               let dTo = dVal.includes("To") ? 1 : 0;
-               let mTo = (mVal.includes("To") || mPatVal === "ToTo") ? 1 : 0;
-               let count = (dTo && Math.random() > 0.5 ? 1 : 0) + (mTo && Math.random() > 0.5 ? 1 : 0);
-               if(count === 2) { yLabel = "Yellow (ToTo) "; yCode = "ToTo"; inherited.push("To"); }
-               else if(count === 1) { yLabel = "Tortoiseshell (ToTo) "; yCode = "ToTo"; }
-            }
-        }
+        let yLabel = ""; let yCode = "";
+        if (pool.includes("To") || mPatVal === "Toto") {
+            if (isM) {
+               if((mVal.includes("To") || mPatVal === "Toto") && Math.random() > 0.4) { 
+                   yCode = "ToY"; inherited.push("To"); 
+                   pSex = "Yellow (Male)";
+               }
+            } else {
+               let dTo = dVal.includes("To") ? 1 : 0;
+               let mTo = (mVal.includes("To") || mPatVal === "Toto") ? 1 : 0;
+               let count = (dTo && Math.random() > 0.5 ? 1 : 0) + (mTo && Math.random() > 0.5 ? 1 : 0);
+               if(count === 2) { yLabel = "Yellow (ToTo) "; yCode = "ToTo"; inherited.push("To"); }
+               else if(count === 1) { yLabel = "Tortoiseshell (Toto) "; yCode = "Toto"; }
+            }
+        }
 
-        let base = "Golden (++)";
-        let match = PHENOTYPES.sort((a,b) => b.id.length - a.id.length).find(p => inherited.join('').includes(p.id.replace('To','')));
-        if(match) base = match.name;
-        
-        if (base.includes("Cinnamon") && (yCode === "ToY" || yCode === "ToTo")) {
-             base = base.replace("Cinnamon", "Honey");
-             yLabel = ""; 
-        }
+        let base = "Golden (++)";
+        let match = PHENOTYPES.sort((a,b) => b.id.length - a.id.length).find(p => inherited.join('').includes(p.id.replace('To','')));
+        if(match) base = match.name;
+        
+        if (base.includes("Cinnamon") && (yCode === "ToY" || yCode === "ToTo")) {
+             base = base.replace("Cinnamon", "Honey");
+             yLabel = ""; 
+        }
 
-        let cType = COAT_OPTIONS.find(x => pool.includes(x.val))?.val || "Sh";
-        
-        let inheritedPatterns = [];
-        PATTERN_OPTIONS.forEach(p => {
-            if(p.val && pool.includes(p.val) && Math.random() > 0.5) inheritedPatterns.push(p.text);
-        });
-        if (!isM && yCode === "ToTo") inheritedPatterns.push("Tortoiseshell (ToTo)");
-        let pLabel = inheritedPatterns.length > 0 ? inheritedPatterns.join(" ") : "Solid";
-        
-        let pCodes = PATTERN_OPTIONS.filter(p => inheritedPatterns.includes(p.text)).map(p => p.val).join("");
-        if (!isM && yCode === "ToTo") pCodes += "ToTo";
+        let cType = COAT_OPTIONS.find(x => pool.includes(x.val))?.val || "Sh";
+        
+        let inheritedPatterns = [];
+        PATTERN_OPTIONS.forEach(p => {
+            if(p.val && pool.includes(p.val) && Math.random() > 0.5) inheritedPatterns.push(p.text);
+        });
+        if (!isM && yCode === "Toto") inheritedPatterns.push("Tortoiseshell (Toto)");
+        let pLabel = inheritedPatterns.length > 0 ? inheritedPatterns.join(" ") : "Solid";
+        
+        let pCodes = PATTERN_OPTIONS.filter(p => inheritedPatterns.includes(p.text)).map(p => p.val).join("");
+        if (!isM && yCode === "Toto") pCodes += "Toto";
 
-        let geno = (inherited.join('') + yCode + cType + pCodes).replace(/\+\+/g, '+');
+        let geno = (inherited.join('') + yCode + cType + pCodes).replace(/\+\+/g, '+');
 
-        grid.innerHTML += `
-            <div class="pcrd">
-                <span class="pnm">${yLabel}${base} ${pLabel}</span>
-                <span class="pgn">${geno}</span>
-                <strong>Sex:</strong> ${pSex}<br>
-                <strong>Coat:</strong> ${cType}<br>
-                <div class="pdsc">To be added</div>
-            </div>`;
-    }
+        grid.innerHTML += `
+            <div class="pcrd">
+                <span class="pnm">${yLabel}${base} ${pLabel}</span>
+                <span class="pgn">${geno}</span>
+                <strong>Sex:</strong> ${pSex}<br>
+                <strong>Coat:</strong> ${cType}<br>
+                <div class="pdsc">To be added</div>
+            </div>`;
+    }
 }
 
-window.onload = () => { 
-    setup(); 
-    document.querySelectorAll('.gn-inp').forEach(e => e.onchange = calc); 
-    calc(); 
+window.onload = () => { 
+    setup(); 
+    document.querySelectorAll('.gn-inp').forEach(e => e.onchange = calc); 
+    calc(); 
 };
 </script>
