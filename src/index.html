@@ -1,105 +1,9 @@
-<style>
-    .parent-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .parent-column {
-        flex: 1;
-        min-width: 300px;
-        background: #f9f9f9;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-    }
-
-    .parent-column h3 {
-        margin-top: 0;
-        font-size: 1.1em;
-        border-bottom: 2px solid #eee;
-        padding-bottom: 5px;
-    }
-
-    .shpdd {
-        margin-bottom: 10px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .shpdd label {
-        font-size: 0.9em;
-        font-weight: bold;
-        margin-bottom: 3px;
-    }
-
-    #result-display {
-        background: #fffbe6;
-        padding: 20px;
-        border: 2px solid #ffe58f;
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    @media (max-width: 600px) {
-        .parent-column { flex: 1 1 100%; }
-    }
-</style>
-
-<div class="parent-container">
-    <div class="parent-column">
-        <h3>Male (Father)</h3>
-        <div class="shpdd">
-            <label>Base Color:</label>
-            <select id="dad">
-                <option value="++" selected>Golden (+)</option>
-                <option value="aa">Black (aa)</option>
-                <option value="pp">Cinnamon (pp)</option>
-                <option value="ee">Cream (ee)</option>
-                <option value="aapp">Dove (aapp)</option>
-                <option value="cdcd">Dark Eared White (cdcd)</option>
-                <option value="dgdg">Dark Grey (dgdg)</option>
-                <option value="cece">Extreme Dilute (cece)</option>
-                <option value="Lglg">Light Grey (Lglg)</option>
-                <option value="bb">Rust (bb)</option>
-                <option value="SgSg">Silver Grey (SgSg)</option>
-                <option value="ToY">Yellow (ToY)</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="parent-column">
-        <h3>Female (Mother)</h3>
-        <div class="shpdd">
-            <label>Base Color:</label>
-            <select id="mom">
-                <option value="++" selected>Golden (+)</option>
-                <option value="aa">Black (aa)</option>
-                <option value="pp">Cinnamon (pp)</option>
-                <option value="ee">Cream (ee)</option>
-                <option value="aapp">Dove (aapp)</option>
-                <option value="cdcd">Dark Eared White (cdcd)</option>
-                <option value="dgdg">Dark Grey (dgdg)</option>
-                <option value="cece">Extreme Dilute (cece)</option>
-                <option value="Lglg">Light Grey (Lglg)</option>
-                <option value="bb">Rust (bb)</option>
-                <option value="SgSg">Silver Grey (SgSg)</option>
-                <option value="ToTo">Yellow (ToTo)</option>
-            </select>
-        </div>
-    </div>
-</div>
-
-<div class="parent-column" style="margin-bottom: 20px; max-width: 100%;">
-    <h3>Offspring & Coat Settings</h3>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-        <div class="shpdd"><label>Sex:</label><select id="offspringssex"><option value="male">Male</option><option value="female" selected>Female</option></select></div>
-        <div class="shpdd"><label>Coat Type:</label><select id="coat-type"><option value="++" selected>Shorthair (++)</option><option value="ll">Longhair (ll)</option><option value="rxrx">Rex (rxrx)</option><option value="Sasa">Satin (Sasa)</option><option value="hrhr">Hairless (hrhr)</option></select></div>
-        <div class="shpdd"><label>Pattern:</label><select id="pattern"><option value="++" selected>None (Solid)</option><option value="Ba_">Banded (Ba_)</option><option value="Dsds">Dominant Spot (Dsds)</option><option value="rdrd">Recessive Dappled (rdrd)</option><option value="Whwh">Roan (Whwh)</option><option value="ss">Piebald (ss)</option><option value="Toto">Tortoiseshell (Toto)</option></select></div>
-        <div class="shpdd"><label>Eye Color:</label><select id="eye-color"><option value="black" selected>Black</option><option value="red">Red/Pink</option></select></div>
-    </div>
+<div class="shpdd">
+    <label>Umbrous (Sable Factor):</label>
+    <select id="umbrous">
+        <option value="++" selected>No (++)</option>
+        <option value="U">Yes (U_)</option>
+    </select>
 </div>
 
 <div id="combination-lookup" style="display: none;">
@@ -117,15 +21,12 @@
         <option value="aapp">Dove</option>
         <option value="dgdgpp">Lilac</option>
         <option value="eepp">Red Eyed Cream</option>
-        <option value="eeU_">Sable</option>
+        <option value="eeU">Sable</option>
+        <option value="eeppU">Mink</option>
+        <option value="dgdgeeppU">Blue Mink</option>
+        <option value="bbeeppU">Copper</option>
+        <option value="dgdgeeU">Dark Grey Sable</option>
     </select>
-</div>
-
-<div id="result-display">
-    <h3>Predicted Offspring:</h3>
-    <div id="offspring-result-name" style="font-size: 1.5em; font-weight: bold;">Golden Agouti Shorthair</div>
-    <div id="genotype-label" style="font-size: 0.9em; color: #666; margin: 10px 0;"></div>
-    <img id="offspring-visual" src="images/++.png" alt="Hamster Result" style="max-width: 250px; display: block; margin: 0 auto;">
 </div>
 
 <script>
@@ -136,38 +37,25 @@ const SHP = {
     "Sa": { type: "dominant" }, "hr": { type: "recessive" }, "Ba": { type: "dominant" },
     "Ds": { type: "dominant" }, "rd": { type: "recessive" }, "Wh": { type: "dominant" },
     "s": { type: "recessive" }, "Sg": { type: "incomplete_dominant" },
-    "Lg": { type: "incomplete_dominant" }, "To": { type: "sex_linked" }
+    "Lg": { type: "incomplete_dominant" }, "To": { type: "sex_linked" },
+    "U": { type: "dominant" } // Added Umbrous Gene
 };
 
-function children(genotype, sex) {
-    let traits = [];
-    const count = (g) => (genotype.match(new RegExp(g, "g")) || []).length;
-    for (let g in SHP) {
-        let r = SHP[g];
-        if (r.type === "sex_linked") {
-            let tc = count("To");
-            if (sex === "male" && tc >= 1) traits.push("ToY");
-            else if (sex === "female") { if (tc >= 2) traits.push("ToTo"); else if (tc === 1) traits.push("Toto"); }
-        } else if (r.type === "recessive" && count(g) >= 2) traits.push(g);
-        else if (r.type === "dominant" && count(g) >= 1) traits.push(g);
-        else if (r.type === "incomplete_dominant") { if (count(g) >= 2) traits.push(g + g); else if (count(g) === 1) traits.push(g); }
-    }
-    return traits;
-}
+// ... keep your children() function the same ...
 
 function updateResult() {
     const sex = document.getElementById('offspringssex').value;
-    const combined = ['dad', 'mom', 'coat-type', 'pattern'].map(id => document.getElementById(id).value).join('');
+    // Added 'umbrous' to the combined strings
+    const combined = ['dad', 'mom', 'coat-type', 'pattern', 'umbrous'].map(id => document.getElementById(id).value).join('');
     
-    // LETHAL CHECKS
     const cLg = (combined.match(/Lg/g) || []).length;
     const cDs = (combined.match(/Ds/g) || []).length;
     const cWh = (combined.match(/Wh/g) || []).length;
 
     const traits = children(combined, sex);
+    // Added "U" to the filter so it stays with the base genotype for the lookup
     let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
 
-    // COMBINATION LOOKUP
     let baseName = "Golden Agouti";
     const lookup = document.getElementById('offspring-phenotype-list');
     for (let opt of lookup.options) { if (opt.value === baseGenotype) { baseName = opt.text; break; } }
@@ -190,6 +78,10 @@ function updateResult() {
     document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
 }
 
-['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color'].forEach(id => document.getElementById(id).onchange = updateResult);
+// Ensure 'umbrous' is in the listener list
+['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color', 'umbrous'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.onchange = updateResult;
+});
 updateResult();
 </script>
