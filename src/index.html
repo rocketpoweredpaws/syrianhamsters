@@ -1,99 +1,29 @@
 <style>
-    /* ... keeping your existing side-by-side and result-display CSS ... */
-    .carrier-tag {
-        display: inline-block;
-        background: #e2e8f0;
-        color: #475569;
-        font-size: 0.75em;
-        border-radius: 4px;
-        font-family: monospace;
-    }
-    .parent-info {
-        margin-top: 10px;
-        font-size: 0.85em;
-        color: #555;
+    /* ... keeping your existing side-by-side CSS ... */
+    .error-msg {
+        color: #dc2626;
+        font-size: 0.8em;
+        font-weight: bold;
+        margin-top: 5px;
+        display: none;
     }
 </style>
 
 <div class="parent-container">
-    <div class="parent-column">
+    <div class="parent-column" id="dad-col">
         <h3>Male (Father)</h3>
-        <div class="shpdd"><label>Base Color</label><select class="gene-input" id="dad-1"><option value="">Golden (+)</option><option value="aa">Black (aa)</option><option value="ee">Cream (ee)</option><option value="cdcd">Dark Eared White (cdcd)</option></select></div>
-        <div class="shpdd"><label>Base Color 2</label><select class="gene-input" id="dad-2"><option value="">None</option><option value="pp">Cinnamon (pp)</option><option value="bb">Rust (bb)</option></select></div>
-        <div class="shpdd"><label>Base Color 3</label><select class="gene-input" id="dad-3"><option value="">None</option><option value="dgdg">Dark Grey (dgdg)</option><option value="SgSg">Silver Grey (SgSg)</option><option value="Lglg">Light Grey (Lglg)</option></select></div>
-        <div class="shpdd"><label>Base Color 4</label><select class="gene-input" id="dad-4"><option value="">None</option><option value="ToY">Yellow (ToY)</option></select></div>
-        <div class="shpdd"><label>Dilute</label><select class="gene-input" id="dad-dilute"><option value="">None</option><option value="cece">Extreme Dilute (cece)</option></select></div>
-        <div class="shpdd"><label>Pattern</label><select class="gene-input" id="dad-pat"><option value="">Solid</option><option value="Ba">Banded (Ba)</option><option value="Ds">Dom Spot (Ds)</option></select></div>
-        <div id="dad-carriers" class="parent-info">Carriers: <span>None</span></div>
+        <div class="shpdd"><label>Base Color</label><select class="gene-input base-sel" id="dad-1"></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel" id="dad-2"></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel" id="dad-3"></select></div>
+       </select></div>
+        <div id="dad-error" class="error-msg"> Invalid color combination. Resetting to Wild Type.</div>
     </div>
 
-    <div class="parent-column">
+    <div class="parent-column" id="mom-col">
         <h3>Female (Mother)</h3>
-        <div class="shpdd"><label>Base Color</label><select class="gene-input" id="mom-1"><option value="">Golden (+)</option><option value="aa">Black (aa)</option><option value="ee">Cream (ee)</option><option value="cdcd">Dark Eared White (cdcd)</option></select></div>
-        <div class="shpdd"><label>Base Color 2</label><select class="gene-input" id="mom-2"><option value="">None</option><option value="pp">Cinnamon (pp)</option><option value="bb">Rust (bb)</option></select></div>
-        <div class="shpdd"><label>Base Color 3</label><select class="gene-input" id="mom-3"><option value="">None</option><option value="dgdg">Dark Grey (dgdg)</option><option value="SgSg">Silver Grey (SgSg)</option><option value="Lglg">Light Grey (Lglg)</option></select></div>
-        <div class="shpdd"><label>Base Color 4</label><select class="gene-input" id="mom-4"><option value="">None</option><option value="ToTo">Yellow (ToTo)</option></select></div>
-        <div class="shpdd"><label>Dilute</label><select class="gene-input" id="mom-dilute"><option value="">None</option><option value="cece">Extreme Dilute (cece)</option></select></div>
-        <div class="shpdd"><label>Pattern</label><select class="gene-input" id="mom-pat"><option value="">Solid</option><option value="Ba">Banded (Ba)</option><option value="Ds">Dom Spot (Ds)</option></select></div>
-        <div id="mom-carriers" class="parent-info">Carriers: <span>None</span></div>
+        <div class="shpdd"><label>Base Color</label><select class="gene-input base-sel" id="mom-1"></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel" id="mom-2"></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel" id="mom-3"></select></div>
+        <div id="mom-error" class="error-msg">⚠ Invalid color combination. Resetting to Wild Type.</div>
     </div>
 </div>
-
-<div id="result-display">
-    <h3 style="margin-top:0;">Predicted Offspring</h3>
-    <div id="offspring-result-name" style="font-size: 1.6em; font-weight: bold; color: #b45309;">Golden Agouti Shorthair</div>
-    <div id="offspring-carriers" style="margin: 10px 0;"><strong>Offspring Carriers:</strong> <span id="offspring-carrier-list">None</span></div>
-    
-    <div id="lethal-warning" class="warning-box lethal-warn">⚠️ LETHAL COMBINATION: 25% litter reduction expected.</div>
-    <div id="eyeless-warning" class="warning-box eyeless-warn">⚠️ EYELESS WHITE WARNING: High probability of anophthalmic pups.</div>
-    
-    <img id="offspring-visual" src="images/++.png" alt="Hamster Result" style="max-width: 250px; height: auto; display: block; margin: 15px auto;">
-</div>
-
-<script>
-// ... keeping original COLOR_MAP and GENE_RULES from previous response ...
-
-function getCarrierList(genotypeString) {
-    let carriers = [];
-    for (let g in GENE_RULES) {
-        if (GENE_RULES[g] === "recessive") {
-            let count = (genotypeString.match(new RegExp(g, "g")) || []).length;
-            // A carrier has exactly 1 allele of a recessive trait (e.g., 'a' but not 'aa')
-            if (count === 1) {
-                carriers.push(`<span class="carrier-tag">${g.toUpperCase()}${g}</span>`);
-            }
-        }
-    }
-    return carriers.length ? carriers.join(' ') : "None";
-}
-
-function updateCalculator() {
-    const dadInputs = [
-        document.getElementById('dad-1').value, document.getElementById('dad-2').value,
-        document.getElementById('dad-3').value, document.getElementById('dad-4').value,
-        document.getElementById('dad-dilute').value, document.getElementById('dad-pat').value
-    ].join('');
-
-    const momInputs = [
-        document.getElementById('mom-1').value, document.getElementById('mom-2').value,
-        document.getElementById('mom-3').value, document.getElementById('mom-4').value,
-        document.getElementById('mom-dilute').value, document.getElementById('mom-pat').value
-    ].join('');
-
-    // Business Rule: Display Carriers for Parents
-    document.querySelector('#dad-carriers span').innerHTML = getCarrierList(dadInputs);
-    document.querySelector('#mom-carriers span').innerHTML = getCarrierList(momInputs);
-
-    // Business Rule: Offspring Carriers (Inherited single alleles)
-    // Simplified logic: Offspring carry any recessive gene where total parent count is >= 1 but <= 2
-    const allInputs = dadInputs + momInputs + document.getElementById('coat').value + document.getElementById('umbrous').value;
-    document.getElementById('offspring-carrier-list').innerHTML = getCarrierList(allInputs);
-
-    
-}
-document.querySelectorAll('.gene-input').forEach(el => {
-    el.addEventListener('change', updateCalculator);
-});
-
-updateCalculator();
-</script>
