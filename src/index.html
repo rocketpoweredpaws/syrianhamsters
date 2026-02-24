@@ -1,86 +1,101 @@
-<div class="shpdd">
-    <label>Umbrous (Sable Factor):</label>
-    <select id="umbrous">
-        <option value="++" selected>No (++)</option>
-        <option value="U">Yes (U_)</option>
-    </select>
+<style>
+    /* ... keeping your existing side-by-side and result-display CSS ... */
+    .carrier-tag {
+        display: inline-block;
+        background: #e2e8f0;
+        color: #475569;
+        font-size: 0.75em;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin: 2px;
+        font-family: monospace;
+    }
+    .parent-info {
+        margin-top: 10px;
+        font-size: 0.85em;
+        color: #555;
+    }
+</style>
+
+<div class="parent-container">
+    <div class="parent-column">
+        <h3>Male (Father)</h3>
+        <div class="shpdd"><label>Base Color</label><select class="gene-input" id="dad-1"><option value="">Golden (+)</option><option value="aa">Black (aa)</option><option value="ee">Cream (ee)</option><option value="cdcd">Dark Eared White (cdcd)</option></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input" id="dad-2"><option value="">None</option><option value="pp">Cinnamon (pp)</option><option value="bb">Rust (bb)</option></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input" id="dad-3"><option value="">None</option><option value="dgdg">Dark Grey (dgdg)</option><option value="SgSg">Silver Grey (SgSg)</option><option value="Lglg">Light Grey (Lglg)</option></select></div>
+        <div class="shpdd"><label>Base Color 4</label><select class="gene-input" id="dad-4"><option value="">None</option><option value="ToY">Yellow (ToY)</option></select></div>
+        <div class="shpdd"><label>Dilute</label><select class="gene-input" id="dad-dilute"><option value="">None</option><option value="cece">Extreme Dilute (cece)</option></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gene-input" id="dad-pat"><option value="">Solid</option><option value="Ba">Banded (Ba)</option><option value="Ds">Dom Spot (Ds)</option></select></div>
+        <div id="dad-carriers" class="parent-info">Carriers: <span>None</span></div>
+    </div>
+
+    <div class="parent-column">
+        <h3>Female (Mother)</h3>
+        <div class="shpdd"><label>Base Color</label><select class="gene-input" id="mom-1"><option value="">Golden (+)</option><option value="aa">Black (aa)</option><option value="ee">Cream (ee)</option><option value="cdcd">Dark Eared White (cdcd)</option></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input" id="mom-2"><option value="">None</option><option value="pp">Cinnamon (pp)</option><option value="bb">Rust (bb)</option></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input" id="mom-3"><option value="">None</option><option value="dgdg">Dark Grey (dgdg)</option><option value="SgSg">Silver Grey (SgSg)</option><option value="Lglg">Light Grey (Lglg)</option></select></div>
+        <div class="shpdd"><label>Base Color 4</label><select class="gene-input" id="mom-4"><option value="">None</option><option value="ToTo">Yellow (ToTo)</option></select></div>
+        <div class="shpdd"><label>Dilute</label><select class="gene-input" id="mom-dilute"><option value="">None</option><option value="cece">Extreme Dilute (cece)</option></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gene-input" id="mom-pat"><option value="">Solid</option><option value="Ba">Banded (Ba)</option><option value="Ds">Dom Spot (Ds)</option></select></div>
+        <div id="mom-carriers" class="parent-info">Carriers: <span>None</span></div>
+    </div>
 </div>
 
-<div id="combination-lookup" style="display: none;">
-    <select id="offspring-phenotype-list">
-        <option value="bbdgdg">Beige</option>
-        <option value="bbLglg">Black Eyed Blonde</option>
-        <option value="bbToTo">Black Eyed Honey</option>
-        <option value="bbToY">Black Eyed Honey</option>
-        <option value="dgdgee">Black Eyed Ivory</option>
-        <option value="eeSgSg">Black Eyed White</option>
-        <option value="Lglgpp">Blonde</option>
-        <option value="ppSgSg">Blonde (Sg var.)</option>
-        <option value="aabbpp">Champagne</option>
-        <option value="aabb">Chocolate</option>
-        <option value="aapp">Dove</option>
-        <option value="dgdgpp">Lilac</option>
-        <option value="eepp">Red Eyed Cream</option>
-        <option value="eeU">Sable</option>
-        <option value="eeppU">Mink</option>
-        <option value="dgdgeeppU">Blue Mink</option>
-        <option value="bbeeppU">Copper</option>
-        <option value="dgdgeeU">Dark Grey Sable</option>
-    </select>
+<div id="result-display">
+    <h3 style="margin-top:0;">Predicted Offspring</h3>
+    <div id="offspring-result-name" style="font-size: 1.6em; font-weight: bold; color: #b45309;">Golden Agouti Shorthair</div>
+    <div id="offspring-carriers" style="margin: 10px 0;"><strong>Offspring Carriers:</strong> <span id="offspring-carrier-list">None</span></div>
+    
+    <div id="lethal-warning" class="warning-box lethal-warn">⚠️ LETHAL COMBINATION: 25% litter reduction expected.</div>
+    <div id="eyeless-warning" class="warning-box eyeless-warn">⚠️ EYELESS WHITE WARNING: High probability of anophthalmic pups.</div>
+    
+    <img id="offspring-visual" src="images/++.png" alt="Hamster Result" style="max-width: 250px; height: auto; display: block; margin: 15px auto;">
 </div>
 
 <script>
-const SHP = {
-    "a": { type: "recessive" }, "p": { type: "recessive" }, "e": { type: "recessive" },
-    "b": { type: "recessive" }, "dg": { type: "recessive" }, "ce": { type: "recessive" },
-    "cd": { type: "recessive" }, "l": { type: "recessive" }, "rx": { type: "recessive" },
-    "Sa": { type: "dominant" }, "hr": { type: "recessive" }, "Ba": { type: "dominant" },
-    "Ds": { type: "dominant" }, "rd": { type: "recessive" }, "Wh": { type: "dominant" },
-    "s": { type: "recessive" }, "Sg": { type: "incomplete_dominant" },
-    "Lg": { type: "incomplete_dominant" }, "To": { type: "sex_linked" },
-    "U": { type: "dominant" } 
-};
+// ... keeping original COLOR_MAP and GENE_RULES from previous response ...
 
-
-function updateResult() {
-    const sex = document.getElementById('offspringssex').value;
-    
-    const combined = ['dad', 'mom', 'coat-type', 'pattern', 'umbrous'].map(id => document.getElementById(id).value).join('');
-    
-    const cLg = (combined.match(/Lg/g) || []).length;
-    const cDs = (combined.match(/Ds/g) || []).length;
-    const cWh = (combined.match(/Wh/g) || []).length;
-
-    const traits = children(combined, sex);
-    
-    let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
-
-    let baseName = "Golden Agouti";
-    const lookup = document.getElementById('offspring-phenotype-list');
-    for (let opt of lookup.options) { if (opt.value === baseGenotype) { baseName = opt.text; break; } }
-
-    let mods = [];
-    if (traits.includes("Ba")) mods.push("Banded");
-    if (traits.includes("Ds")) mods.push("Dominant Spot");
-    if (traits.includes("Wh")) mods.push("Roan");
-    if (traits.includes("Toto")) mods.push("Tortoiseshell");
-    
-    let tex = traits.includes("ll") ? "Longhair" : traits.includes("rxrx") ? "Rex" : traits.includes("Sasa") ? "Satin" : traits.includes("hrhr") ? "Hairless" : "Shorthair";
-
-    document.getElementById('offspring-result-name').innerText = `${baseName} ${mods.join(' ')} ${tex}`.replace(/\s+/g, ' ').trim();
-    
-    let msg = `Genotype: ${traits.join(' ')}`;
-    if (cLg >= 2 || cDs >= 2) msg += ` | Lethal combination: Litter size reduced by 25%.`;
-    if (cWh >= 2) msg += ` | Caution: Eyeless White pups (Anophthalmic) likely.`;
-    
-    document.getElementById('genotype-label').innerText = msg;
-    document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
+function getCarrierList(genotypeString) {
+    let carriers = [];
+    for (let g in GENE_RULES) {
+        if (GENE_RULES[g] === "recessive") {
+            let count = (genotypeString.match(new RegExp(g, "g")) || []).length;
+            // A carrier has exactly 1 allele of a recessive trait (e.g., 'a' but not 'aa')
+            if (count === 1) {
+                carriers.push(`<span class="carrier-tag">${g.toUpperCase()}${g}</span>`);
+            }
+        }
+    }
+    return carriers.length ? carriers.join(' ') : "None";
 }
 
-// Ensure 'umbrous' is in the listener list
-['offspringssex', 'dad', 'mom', 'coat-type', 'pattern', 'eye-color', 'umbrous'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el) el.onchange = updateResult;
+function updateCalculator() {
+    const dadInputs = [
+        document.getElementById('dad-1').value, document.getElementById('dad-2').value,
+        document.getElementById('dad-3').value, document.getElementById('dad-4').value,
+        document.getElementById('dad-dilute').value, document.getElementById('dad-pat').value
+    ].join('');
+
+    const momInputs = [
+        document.getElementById('mom-1').value, document.getElementById('mom-2').value,
+        document.getElementById('mom-3').value, document.getElementById('mom-4').value,
+        document.getElementById('mom-dilute').value, document.getElementById('mom-pat').value
+    ].join('');
+
+    // Business Rule: Display Carriers for Parents
+    document.querySelector('#dad-carriers span').innerHTML = getCarrierList(dadInputs);
+    document.querySelector('#mom-carriers span').innerHTML = getCarrierList(momInputs);
+
+    // Business Rule: Offspring Carriers (Inherited single alleles)
+    // Simplified logic: Offspring carry any recessive gene where total parent count is >= 1 but <= 2
+    const allInputs = dadInputs + momInputs + document.getElementById('coat').value + document.getElementById('umbrous').value;
+    document.getElementById('offspring-carrier-list').innerHTML = getCarrierList(allInputs);
+
+    
+}
+document.querySelectorAll('.gene-input').forEach(el => {
+    el.addEventListener('change', updateCalculator);
 });
-updateResult();
+
+updateCalculator();
 </script>
