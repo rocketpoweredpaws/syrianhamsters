@@ -38,14 +38,13 @@ const SHP = {
     "Ds": { type: "dominant" }, "rd": { type: "recessive" }, "Wh": { type: "dominant" },
     "s": { type: "recessive" }, "Sg": { type: "incomplete_dominant" },
     "Lg": { type: "incomplete_dominant" }, "To": { type: "sex_linked" },
-    "U": { type: "dominant" } // Added Umbrous Gene
+    "U": { type: "dominant" } 
 };
 
-// ... keep your children() function the same ...
 
 function updateResult() {
     const sex = document.getElementById('offspringssex').value;
-    // Added 'umbrous' to the combined strings
+    
     const combined = ['dad', 'mom', 'coat-type', 'pattern', 'umbrous'].map(id => document.getElementById(id).value).join('');
     
     const cLg = (combined.match(/Lg/g) || []).length;
@@ -53,7 +52,7 @@ function updateResult() {
     const cWh = (combined.match(/Wh/g) || []).length;
 
     const traits = children(combined, sex);
-    // Added "U" to the filter so it stays with the base genotype for the lookup
+    
     let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
 
     let baseName = "Golden Agouti";
