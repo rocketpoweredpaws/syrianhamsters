@@ -1,29 +1,152 @@
 <style>
-    /* ... keeping your existing side-by-side CSS ... */
-    .error-msg {
-        color: #dc2626;
-        font-size: 0.8em;
-        font-weight: bold;
-        margin-top: 5px;
-        display: none;
-    }
+    /* Clean UI: Borders and manual sex buttons removed */
+    .parent-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin-bottom: 20px; }
+    .parent-column { flex: 1; min-width: 320px; background: #fdfdfd; padding: 15px; border-radius: 8px; }
+    .shpdd { margin-bottom: 10px; display: flex; flex-direction: column; }
+    .shpdd label { font-size: 0.75em; font-weight: bold; text-transform: uppercase; color: #666; margin-bottom: 2px; }
+    .gene-input { padding: 5px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em; background: #fff; }
+    
+    #litter-box { margin-top: 20px; padding: 20px; background: #fff; border-radius: 12px; }
+    .offspring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-top: 15px; }
+    
+    .pup-card { padding: 12px; border-radius: 8px; background: #fafafa; font-size: 0.85em; box-shadow: 2px 2px 5px rgba(0,0,0,0.05); position: relative; }
+    .pup-name { font-weight: bold; color: #b45309; display: block; font-size: 1.1em; margin-bottom: 2px; }
+    .pup-genotype { font-family: Ariel; font-size: 0.8em; color: #64748b; display: block; margin-bottom: 8px; }
+    .pup-desc { margin-top: 10px; font-style: italic; color: #444; border-top: 1px solid #eee; padding-top: 8px; }
+    
+    .warning-banner { padding: 12px; border-radius: 6px; font-weight: bold; margin-bottom: 15px; display: none; text-align: center; }
+    .lethal { background: #fee2e2; color: #991b1b; }
 </style>
 
 <div class="parent-container">
-    <div class="parent-column" id="dad-col">
-        <h3>Male (Father)</h3>
-        <div class="shpdd"><label>Base Color</label><select class="gene-input base-sel" id="dad-1"></select></div>
-        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel" id="dad-2"></select></div>
-        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel" id="dad-3"></select></div>
-       </select></div>
-        <div id="dad-error" class="error-msg"> Invalid color combination. Resetting to Wild Type.</div>
-    </div>
+    <div class="parent-column" id="dad-col">
+        <h3>Male (Father)</h3>
+        <div class="shpdd"><label>Base Color 1</label><select class="gene-input base-sel" id="dad-1"></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel blankable" id="dad-2"></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel blankable" id="dad-3"></select></div>
+        <div class="shpdd"><label>Yellow Gene</label><select class="gene-input" id="dad-yellow"><option value="">Non-Yellow</option><option value="ToY">Yellow (ToY)</option></select></div>
+        <div class="shpdd"><label>Coat Type</label><select class="gene-input coat-sel" id="dad-coat"></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gene-input pat-sel" id="dad-pat"></select></div>
+        <div class="shpdd"><label>Umbrous (U)</label><select class="gene-input" id="dad-u"><option value="">No</option><option value="U">Yes (U)</option></select></div>
+    </div>
 
-    <div class="parent-column" id="mom-col">
-        <h3>Female (Mother)</h3>
-        <div class="shpdd"><label>Base Color</label><select class="gene-input base-sel" id="mom-1"></select></div>
-        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel" id="mom-2"></select></div>
-        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel" id="mom-3"></select></div>
-        <div id="mom-error" class="error-msg">⚠ Invalid color combination. Resetting to Wild Type.</div>
-    </div>
+    <div class="parent-column" id="mom-col">
+        <h3>Female (Mother)</h3>
+        <div class="shpdd"><label>Base Color 1</label><select class="gene-input base-sel" id="mom-1"></select></div>
+        <div class="shpdd"><label>Base Color 2</label><select class="gene-input base-sel blankable" id="mom-2"></select></div>
+        <div class="shpdd"><label>Base Color 3</label><select class="gene-input base-sel blankable" id="mom-3"></select></div>
+        <div class="shpdd"><label>Yellow Gene</label><select class="gene-input" id="mom-yellow"><option value="">Non-Yellow</option><option value="ToTo">Yellow (ToTo)</option><option value="Toto">Tortoiseshell (Toto)</option></select></div>
+        <div class="shpdd"><label>Coat Type</label><select class="gene-input coat-sel" id="mom-coat"></select></div>
+        <div class="shpdd"><label>Pattern</label><select class="gene-input pat-sel" id="mom-pat"></select></div>
+        <div class="shpdd"><label>Umbrous (U)</label><select class="gene-input" id="mom-u"><option value="">No</option><option value="U">Yes (U)</option></select></div>
+    </div>
 </div>
+
+<div id="litter-box">
+    <div id="lethal-banner" class="warning-banner lethal">LETHAL TRAIT: 25% reduction in potential litter size (DsDs, LgLg, or WhWh)</div>
+    <h3 style="margin-top:0;">Predicted Litter</h3>
+    <div id="offspring-grid" class="offspring-grid"></div>
+</div>
+
+<script>
+const BASE_OPTIONS = [
+    { val: "++", text: "Golden" }, { val: "aa", text: "Black" }, { val: "ee", text: "Black Eyed Cream" },
+    { val: "pp", text: "Cinnamon" }, { val: "cdcd", text: "Dark Eared White" }, { val: "dgdg", text: "Dark Grey" },
+    { val: "Lglg", text: "Light Grey" }, { val: "bb", text: "Rust" }, { val: "SgSg", text: "Silver Grey" }
+];
+
+const COAT_OPTIONS = [
+    { val: "Sh", text: "Shorthair (Sh)" }, { val: "ll", text: "Longhair (lh)" }, 
+    { val: "rxrx", text: "Rex (rx)" }, { val: "Sasa", text: "Cushy/Satin (Sa)" },
+    { val: "hrhr", text: "Hairless (hr)" }
+];
+
+const PATTERN_OPTIONS = [
+    { val: "", text: "Solid" }, { val: "Ba", text: "Banded (Ba)" }, { val: "Ds", text: "Dom Spot (Ds)" },
+    { val: "Wh", text: "Roan/Wh Bellied (Wh)" }, { val: "rdrd", text: "Rec. Dappled (rd)" }, { val: "ss", text: "Piebald (s)" }
+];
+
+const PHENOTYPES = [
+    { id: "dgdgppTo", name: "Lilac Pearl" }, { id: "dgdgTo", name: "Smoke Pearl" },
+    { id: "aaTo", name: "Yellow Black" }, { id: "ppTo", name: "Honey" },
+    { id: "bbTo", name: "Black Eyed Honey" }, { id: "dgdgeeppU", name: "Blue Mink" },
+    { id: "bbeeppU", name: "Copper" }, { id: "eeppU", name: "Mink (Caramel)" },
+    { id: "dgdgeeU", name: "Dark Grey Sable" }, { id: "eeLglgU", name: "Light Grey Sable" },
+    { id: "eeSgSgU", name: "Silver Sable" }, { id: "eeU", name: "Sable" },
+    { id: "eeSgSg", name: "Black Eyed White" }, { id: "aabbpp", name: "Champagne" },
+    { id: "bbee", name: "Pale Eared Cream" }, { id: "aabb", name: "Chocolate" },
+    { id: "bbeeU", name: "Chocolate (Sable var.)" }, { id: "bbdgdg", name: "Beige" },
+    { id: "bbLglg", name: "Black Eyed Blonde" }, { id: "eepp", name: "Red Eyed Cream" },
+    { id: "aapp", name: "Dove" }, { id: "aasg", name: "Dingy Black" },
+    { id: "cdcdpp", name: "Flesh Eared White" }, { id: "dgdgpp", name: "Lilac" },
+    { id: "Lglgpp", name: "Blonde" }, { id: "ppSgSg", name: "Blonde (Sg var.)" }
+];
+
+function init() {
+    document.querySelectorAll('.base-sel').forEach(s => {
+        if(s.classList.contains('blankable')) s.appendChild(new Option("None/Blank", ""));
+        BASE_OPTIONS.forEach(o => s.appendChild(new Option(o.text, o.val)));
+    });
+    document.querySelectorAll('.coat-sel').forEach(s => COAT_OPTIONS.forEach(o => s.appendChild(new Option(o.text, o.val))));
+    document.querySelectorAll('.pat-sel').forEach(s => PATTERN_OPTIONS.forEach(o => s.appendChild(new Option(o.text, o.val))));
+}
+
+function updateLitter() {
+    const dad = Array.from(document.querySelectorAll('[id^="dad-"]')).map(i => i.value).join('');
+    const mom = Array.from(document.querySelectorAll('[id^="mom-"]')).map(i => i.value).join('');
+    const totalPool = dad + mom;
+
+    const isLethal = (totalPool.match(/Ds/g) || []).length >= 2 || (totalPool.match(/Lg/g) || []).length >= 2 || (totalPool.match(/Wh/g) || []).length >= 2;
+    document.getElementById('lethal-banner').style.display = isLethal ? 'block' : 'none';
+    
+    const grid = document.getElementById('offspring-grid');
+    grid.innerHTML = '';
+    const size = isLethal ? 9 : 12;
+
+    for (let i = 0; i < size; i++) {
+        let sex = Math.random() > 0.5 ? "Male" : "Female";
+        let pupExp = [];
+        
+        if(totalPool.includes("aa") && Math.random() > 0.3) pupExp.push("aa");
+        if(totalPool.includes("ee") && Math.random() > 0.3) pupExp.push("ee");
+        if(totalPool.includes("pp") && Math.random() > 0.3) pupExp.push("pp");
+        if(totalPool.includes("bb") && Math.random() > 0.3) pupExp.push("bb");
+        if(totalPool.includes("U") && Math.random() > 0.5) pupExp.push("U");
+        
+        let coatCode = COAT_OPTIONS.find(c => totalPool.includes(c.val))?.val || "Sh";
+        let patCode = PATTERN_OPTIONS.find(p => p.val && totalPool.includes(p.val))?.val || "";
+        
+        let yellowLabel = "";
+        let yellowCode = "";
+        if (totalPool.includes("To")) {
+            if (sex === "Female" && totalPool.match(/To/g).length === 1) {
+                yellowLabel = "Tortoiseshell ";
+                yellowCode = "Toto";
+            } else if (totalPool.match(/To/g).length >= 1) {
+                yellowLabel = "Yellow ";
+                yellowCode = (sex === "Male") ? "ToY" : "ToTo";
+            }
+        }
+
+        let name = "Golden Agouti";
+        let match = PHENOTYPES.sort((a,b) => b.id.length - a.id.length).find(p => pupExp.join('').includes(p.id.replace('To','')));
+        if(match) name = match.name;
+        
+        let coatName = COAT_OPTIONS.find(c => c.val === coatCode)?.text.split(' ')[0] || "Shorthair";
+        
+        // Construct the genotype string
+        let fullGenotype = (pupExp.join('') + yellowCode + coatCode + patCode).replace(/\+\+/g, '+');
+
+        grid.innerHTML += `
+            <div class="pup-card">
+                <span class="pup-name">${yellowLabel}${name}</span>
+                <span class="pup-genotype">${fullGenotype}</span>
+                <strong>Sex:</strong> ${sex}<br>
+                <strong>Coat:</strong> ${coatName} ${patCode}<br>
+                <div class="pup-desc">To be added</div>
+            </div>`;
+    }
+}
+
+window.onload = () => { init(); document.querySelectorAll('.gene-input').forEach(el => el.onchange = updateLitter); updateLitter(); };
+</script>
