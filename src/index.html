@@ -1,105 +1,192 @@
+<style>
+    .parent-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .parent-column {
+        flex: 1;
+        min-width: 300px;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .parent-column h3 {
+        margin-top: 0;
+        font-size: 1.1em;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 5px;
+    }
+
+    .shpdd {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .shpdd label {
+        font-size: 0.9em;
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    #result-display {
+        background: #fffbe6;
+        padding: 20px;
+        border: 2px solid #ffe58f;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    @media (max-width: 600px) {
+        .parent-column { flex: 1 1 100%; }
+    }
+</style>
+
+<div class="parent-container">
+    <div class="parent-column">
+        <h3>Male (Father)</h3>
+        <div class="shpdd">
+            <label>Base Color:</label>
+            <select id="dad">
+                <option value="++" selected>Golden (+)</option>
+                <option value="aa">Black (aa)</option>
+                <option value="pp">Cinnamon (pp)</option>
+                <option value="ee">Cream (ee)</option>
+                <option value="aapp">Dove (aapp)</option>
+                <option value="cdcd">Dark Eared White (cdcd)</option>
+                <option value="dgdg">Dark Grey (dgdg)</option>
+                <option value="cece">Extreme Dilute (cece)</option>
+                <option value="Lglg">Light Grey (Lglg)</option>
+                <option value="bb">Rust (bb)</option>
+                <option value="SgSg">Silver Grey (SgSg)</option>
+                <option value="ToY">Yellow (ToY)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="parent-column">
+        <h3>Female (Mother)</h3>
+        <div class="shpdd">
+            <label>Base Color:</label>
+            <select id="mom">
+                <option value="++" selected>Golden (+)</option>
+                <option value="aa">Black (aa)</option>
+                <option value="pp">Cinnamon (pp)</option>
+                <option value="ee">Cream (ee)</option>
+                <option value="aapp">Dove (aapp)</option>
+                <option value="cdcd">Dark Eared White (cdcd)</option>
+                <option value="dgdg">Dark Grey (dgdg)</option>
+                <option value="cece">Extreme Dilute (cece)</option>
+                <option value="Lglg">Light Grey (Lglg)</option>
+                <option value="bb">Rust (bb)</option>
+                <option value="SgSg">Silver Grey (SgSg)</option>
+                <option value="ToTo">Yellow (ToTo)</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="parent-column" style="margin-bottom: 20px; max-width: 100%;">
+    <h3>Offspring & Coat Settings</h3>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="shpdd"><label>Sex:</label><select id="offspringssex"><option value="male">Male</option><option value="female" selected>Female</option></select></div>
+        <div class="shpdd"><label>Coat Type:</label><select id="coat-type"><option value="++" selected>Shorthair (++)</option><option value="ll">Longhair (ll)</option><option value="rxrx">Rex (rxrx)</option><option value="Sasa">Satin (Sasa)</option><option value="hrhr">Hairless (hrhr)</option></select></div>
+        <div class="shpdd"><label>Pattern:</label><select id="pattern"><option value="++" selected>None (Solid)</option><option value="Ba_">Banded (Ba_)</option><option value="Dsds">Dominant Spot (Dsds)</option><option value="rdrd">Recessive Dappled (rdrd)</option><option value="Whwh">Roan (Whwh)</option><option value="ss">Piebald (ss)</option><option value="Toto">Tortoiseshell (Toto)</option></select></div>
+        <div class="shpdd"><label>Eye Color:</label><select id="eye-color"><option value="black" selected>Black</option><option value="red">Red/Pink</option></select></div>
+    </div>
+</div>
+
+<div id="combination-lookup" style="display: none;">
+    <select id="offspring-phenotype-list">
+        <option value="bbdgdg">Beige</option>
+        <option value="bbLglg">Black Eyed Blonde</option>
+        <option value="bbToTo">Black Eyed Honey</option>
+        <option value="bbToY">Black Eyed Honey</option>
+        <option value="dgdgee">Black Eyed Ivory</option>
+        <option value="eeSgSg">Black Eyed White</option>
+        <option value="Lglgpp">Blonde</option>
+        <option value="ppSgSg">Blonde (Sg var.)</option>
+        <option value="aabbpp">Champagne</option>
+        <option value="aabb">Chocolate</option>
+        <option value="aapp">Dove</option>
+        <option value="dgdgpp">Lilac</option>
+        <option value="eepp">Red Eyed Cream</option>
+        <option value="eeU_">Sable</option>
+    </select>
+</div>
+
+<div id="result-display">
+    <h3>Predicted Offspring:</h3>
+    <div id="offspring-result-name" style="font-size: 1.5em; font-weight: bold;">Golden Agouti Shorthair</div>
+    <div id="genotype-label" style="font-size: 0.9em; color: #666; margin: 10px 0;"></div>
+    <img id="offspring-visual" src="images/++.png" alt="Hamster Result" style="max-width: 250px; display: block; margin: 0 auto;">
+</div>
+
 <script>
 const SHP = {
-    "a": { type: "recessive", name: "Black" },
-    "p": { type: "recessive", name: "Cinnamon" },
-    "e": { type: "recessive", name: "Cream" },
-    "b": { type: "recessive", name: "Rust" },
-    "dg": { type: "recessive", name: "Dark Grey" },
-    "ce": { type: "recessive", name: "Extreme Dilute" },
-    "cd": { type: "recessive", name: "Dark Eared White" },
-    "l": { type: "recessive", name: "Longhair" },
-    "rx": { type: "recessive", name: "Rex" },
-    "Sa": { type: "dominant", name: "Satin" },
-    "hr": { type: "recessive", name: "Hairless" },
-    "Ba": { type: "dominant", name: "Banded" },
-    "Ds": { type: "dominant", name: "Dominant Spot" },
-    "rd": { type: "recessive", name: "Recessive Dappled" },
-    "Wh": { type: "dominant", name: "Roan" },
-    "s": { type: "recessive", name: "Piebald" },
-    "Sg": { type: "incomplete_dominant", name: "Silver Grey" },
-    "Lg": { type: "incomplete_dominant", name: "Light Grey" },
-    "To": { type: "sex_linked", name: "Yellow" }
+    "a": { type: "recessive" }, "p": { type: "recessive" }, "e": { type: "recessive" },
+    "b": { type: "recessive" }, "dg": { type: "recessive" }, "ce": { type: "recessive" },
+    "cd": { type: "recessive" }, "l": { type: "recessive" }, "rx": { type: "recessive" },
+    "Sa": { type: "dominant" }, "hr": { type: "recessive" }, "Ba": { type: "dominant" },
+    "Ds": { type: "dominant" }, "rd": { type: "recessive" }, "Wh": { type: "dominant" },
+    "s": { type: "recessive" }, "Sg": { type: "incomplete_dominant" },
+    "Lg": { type: "incomplete_dominant" }, "To": { type: "sex_linked" }
 };
 
 function children(genotype, sex) {
-    let phenotypeTraits = [];
-    const count = (gene) => (genotype.match(new RegExp(gene, "g")) || []).length;
-
-    for (let gene in SHP) {
-        const rule = SHP[gene];
-        if (rule.type === "sex_linked") {
-            const toCount = count("To");
-            if (sex === "male" && toCount >= 1) phenotypeTraits.push("ToY");
-            else if (sex === "female") {
-                if (toCount >= 2) phenotypeTraits.push("ToTo");
-                else if (toCount === 1) phenotypeTraits.push("Toto");
-            }
-            continue;
-        }
-        if (rule.type === "recessive" && count(gene) >= 2) phenotypeTraits.push(gene);
-        else if (rule.type === "dominant" && count(gene) >= 1) phenotypeTraits.push(gene);
-        else if (rule.type === "incomplete_dominant") {
-            if (count(gene) >= 2) phenotypeTraits.push(gene + gene);
-            else if (count(gene) === 1) phenotypeTraits.push(gene);
-        }
+    let traits = [];
+    const count = (g) => (genotype.match(new RegExp(g, "g")) || []).length;
+    for (let g in SHP) {
+        let r = SHP[g];
+        if (r.type === "sex_linked") {
+            let tc = count("To");
+            if (sex === "male" && tc >= 1) traits.push("ToY");
+            else if (sex === "female") { if (tc >= 2) traits.push("ToTo"); else if (tc === 1) traits.push("Toto"); }
+        } else if (r.type === "recessive" && count(g) >= 2) traits.push(g);
+        else if (r.type === "dominant" && count(g) >= 1) traits.push(g);
+        else if (r.type === "incomplete_dominant") { if (count(g) >= 2) traits.push(g + g); else if (count(g) === 1) traits.push(g); }
     }
-    return phenotypeTraits;
+    return traits;
 }
 
 function updateResult() {
     const sex = document.getElementById('offspringssex').value;
-    const dadVal = document.getElementById('dad').value;
-    const momVal = document.getElementById('mom').value;
-    const coatVal = document.getElementById('coat-type').value;
-    const patVal = document.getElementById('pattern').value;
+    const combined = ['dad', 'mom', 'coat-type', 'pattern'].map(id => document.getElementById(id).value).join('');
     
-    // Combine genetic inputs
-    const combined = dadVal + momVal + coatVal + patVal;
-    
-    // 1. LETHAL CHECKS (Count occurrences across parents)
-    const countLg = (combined.match(/Lg/g) || []).length;
-    const countDs = (combined.match(/Ds/g) || []).length;
-    const countWh = (combined.match(/Wh/g) || []).length; // Anophthalmic White (WhWh) check
+    // LETHAL CHECKS
+    const cLg = (combined.match(/Lg/g) || []).length;
+    const cDs = (combined.match(/Ds/g) || []).length;
+    const cWh = (combined.match(/Wh/g) || []).length;
 
-    let lethalWarning = "";
-    let litterReduction = 0;
-
-    // Check for 25% reduction (Homozygous Dominant)
-    if (countLg >= 2) { lethalWarning = "Homozygous Light Grey (LgLg) is lethal."; litterReduction = 25; }
-    if (countDs >= 2) { lethalWarning = "Homozygous Dominant Spot (DsDs) is lethal."; litterReduction = 25; }
-    if (countWh >= 2) { lethalWarning = "Homozygous Roan (WhWh) results in Anophthalmic White (eyeless) pups."; }
-
-    // 2. Determine Phenotype
     const traits = children(combined, sex);
     let baseGenotype = traits.filter(t => !["ll", "rxrx", "Sasa", "hrhr", "Ba", "Ds", "rd", "Wh", "ss", "Toto"].includes(t)).sort().join('') || "++";
 
+    // COMBINATION LOOKUP
     let baseName = "Golden Agouti";
     const lookup = document.getElementById('offspring-phenotype-list');
-    for (let opt of lookup.options) {
-        if (opt.value === baseGenotype) { baseName = opt.text; break; }
-    }
+    for (let opt of lookup.options) { if (opt.value === baseGenotype) { baseName = opt.text; break; } }
 
-    // 3. Modifiers
-    let modifiers = [];
-    if (traits.includes("Ba")) modifiers.push("Banded");
-    if (traits.includes("Ds")) modifiers.push("Dominant Spot");
-    if (traits.includes("Wh")) modifiers.push("Roan");
-    if (traits.includes("Toto")) modifiers.push("Tortoiseshell");
+    let mods = [];
+    if (traits.includes("Ba")) mods.push("Banded");
+    if (traits.includes("Ds")) mods.push("Dominant Spot");
+    if (traits.includes("Wh")) mods.push("Roan");
+    if (traits.includes("Toto")) mods.push("Tortoiseshell");
     
-    let texture = traits.includes("ll") ? "Longhair" : traits.includes("rxrx") ? "Rex" : traits.includes("Sasa") ? "Satin" : traits.includes("hrhr") ? "Hairless" : "Shorthair";
+    let tex = traits.includes("ll") ? "Longhair" : traits.includes("rxrx") ? "Rex" : traits.includes("Sasa") ? "Satin" : traits.includes("hrhr") ? "Hairless" : "Shorthair";
 
-    // 4. Update UI
-    document.getElementById('offspring-result-name').innerText = `${baseName} ${modifiers.join(' ')} ${texture}`.replace(/\s+/g, ' ').trim();
+    document.getElementById('offspring-result-name').innerText = `${baseName} ${mods.join(' ')} ${tex}`.replace(/\s+/g, ' ').trim();
     
-    // Update labels with lethal info if applicable
-    let labelText = `Genotype: ${traits.join(' ')}`;
-    if (litterReduction > 0) {
-        labelText += ` | warn: ${lethalWarning} Expected litter size reduced by ${litterReduction}%.`;
-    } else if (countWh >= 2) {
-        labelText += ` | warn: ${lethalWarning}`;
-    }
+    let msg = `Genotype: ${traits.join(' ')}`;
+    if (cLg >= 2 || cDs >= 2) msg += ` | ⚠️ Lethal combination: Litter size reduced by 25%.`;
+    if (cWh >= 2) msg += ` | ⚠️ Warning: Eyeless White pups (Anophthalmic) likely.`;
     
-    document.getElementById('genotype-label').innerText = labelText;
+    document.getElementById('genotype-label').innerText = msg;
     document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
 }
 
