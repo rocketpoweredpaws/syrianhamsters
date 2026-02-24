@@ -71,8 +71,8 @@ function updateResult() {
     document.getElementById('offspring-result-name').innerText = `${baseName} ${mods.join(' ')} ${tex}`.replace(/\s+/g, ' ').trim();
     
     let msg = `Genotype: ${traits.join(' ')}`;
-    if (cLg >= 2 || cDs >= 2) msg += ` | ⚠️ Lethal combination: Litter size reduced by 25%.`;
-    if (cWh >= 2) msg += ` | ⚠️ Warning: Eyeless White pups (Anophthalmic) likely.`;
+    if (cLg >= 2 || cDs >= 2) msg += ` | Lethal combination: Litter size reduced by 25%.`;
+    if (cWh >= 2) msg += ` | Caution: Eyeless White pups (Anophthalmic) likely.`;
     
     document.getElementById('genotype-label').innerText = msg;
     document.getElementById('offspring-visual').src = `images/${baseGenotype}.png`;
