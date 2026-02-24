@@ -1,21 +1,44 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Whackadoo&display=swap');
 
-    .pc { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; margin: 0; padding: 0; font-family: 'Whackadoo', 'Comic Sans MS', sans-serif; }
-    .pcmn { flex: 1; min-width: 300px; background: #fdfdfd; border-radius: 8px; margin: 0; padding: 0; }
-    .shpdd { margin: 0; padding: 0; display: flex; flex-direction: column; }
-    .shpdd label { font-size: 0.7em; font-weight: bold; text-transform: uppercase; color: #777; margin: 0; padding: 0; }
-    .gn-inp { border-radius: 4px; border: 1px solid #ccc; font-size: 0.9em; background: #fff; margin: 0; padding: 0; font-family: inherit; }
+    .pc { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; font-family: 'Whackadoo', 'Comic Sans MS', sans-serif; }
+    .pcmn { flex: 1; min-width: 300px; background: #fdfdfd; border-radius: 8px; border: 1px solid #eee; }
+    .shpdd { display: flex; flex-direction: column; }
+    .shpdd label { font-size: 0.75em; font-weight: bold; text-transform: uppercase; color: #777; }
+    .gn-inp { border-radius: 4px;  solid #ccc; font-size: 0.9em; background: #fff; font-family: inherit; }
     
-    #litter-box { margin: 0; padding: 0; background: #fff; border-radius: 12px; font-family: 'Whackadoo', sans-serif; }
-    .offspring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 0; padding: 0; }
+    #litter-box { background: #fff; font-family: 'Whackadoo', sans-serif; }
+    .offspring-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
     
-    .pcrd { border-radius: 8px; background: #fafafa; font-size: 0.85em; box-shadow: 1px 1px 6px rgba(0,0,0,0.05); margin: 0; padding: 0; }
-    .pnm { font-weight: bold; color: #b45309; display: block; font-size: 1em; margin: 0; padding: 0; }
-    .pgn { font-size: 0.75em; color: #888; display: block; margin: 0; padding: 0; font-family: inherit; }
-    .pdsc { margin: 0; font-style: italic; color: #555; padding: 0; }
+    .pcrd { 
+        border: 2px solid #e2e8f0; 
+        border-radius: 12px; 
+        background: #ffffff; 
+        font-size: 0.85em; 
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); 
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+    .pcrd:hover { transform: translateY(-5px); border-color: #b45309; }
     
-    .wrnbnnr { border-radius: 6px; font-weight: bold; margin: 0; padding: 0; display: none; text-align: center; background: #fee2e2; color: #991b1b; }
+    .img-placeholder {
+        width: 100%;
+        height: 150px;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid #e2e8f0;
+        color: #94a3b8;
+        font-size: 0.8em;
+    }
+
+    .card-content { }
+    .pnm { font-weight: bold; color: #b45309; display: block; font-size: 1.1em; }
+    .pgn { font-size: 0.8em; color: #64748b; display: block; font-family: inherit; background: #f8fafc; border-radius: 4px; }
+    .pdsc { font-style: italic; color: #555; border-top: 1px dashed #cbd5e1; }
+    
+    .wrnbnnr { border-radius: 6px; font-weight: bold; display: none; text-align: center; background: #fee2e2; color: #991b1b; }
 </style>
 
 <div class="pc">
@@ -23,7 +46,7 @@
         <h3>Father (Male)</h3>
         <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="dad-1"></select></div>
         <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="dad-2"></select></div>
-        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="dad-3"></select></div>
+        <div class="shpdd"><label>Dilution</label><select class="gn-inp dil-sel" id="dad-dil"></select></div>
         <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="dad-coat"></select></div>
         <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="dad-pat"></select></div>
         <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="dad-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
@@ -33,7 +56,7 @@
         <h3>Mother (Female)</h3>
         <div class="shpdd"><label>Color 1</label><select class="gn-inp base-sel" id="mom-1"></select></div>
         <div class="shpdd"><label>Color 2</label><select class="gn-inp base-sel blankable" id="mom-2"></select></div>
-        <div class="shpdd"><label>Color 3</label><select class="gn-inp base-sel blankable" id="mom-3"></select></div>
+        <div class="shpdd"><label>Dilution</label><select class="gn-inp dil-sel" id="mom-dil"></select></div>
         <div class="shpdd"><label>Coat</label><select class="gn-inp coat-sel" id="mom-coat"></select></div>
         <div class="shpdd"><label>Pattern</label><select class="gn-inp pat-sel" id="mom-pat-female"></select></div>
         <div class="shpdd"><label>Umbrous</label><select class="gn-inp" id="mom-u"><option value="">No</option><option value="U_">Yes (U_)</option></select></div>
@@ -42,7 +65,7 @@
 
 <div id="litter-box">
     <div id="lethal-banner" class="wrnbnnr">LETHAL TRAIT DETECTED: Litter size reduced by 25% (DsDs, LgLg, or WhWh)</div>
-    <h3 style="margin:0;">Potential Litter Results</h3>
+    <h3>Potential Offspring</h3>
     <div id="offspring-grid" class="offspring-grid"></div>
 </div>
 
@@ -58,7 +81,12 @@ const BASE_OPTIONS = [
     { val: "Lglg", text: "Light Grey (Lglg)" }, 
     { val: "bb", text: "Rust (bb)" }, 
     { val: "SgSg", text: "Silver Grey (SgSg)" },
-    { val: "To", text: "Yellow" }
+    { val: "Toto", text: "Yellow (Toto)" }
+];
+
+const DILUTION_OPTIONS = [
+    { val: "", text: "None" },
+    { val: "dd", text: "Golden Dilute (dd)" }
 ];
 
 const COAT_OPTIONS = [
@@ -110,7 +138,16 @@ const PHENOTYPES = [
     { id: "eeU_", name: "Sable (eeU_)" },
     { id: "eeSgSgU_", name: "Silver Sable (eeSgSgU_)" },
     { id: "dgdgTo", name: "Smoke Pearl (dgdgTo)" },
-    { id: "aaTo", name: "Yellow Black (aaTo)" }
+    { id: "aaTo", name: "Yellow Black (aaTo)" },
+    { id: "aadd", name: "Blue (aadd)" },
+    { id: "ppdd", name: "Lavender (ppdd)" },
+    { id: "aappdd", name: "Dove Dilute (aappdd)" },
+    { id: "aaTocece", name: "Extreme Dilute Melanistic Yellow (aaTocece)" },
+    { id: "eecece", name: "Extreme Dilute Black Eyed Cream (eecece)" },
+    { id: "aacece", name: "Extreme Dilute Black (aacece)" },
+    { id: "cece", name: "Extreme Dilute Golden (cece)" },
+    { id: "bbcece", name: "Extreme Dilute Rust (bbcece)" },
+    { id: "aaU_dd", name: "Umbrous Black Dilute (aaU_dd)" }
 ];
 
 function setup() {
@@ -118,13 +155,17 @@ function setup() {
         if(s.classList.contains('blankable')) s.add(new Option("None", ""));
         BASE_OPTIONS.forEach(o => {
             let label = o.text;
-            // Shorthand logic for parents
-            if (o.val === "To") {
-                label = s.id.includes("dad") ? "Yellow (ToY)" : "Yellow (ToTo)";
+            if (o.val === "Toto") {
+                label = s.id.includes("dad") ? "Yellow (ToY)" : "Yellow (Toto)";
             }
             s.add(new Option(label, o.val));
         });
     });
+
+    document.querySelectorAll('.dil-sel').forEach(s => {
+        DILUTION_OPTIONS.forEach(o => s.add(new Option(o.text, o.val)));
+    });
+
     document.querySelectorAll('.coat-sel').forEach(s => COAT_OPTIONS.forEach(o => s.add(new Option(o.text, o.val))));
     
     const dPat = document.getElementById('dad-pat');
@@ -132,7 +173,7 @@ function setup() {
     
     const mPat = document.getElementById('mom-pat-female');
     PATTERN_OPTIONS.forEach(o => mPat.add(new Option(o.text, o.val)));
-    mPat.add(new Option("Tortoiseshell (Toto)", "Toto"));
+    mPat.add(new Option("Tortoiseshell (ToTo)", "ToTo"));
 }
 
 function calc() {
@@ -153,32 +194,23 @@ function calc() {
         let pSexDisplay = isM ? "Male" : "Female";
         let inherited = [];
         
-        ["aa", "ee", "pp", "bb", "U_", "SgSg", "dgdg", "Lglg", "cece", "cdcd", "Sgsg"].forEach(g => {
+        ["aa", "ee", "pp", "bb", "U_", "SgSg", "dgdg", "Lglg", "cece", "cdcd", "Sgsg", "dd"].forEach(g => {
             if(pool.includes(g) && Math.random() > 0.4) inherited.push(g);
         });
 
         let yLabel = ""; let yCode = "";
-        if (pool.includes("To") || mPatVal === "Toto") {
+        if (pool.includes("Toto") || mPatVal === "ToTo") {
             if (isM) {
-               // Male logic
-               if((mVal.includes("To") || mPatVal === "Toto") && Math.random() > 0.4) { 
+               if((mVal.includes("Toto") || mPatVal === "ToTo") && Math.random() > 0.5) { 
                    yCode = "ToY"; inherited.push("To"); 
                    pSexDisplay = "Yellow (Male)";
                }
             } else {
-               // Female logic
-               let dTo = dVal.includes("To") ? 1 : 0;
-               let mTo = (mVal.includes("To") || mPatVal === "Toto") ? 1 : 0;
+               let dTo = dVal.includes("Toto") ? 1 : 0;
+               let mTo = (mVal.includes("Toto") || mPatVal === "ToTo") ? 1 : 0;
                let count = (dTo && Math.random() > 0.5 ? 1 : 0) + (mTo && Math.random() > 0.5 ? 1 : 0);
-               if(count === 2) { 
-                   yLabel = "Yellow (ToTo) "; 
-                   yCode = "ToTo"; 
-                   inherited.push("To"); 
-               }
-               else if(count === 1) { 
-                   yLabel = "Tortoiseshell (Toto) "; 
-                   yCode = "Toto"; 
-               }
+               if(count === 2) { yLabel = "Yellow (Toto) "; yCode = "Toto"; inherited.push("To"); }
+               else if(count === 1) { yLabel = "Tortoiseshell (ToTo) "; yCode = "ToTo"; }
             }
         }
 
@@ -186,7 +218,7 @@ function calc() {
         let match = PHENOTYPES.sort((a,b) => b.id.length - a.id.length).find(p => inherited.join('').includes(p.id.replace('To','')));
         if(match) base = match.name;
         
-        if (base.includes("Cinnamon") && (yCode === "ToY" || yCode === "ToTo")) {
+        if (base.includes("Cinnamon") && (yCode === "ToY" || yCode === "Toto")) {
              base = base.replace("Cinnamon", "Honey");
              yLabel = ""; 
         }
@@ -198,24 +230,24 @@ function calc() {
             if(p.val && pool.includes(p.val) && Math.random() > 0.5) inheritedPatterns.push(p.text);
         });
         
-        if (!isM && yCode === "Toto") {
-            inheritedPatterns.push("Tortoiseshell (Toto)");
-        }
-        
+        if (!isM && yCode === "ToTo") inheritedPatterns.push("Tortoiseshell (ToTo)");
         let pLabel = inheritedPatterns.length > 0 ? inheritedPatterns.join(" ") : "Solid";
-        let pCodes = PATTERN_OPTIONS.filter(p => inheritedPatterns.includes(p.text)).map(p => p.val).join("");
         
-        if (!isM && yCode === "Toto") pCodes += "Toto";
+        let pCodes = PATTERN_OPTIONS.filter(p => inheritedPatterns.includes(p.text)).map(p => p.val).join("");
+        if (!isM && yCode === "ToTo") pCodes += "ToTo";
 
         let geno = (inherited.join('') + yCode + cType + pCodes).replace(/\+\+/g, '+');
 
         grid.innerHTML += `
             <div class="pcrd">
-                <span class="pnm">${yLabel}${base} ${pLabel}</span>
-                <span class="pgn">${geno}</span>
-                <strong>Sex:</strong> ${pSexDisplay}<br>
-                <strong>Coat:</strong> ${cType}<br>
-                <div class="pdsc">To be added</div>
+                <div class="img-placeholder">PHOTO SPACE</div>
+                <div class="card-content">
+                    <span class="pnm">${yLabel}${base} ${pLabel}</span>
+                    <span class="pgn">${geno}</span>
+                    <strong>Sex:</strong> ${pSexDisplay}<br>
+                    <strong>Coat:</strong> ${cType}<br>
+                    <div class="pdsc">Phenotype description pending...</div>
+                </div>
             </div>`;
     }
 }
