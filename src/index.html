@@ -1,280 +1,281 @@
 <style>
-    /* Updated formatting only */
-    body {
-        background-color: #fdfdfd;
-        color: #444;
-    }
-    .pc { 
-        display: flex; 
-        flex-wrap: wrap; 
-        gap: 20px; 
-        justify-content: space-between; 
-        font-family: 'Verdana', 'Geneva', sans-serif; 
-        background: #fff;
-        max-width: 900px;
-    }
-    .hamster4 { 
-        flex: 1; 
-        min-width: 300px; 
-        background: #ffffff; 
-        
-    }
-    .hamster4 h3 {
-        color: #cc6099;
-        border-bottom: 2px solid #ffe6f2;
-        
-        font-size: 1.1em;
-        text-transform: lowercase;
-        font-style: italic;
-        
-    }
-    .hamster { display: flex; flex-direction: column; margin-bottom: 10px; }
-    .hamster label { 
-        font-size: 0.75em; 
-        font-weight: bold; 
-        text-transform: lowercase; 
-        color: #cc6099; 
-    }
-    .gn-inp { 
-        border: 1px solid #f5a8d0; 
-        font-size: 0.9em; 
-        background: #fff; 
-        font-family: inherit; 
-        
-        outline-color: #cc6099;
-        color: #555;
-    }
-    
-    #litters {
-        max-width: 900px;
-        
-       
-        background: #ffffff;
-        
-    }
-    .offspring-grid { 
-        display: grid; 
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-        gap: 20px; 
-        
-        font-family: 'Verdana', 'Geneva', sans-serif; 
-    }
-    .hamster2 { 
-        
-        border-radius: 12px; 
-        background: #ffffff; 
-        font-size: 0.85em; 
-        overflow: hidden; 
-        transition: transform 0.2s, box-shadow 0.2s; 
-    }
-    .hamster2:hover { 
-        transform: translateY(-5px); 
-        border-color: #cc6099; 
-        box-shadow: 4px 4px 0px #ffe6f2;
-    }
-    .img-placeholder { 
-        width: 100%; 
-        height: 120px; 
-        background: #ffe6f2; 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        border-bottom: 2px dashed #f5a8d0; 
-        color: #cc6099; 
-        font-size: 0.8em; 
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-    .card-content { padding: 12px; }
-    .pnm { font-weight: bold; color: #cc6099; display: block; font-size: 1.1em; }
-    .pgn { 
-        font-size: 0.65em; 
-        color: #777; 
-        display: block; 
-        font-family: 'Courier New', monospace; 
-        background: #fffafa; 
-        padding: 6px; 
-        margin: 4px 0; 
-        border-radius: 4px; 
-        line-height: 1.3; 
-        border: 1px solid #ffe6f2;
-        word-break: break-all;
-    }
-    .pdsc { font-style: italic; color: #666; border-top: 1px dotted #f5a8d0; margin-top: 8px; padding-top: 4px; font-size: 0.9em; }
-    .wrnbnnr { font-weight: bold; display: none; text-align: center; background: #ffebeb; color: #b91c1c; padding: 10px; border-radius: 6px; margin-bottom: 15px; border: 1px solid #fca5a5; }
+    /* Updated formatting only */
+    body {
+        background-color: #fdfdfd;
+        color: #444;
+    }
+    .pc { 
+        display: flex; 
+        flex-wrap: wrap; 
+        gap: 20px; 
+        justify-content: space-between; 
+        font-family: 'Verdana', 'Geneva', sans-serif; 
+        background: #fff;
+        max-width: 900px;
+    }
+    .hamster4 { 
+        flex: 1; 
+        min-width: 300px; 
+        background: #ffffff; 
+        
+    }
+    .hamster4 h3 {
+        color: #cc6099;
+        border-bottom: 2px solid #ffe6f2;
+        
+        font-size: 1.1em;
+        text-transform: lowercase;
+        font-style: italic;
+        
+    }
+    .hamster { display: flex; flex-direction: column; margin-bottom: 10px; }
+    .hamster label { 
+        font-size: 0.75em; 
+        font-weight: bold; 
+        text-transform: lowercase; 
+        color: #cc6099; 
+    }
+    .gn-inp { 
+        border: 1px solid #f5a8d0; 
+        font-size: 0.9em; 
+        background: #fff; 
+        font-family: inherit; 
+        
+        outline-color: #cc6099;
+        color: #555;
+    }
+    
+    #litters {
+        max-width: 900px;
+        
+       
+        background: #ffffff;
+        
+    }
+    .offspring-grid { 
+        display: grid; 
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+        gap: 20px; 
+        
+        font-family: 'Verdana', 'Geneva', sans-serif; 
+    }
+    .hamster2 { 
+        
+        border-radius: 12px; 
+        background: #ffffff; 
+        font-size: 0.85em; 
+        overflow: hidden; 
+        transition: transform 0.2s, box-shadow 0.2s; 
+    }
+    .hamster2:hover { 
+        transform: translateY(-5px); 
+        border-color: #cc6099; 
+        box-shadow: 4px 4px 0px #ffe6f2;
+    }
+    .img-placeholder { 
+        width: 100%; 
+        height: 120px; 
+        background: #ffe6f2; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        border-bottom: 2px dashed #f5a8d0; 
+        color: #cc6099; 
+        font-size: 0.8em; 
+        font-weight: bold;
+        letter-spacing: 1px;
+    }
+    .card-content { padding: 12px; }
+    .pnm { font-weight: bold; color: #cc6099; display: block; font-size: 1.1em; }
+    .pgn { 
+        font-size: 0.65em; 
+        color: #777; 
+        display: block; 
+        font-family: 'Courier New', monospace; 
+        background: #fffafa; 
+        padding: 6px; 
+        margin: 4px 0; 
+        border-radius: 4px; 
+        line-height: 1.3; 
+        border: 1px solid #ffe6f2;
+        word-break: break-all;
+    }
+    .pdsc { font-style: italic; color: #666; border-top: 1px dotted #f5a8d0; margin-top: 8px; padding-top: 4px; font-size: 0.9em; }
+    .wrnbnnr { font-weight: bold; display: none; text-align: center; background: #ffebeb; color: #b91c1c; padding: 10px; border-radius: 6px; margin-bottom: 15px; border: 1px solid #fca5a5; }
 </style>
 
 <div class="pc">
-    <div class="hamster4">
-        <h3>Father (Male)</h3>
-        <div class="hamster"><label>Color 1</label><select class="gn-inp base-sel" id="dad-1"></select></div>
-        <div class="hamster"><label>Color 2</label><select class="gn-inp base-sel blankable" id="dad-2"></select></div>
-          <div class="hamster"><label>Color 3</label><select class="gn-inp base-sel blankable" id="dad-3"></select></div>
-        <div class="hamster"><label>Coat Type</label><select class="gn-inp coat-sel" id="dad-coat"></select></div>
-        <div class="hamster"><label>Pattern</label><select class="gn-inp pat-sel" id="dad-pat"></select></div>
-        <div class="hamster"><label>Umbrous</label><select class="gn-inp" id="dad-u"><option value="uu">No (uu)</option><option value="Uu">Yes (Uu)</option></select></div>
-    </div>
-    <div class="hamster4">
-        <h3>Mother (Female)</h3>
-        <div class="hamster"><label>Color 1</label><select class="gn-inp base-sel" id="mom-1"></select></div>
-        <div class="hamster"><label>Color 2</label><select class="gn-inp base-sel blankable" id="mom-2"></select></div>
-        <div class="hamster"><label>Color 3</label><select class="gn-inp base-sel blankable" id="mom-3"></select></div>
-        <div class="hamster"><label>Coat Type</label><select class="gn-inp coat-sel" id="mom-coat"></select></div>
-        <div class="hamster"><label>Pattern</label><select class="gn-inp pat-sel" id="mom-pat"></select></div>
-        <div class="hamster"><label>Umbrous</label><select class="gn-inp" id="mom-u"><option value="uu">No (uu)</option><option value="Uu">Yes (Uu)</option></select></div>
-    </div>
+    <div class="hamster4">
+        <h3>Father (Male)</h3>
+        <div class="hamster"><label>Color 1</label><select class="gn-inp base-sel" id="dad-1"></select></div>
+        <div class="hamster"><label>Color 2</label><select class="gn-inp base-sel blankable" id="dad-2"></select></div>
+          <div class="hamster"><label>Color 3</label><select class="gn-inp base-sel blankable" id="dad-3"></select></div>
+        <div class="hamster"><label>Coat Type</label><select class="gn-inp coat-sel" id="dad-coat"></select></div>
+        <div class="hamster"><label>Pattern</label><select class="gn-inp pat-sel" id="dad-pat"></select></div>
+        <div class="hamster"><label>Umbrous</label><select class="gn-inp" id="dad-u"><option value="U_">No (U_)</option><option value="U_">Yes (U_)</option></select></div>
+    </div>
+    <div class="hamster4">
+        <h3>Mother (Female)</h3>
+        <div class="hamster"><label>Color 1</label><select class="gn-inp base-sel" id="mom-1"></select></div>
+        <div class="hamster"><label>Color 2</label><select class="gn-inp base-sel blankable" id="mom-2"></select></div>
+        <div class="hamster"><label>Color 3</label><select class="gn-inp base-sel blankable" id="mom-3"></select></div>
+        <div class="hamster"><label>Coat Type</label><select class="gn-inp coat-sel" id="mom-coat"></select></div>
+        <div class="hamster"><label>Pattern</label><select class="gn-inp pat-sel" id="mom-pat"></select></div>
+        <div class="hamster"><label>Umbrous</label><select class="gn-inp" id="mom-u"><option value="U_">No (U_)</option><option value="U_">Yes (U_)</option></select></div>
+    </div>
 </div>
 
 <div id="litters">
-    <div id="lethal-banner" class="wrnbnnr">LETHAL TRAIT DETECTED: Homozygous embryos (DsDs or LgLg) failed to develop.</div>
-    <div id="offspring-grid" class="offspring-grid"></div>
+    <div id="lethal-banner" class="wrnbnnr">LETHAL TRAIT DETECTED: Homozygous embryos (DsDs or LgLg) failed to develop.</div>
+    <div id="offspring-grid" class="offspring-grid"></div>
 </div>
 
 <script>
 const colors = [
-    { val: "++", text: "Golden (++)" }, { val: "aa", text: "Black (aa)" }, { val: "ee", text: "Black Eyed Cream (ee)" }, 
-    { val: "pp", text: "Cinnamon (pp)" }, { val: "cdcd", text: "Dark Eared White (cdcd)" }, { val: "dgdg", text: "Dark Grey (dgdg)" },
-    { val: "cece", text: "Extreme Dilute (cece)" }, { val: "Lglg", text: "Light Grey (Lglg)" }, { val: "bb", text: "Rust (bb)" }, 
-    { val: "SgSg", text: "Silver Grey (SgSg)" }, { val: "ToTo", text: "Yellow (ToTo/ToY)" }
+    { val: "++", text: "Golden (++)" }, { val: "aa", text: "Black (aa)" }, { val: "ee", text: "Black Eyed Cream (ee)" }, 
+    { val: "pp", text: "Cinnamon (pp)" }, { val: "cdcd", text: "Dark Eared White (cdcd)" }, { val: "dgdg", text: "Dark Grey (dgdg)" },
+    { val: "cece", text: "Extreme Dilute (cece)" }, { val: "Lglg", text: "Light Grey (Lglg)" }, { val: "bb", text: "Rust (bb)" }, 
+    { val: "SgSg", text: "Silver Grey (SgSg)" }, { val: "ToTo", text: "Yellow (ToTo/ToY)" }
 ];
 
 const textures = [
-    { val: "++", text: "Shorthair (++)" }, { val: "ll", text: "Longhair (ll)" }, 
-    { val: "rxrx", text: "Rex (rxrx)" }, { val: "Sasa", text: "Satin (Sasa)" }, { val: "hrhr", text: "Hairless (hrhr)" }
+    { val: "++", text: "Shorthair (++)" }, { val: "ll", text: "Longhair (ll)" }, 
+    { val: "rxrx", text: "Rex (rxrx)" }, { val: "Sasa", text: "Satin (Sasa)" }, { val: "hrhr", text: "Hairless (hrhr)" }
 ];
 
 const markings = [
-    { val: "n", text: "Patternless" }, { val: "Ba", text: "Banded (Ba)" }, { val: "Ds", text: "Dominant Spot (Ds)" }, 
-    { val: "rdrd", text: "Recessive Dappled (rdrd)" }, { val: "Wh", text: "Roan/White Bellied (Wh)" }, { val: "ss", text: "Piebald (ss)" }
+    { val: "n", text: "Patternless" }, { val: "Ba", text: "Banded (Ba)" }, { val: "Ds", text: "Dominant Spot (Ds)" }, 
+    { val: "rdrd", text: "Recessive Dappled (rdrd)" }, { val: "Wh", text: "Roan/White Bellied (Wh)" }, { val: "ss", text: "Piebald (ss)" }
 ];
 
 const library = [
-    { id: "bbdgdg", name: "Beige" }, { id: "bbLglg", name: "Black Eyed Blonde" }, { id: "bbTo", name: "Black Eyed Honey" },
-    { id: "dgdgee", name: "Black Eyed Ivory" }, { id: "eeLglg", name: "Black Eyed Ivory" }, { id: "eeSgsg", name: "Black Eyed Ivory" },
-    { id: "eeSgSg", name: "Black Eyed White" }, { id: "Lglgpp", name: "Blonde" }, { id: "ppSgSg", name: "Blonde (Sg var.)" },
-    { id: "dgdgeeppU_", name: "Blue Mink" }, { id: "aabbpp", name: "Champagne" }, { id: "aabb", name: "Chocolate" },
-    { id: "bbeeU_", name: "Chocolate (Sable var.)" }, { id: "bbeeppU_", name: "Copper" }, { id: "dgdgeeU_", name: "Dark Grey Sable" },
-    { id: "aaSg", name: "Dingy Black" }, { id: "aapp", name: "Dove" }, { id: "cdcdpp", name: "Flesh Eared White" },
-    { id: "ppTo", name: "Honey" }, { id: "eeLglgU_", name: "Light Grey Sable" }, { id: "dgdgpp", name: "Lilac" },
-    { id: "dgdgppTo", name: "Lilac Pearl" }, { id: "eeppU_", name: "Mink (Caramel)" }, { id: "bbee", name: "Pale Eared Cream" },
-    { id: "eepp", name: "Red Eyed Cream" }, { id: "dgdgeepp", name: "Red Eyed Ivory" }, { id: "eeLglgpp", name: "Red Eyed Ivory" },
-    { id: "eeppSgsg", name: "Red Eyed Ivory" }, { id: "eeU_", name: "Sable" }, { id: "eeSgSgU_", name: "Silver Sable" },
-    { id: "SgTo", name: "Silver Pearl" }, { id: "dgdgTo", name: "Smoke Pearl" }, { id: "aaTo", name: "Yellow Black" }
+    { id: "bbdgdg", name: "Beige" }, { id: "bbLglg", name: "Black Eyed Blonde" }, { id: "bbTo", name: "Black Eyed Honey" },
+    { id: "dgdgee", name: "Black Eyed Ivory" }, { id: "eeLglg", name: "Black Eyed Ivory" }, { id: "eeSgsg", name: "Black Eyed Ivory" },
+    { id: "eeSgSg", name: "Black Eyed White" }, { id: "Lglgpp", name: "Blonde" }, { id: "ppSgSg", name: "Blonde (Sg var.)" },
+    { id: "dgdgeeppU_", name: "Blue Mink" }, { id: "aabbpp", name: "Champagne" }, { id: "aabb", name: "Chocolate" },
+    { id: "bbeeU_", name: "Chocolate (Sable var.)" }, { id: "bbeeppU_", name: "Copper" }, { id: "dgdgeeU_", name: "Dark Grey Sable" },
+    { id: "aaSg", name: "Dingy Black" }, { id: "aapp", name: "Dove" }, { id: "cdcdpp", name: "Flesh Eared White" },
+    { id: "ppTo", name: "Honey" }, { id: "eeLglgU_", name: "Light Grey Sable" }, { id: "dgdgpp", name: "Lilac" },
+    { id: "dgdgppTo", name: "Lilac Pearl" }, { id: "eeppU_", name: "Mink (Caramel)" }, { id: "bbee", name: "Pale Eared Cream" },
+    { id: "eepp", name: "Red Eyed Cream" }, { id: "dgdgeepp", name: "Red Eyed Ivory" }, { id: "eeLglgpp", name: "Red Eyed Ivory" },
+    { id: "eeppSgsg", name: "Red Eyed Ivory" }, { id: "eeU_", name: "Sable" }, { id: "eeSgSgU_", name: "Silver Sable" },
+    { id: "SgTo", name: "Silver Pearl" }, { id: "dgdgTo", name: "Smoke Pearl" }, { id: "aaTo", name: "Yellow Black" }
 ];
 
 function f() {
-    document.querySelectorAll('.base-sel').forEach(k => {
-        if(k.classList.contains('blankable')) k.add(new Option("None", "++"));
-        colors.forEach(v => k.add(new Option(v.text, v.val)));
-    });
-    document.querySelectorAll('.coat-sel').forEach(k => textures.forEach(v => k.add(new Option(v.text, v.val))));
-    document.querySelectorAll('.pat-sel').forEach(k => {
-        markings.forEach(v => k.add(new Option(v.text, v.val)));
-        if (k.id.includes('mom')) k.add(new Option("Tortoiseshell (ToTo)", "ToTo"));
-    });
+    document.querySelectorAll('.base-sel').forEach(k => {
+        if(k.classList.contains('blankable')) k.add(new Option("None", "++"));
+        colors.forEach(v => k.add(new Option(v.text, v.val)));
+    });
+    document.querySelectorAll('.coat-sel').forEach(k => textures.forEach(v => k.add(new Option(v.text, v.val))));
+    document.querySelectorAll('.pat-sel').forEach(k => {
+        markings.forEach(v => k.add(new Option(v.text, v.val)));
+        if (k.id.includes('mom')) k.add(new Option("Tortoiseshell (ToTo)", "ToTo"));
+    });
 }
 
 function g(s) {
-    if (s === "++" || s === "n" || s === "" || s === "uu") return ["+", "+"];
-    if (s === "ToTo") return ["To", "To"];
-    if (s === "ToY") return ["To", "Y"];
-    if (s === "Lglg") return ["Lg", "lg"];
-    if (s === "SgSg") return ["Sg", "Sg"];
-    if (s === "Sgsg") return ["Sg", "sg"];
-    if (s === "Sasa") return ["Sa", "+"];
-    if (s === "Ba") return ["Ba", "n"];
-    if (s === "Ds") return ["Ds", "n"];
-    if (s === "Wh") return ["Wh", "n"];
-    if (s === "Uu") return ["U", "u"];
-    if (s.length === 2 && s[0] === s[1]) return [s[0], s[1]];
-    if (s.length === 4) return [s.substring(0,2), s.substring(2,4)];
-    return [s, s];
+    if (s === "++" || s === "n" || s === "" || s === "U_") return ["+", "+"];
+    if (s === "ToTo") return ["To", "To"];
+    if (s === "ToY") return ["To", "Y"];
+    if (s === "Lglg") return ["Lg", "lg"];
+    if (s === "SgSg") return ["Sg", "Sg"];
+    if (s === "Sgsg") return ["Sg", "sg"];
+    if (s === "Sasa") return ["Sa", "+"];
+    if (s === "Ba") return ["Ba", "n"];
+    if (s === "Ds") return ["Ds", "n"];
+    if (s === "Wh") return ["Wh", "n"];
+    if (s === "U_") return ["U", "u"];
+    if (s.length === 2 && s[0] === s[1]) return [s[0], s[1]];
+    if (s.length === 4) return [s.substring(0,2), s.substring(2,4)];
+    return [s, s];
 }
 
 function m(a, b) {
-    const p1 = g(a); const p2 = g(b);
-    return [p1[Math.floor(Math.random()*2)], p2[Math.floor(Math.random()*2)]].sort();
+    const p1 = g(a); const p2 = g(b);
+    return [p1[Math.floor(Math.random()*2)], p2[Math.floor(Math.random()*2)]].sort();
 }
 
 function breed() {
-    const grid = document.getElementById('offspring-grid'); grid.innerHTML = '';
-    const banner = document.getElementById('lethal-banner'); banner.style.display = 'none';
-    const val = (i) => document.getElementById(i).value;
+    const grid = document.getElementById('offspring-grid'); grid.innerHTML = '';
+    const banner = document.getElementById('lethal-banner'); banner.style.display = 'none';
+    const val = (i) => document.getElementById(i).value;
 
-    const father = { b: [val('dad-1'), val('dad-2')], c: val('dad-coat'), p: val('dad-pat'), u: val('dad-u') };
-    const mother = { b: [val('mom-1'), val('mom-2')], c: val('mom-coat'), p: val('mom-pat'), u: val('mom-u') };
+    const father = { b: [val('dad-1'), val('dad-2')], c: val('dad-coat'), p: val('dad-pat'), u: val('dad-u') };
+    const mother = { b: [val('mom-1'), val('mom-2')], c: val('mom-coat'), p: val('mom-pat'), u: val('mom-u') };
 
-    for (let i = 0; i < 20; i++) {
-        let lethal = false;
-        let gen = { AA:'AA', BB:'BB', baba:'baba', CC:'CC', DgDg:'DgDg', dsds:'dsds', EE:'EE', HrHr:'HrHr', LL:'LL', lglg:'lglg', PP:'PP', RdRd:'RdRd', RuRu:'RuRu', RxRx:'RxRx', SS:'SS', sasa:'sasa', sgsg:'sgsg', toto:'toto', uu:'uu', whwh:'whwh' };
+    for (let i = 0; i < 20; i++) {
+        let lethal = false;
+        let gen = { AA:'AA', BB:'BB', baba:'baba', CC:'CC', DgDg:'DgDg', dsds:'dsds', EE:'EE', HrHr:'HrHr', LL:'LL', lglg:'lglg', PP:'PP', RdRd:'RdRd', RuRu:'RuRu', RxRx:'RxRx', SS:'SS', sasa:'sasa', sgsg:'sgsg', toto:'toto', U_:'U_', whwh:'whwh' };
 
-        ["aa","bb","ee","pp","cdcd","dgdg","cece"].forEach(c => {
-            let res = m(father.b.includes(c)?c:"++", mother.b.includes(c)?c:"++");
-            if(res[0]===res[1] && res[0]!=="+") {
-                let key = c==="cdcd"?"CC": (c==="cece"?"CC": (c==="dgdg"?"DgDg": c.toUpperCase()));
-                gen[key] = res.join('');
-            }
-        });
+        ["aa","bb","ee","pp","cdcd","dgdg","cece"].forEach(c => {
+            let res = m(father.b.includes(c)?c:"++", mother.b.includes(c)?c:"++");
+            if(res[0]===res[1] && res[0]!=="+") {
+                let key = c==="cdcd"?"CC": (c==="cece"?"CC": (c==="dgdg"?"DgDg": c.toUpperCase()));
+                gen[key] = res.join('');
+            }
+        });
 
-        let lg_res = m(father.b.includes("Lglg")?"Lglg":"++", mother.b.includes("Lglg")?"Lglg":"++");
-        if(lg_res.join('')==="LgLg") lethal = true;
-        if(lg_res.includes("Lg")) gen.lglg = lg_res.join('').replace('lgLg','Lglg');
+        let lg_res = m(father.b.includes("Lglg")?"Lglg":"++", mother.b.includes("Lglg")?"Lglg":"++");
+        if(lg_res.join('')==="LgLg") lethal = true;
+        if(lg_res.includes("Lg")) gen.lglg = lg_res.join('').replace('lgLg','Lglg');
 
-        let sg_res = m(father.b.includes("SgSg")?"SgSg":"++", mother.b.includes("SgSg")?"SgSg":"++");
-        if(sg_res.includes("Sg")) gen.sgsg = sg_res.join('').replace('sgSg','Sgsg');
+        let sg_res = m(father.b.includes("SgSg")?"SgSg":"++", mother.b.includes("SgSg")?"SgSg":"++");
+        if(sg_res.includes("Sg")) gen.sgsg = sg_res.join('').replace('sgSg','Sgsg');
 
-        if(m(father.p==="Ds"?"Ds":"++", mother.p==="Ds"?"Ds":"++").join('')==="DsDs") lethal = true;
-        if(lethal) { banner.style.display = 'block'; continue; }
+        if(m(father.p==="Ds"?"Ds":"++", mother.p==="Ds"?"Ds":"++").join('')==="DsDs") lethal = true;
+        if(lethal) { banner.style.display = 'block'; continue; }
 
-        if(m(father.p==="Ds"?"Ds":"++", mother.p==="Ds"?"Ds":"++").includes("Ds")) gen.dsds = "Dsds";
-        if(m(father.p==="Wh"?"Wh":"++", mother.p==="Wh"?"Wh":"++").includes("Wh")) gen.whwh = "Whwh";
-        if(m(father.p==="ss"?"ss":"++", mother.p==="ss"?"ss":"++").join('')==="ss") gen.SS = "ss";
-        if(m(father.p==="rdrd"?"rdrd":"++", mother.p==="rdrd"?"rdrd":"++").join('')==="rdrd") gen.RdRd = "rdrd";
-        if(m(father.u, mother.u).includes("U")) gen.uu = "U_";
+        if(m(father.p==="Ds"?"Ds":"++", mother.p==="Ds"?"Ds":"++").includes("Ds")) gen.dsds = "Dsds";
+        if(m(father.p==="Wh"?"Wh":"++", mother.p==="Wh"?"Wh":"++").includes("Wh")) gen.whwh = "Whwh";
+        if(m(father.p==="ss"?"ss":"++", mother.p==="ss"?"ss":"++").join('')==="ss") gen.SS = "ss";
+        if(m(father.p==="rdrd"?"rdrd":"++", mother.p==="rdrd"?"rdrd":"++").join('')==="rdrd") gen.RdRd = "rdrd";
+        if(m(father.u, mother.u).includes("U")) gen.U_ = "U_";
 
-        let male = Math.random() > 0.5;
-        let p1 = g(father.b.includes("ToTo") ? "ToY" : "++")[Math.floor(Math.random()*2)];
-        let d_type = (mother.b.includes("ToTo") || mother.p==="ToTo") ? "ToTo" : "++";
-        let p2 = g(d_type)[Math.floor(Math.random()*2)];
-        
-        if (male) gen.toto = p2 === "To" ? "ToY" : "toto";
-        else gen.toto = (p1 === "To" && p2 === "To") ? "ToTo" : (p1 === "To" || p2 === "To") ? "Toto" : "toto";
+        let male = Math.random() > 0.5;
+        let p1 = g(father.b.includes("ToTo") ? "ToY" : "++")[Math.floor(Math.random()*2)];
+        let d_type = (mother.b.includes("ToTo") || mother.p==="ToTo") ? "ToTo" : "++";
+        let p2 = g(d_type)[Math.floor(Math.random()*2)];
+        
+        if (male) gen.toto = p2 === "To" ? "ToY" : "toto";
+        else gen.toto = (p1 === "To" && p2 === "To") ? "ToTo" : (p1 === "To" || p2 === "To") ? "Toto" : "toto";
 
-        let coatParts = [];
-        let hr = m(father.c==="hrhr"?"hrhr":"++", mother.c==="hrhr"?"hrhr":"++");
-        if(hr.join('')==="hrhr") { coatParts.push("Hairless"); gen.HrHr = "hrhr"; }
-        else {
-            if(m(father.c==="Sasa"?"Sasa":"++", mother.c==="Sasa"?"Sasa":"++").includes("Sa")) { coatParts.push("Satin"); gen.sasa = "Sasa"; }
-            if(m(father.c==="rxrx"?"rxrx":"++", mother.c==="rxrx"?"rxrx":"++").join('')==="rxrx") { coatParts.push("Rex"); gen.RxRx = "rxrx"; }
-            if(m(father.c==="ll"?"ll":"++", mother.c==="ll"?"ll":"++").join('')==="ll") gen.LL = "ll";
-        }
+        let coatParts = [];
+        let hr = m(father.c==="hrhr"?"hrhr":"++", mother.c==="hrhr"?"hrhr":"++");
+        if(hr.join('')==="hrhr") { coatParts.push("Hairless"); gen.HrHr = "hrhr"; }
+        else {
+            if(m(father.c==="Sasa"?"Sasa":"++", mother.c==="Sasa"?"Sasa":"++").includes("Sa")) { coatParts.push("Satin"); gen.sasa = "Sasa"; }
+            if(m(father.c==="rxrx"?"rxrx":"++", mother.c==="rxrx"?"rxrx":"++").join('')==="rxrx") { coatParts.push("Rex"); gen.RxRx = "rxrx"; }
+            if(m(father.c==="ll"?"ll":"++", mother.c==="ll"?"ll":"++").join('')==="ll") gen.LL = "ll";
+        }
 
-        let genoCombined = Object.values(gen).join('').toLowerCase();
-        let colorMatch = library.sort((a,b) => b.id.length - a.id.length).find(c => {
-            let id = c.id.toLowerCase();
-            if(id.endsWith('u_')) return genoCombined.includes(id.slice(0, -2)) && gen.uu === "U_";
-            return genoCombined.includes(id);
-        });
+        let genoCombined = Object.values(gen).join('').toLowerCase();
+        let colorMatch = library.sort((a,b) => b.id.length - a.id.length).find(c => {
+            let id = c.id.toLowerCase();
+            if(id.endsWith('u_')) return genoCombined.includes(id.slice(0, -2)) && gen.U_ === "U_";
+            return genoCombined.includes(id);
+        });
 
-        let baseName = colorMatch ? colorMatch.name : "Golden";
-        let desc = colorMatch ? "Phenotype inheritance details." : "Default is agouti/wild type.";
+        let baseName = colorMatch ? colorMatch.name : "Golden";
+        let desc = colorMatch ? "Phenotype inheritance details." : "Default is agouti/wild type.";
 
-        if (gen.toto === "Toto" || gen.toto === "ToY") baseName = baseName.replace("Golden", "Yellow");
+        if (gen.toto === "Toto" || gen.toto === "ToY") baseName = baseName.replace("Golden", "Yellow");
 
-        let patternName = "";
-        let isWhite = (gen.CC === "cdcd" || baseName.includes("White") || baseName.includes("Ivory"));
-        if (!isWhite) {
-            if (gen.whwh === "Whwh") patternName = "Roan ";
-            else if (gen.dsds === "Dsds") patternName = "Dominant Spot ";
-            else if (m(father.p==="Ba"?"Ba":"++", mother.p==="Ba"?"Ba":"++").includes("Ba")) { patternName = "Banded "; gen.baba = "Baba"; }
-        }
+        let patternName = "";
+        let isWhite = (gen.CC === "cdcd" || baseName.includes("White") || baseName.includes("Ivory"));
+        if (!isWhite) {
+            if (gen.whwh === "Whwh") patternName = "Roan ";
+            else if (gen.dsds === "Dsds") patternName = "Dominant Spot ";
+            else if (m(father.p==="Ba"?"Ba":"++", mother.p==="Ba"?"Ba":"++").includes("Ba")) { patternName = "Banded "; gen.baba = "Baba"; }
+        }
 
-        if (gen.whwh === "Whwh" && gen.whwh === "WhWh") { baseName = "Anophthalmic White"; patternName = ""; desc = "Warning: High Risk/Eyeless White."; }
+        if (gen.whwh === "Whwh" && gen.whwh === "WhWh") { baseName = "Anophthalmic White"; patternName = ""; desc = "Warning: High Risk/Eyeless White."; }
 
-        grid.innerHTML += `<div class="hamster2"><div class="img-placeholder">PHOTO</div><div class="card-content">
-            <span class="pnm">${coatParts.join(' ')} ${patternName}${baseName}</span><span class="pgn">${Object.values(gen).join(' ')}</span>
-            <strong>Sex:</strong> ${male?"Male":"Female"}<br><div class="pdsc">${desc}</div></div></div>`;
-    }
+        grid.innerHTML += `<div class="hamster2"><div class="img-placeholder">PHOTO</div><div class="card-content">
+            <span class="pnm">${coatParts.join(' ')} ${patternName}${baseName}</span><span class="pgn">${Object.values(gen).join(' ')}</span>
+            <strong>Sex:</strong> ${male?"Male":"Female"}<br><div class="pdsc">${desc}</div></div></div>`;
+    }
 }
 window.onload = () => { f(); document.querySelectorAll('.gn-inp').forEach(e => e.onchange = breed); breed(); };
 </script>
+
