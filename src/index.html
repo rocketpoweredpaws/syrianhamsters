@@ -1,0 +1,566 @@
+
+
+        
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Syrian Hamster Genetics Simulator</title>
+<style>
+  body { 
+    font-family: 'Verdana', sans-serif; 
+    background: #fdfdfd; 
+    color: #444; 
+    margin: 0; 
+   }
+  .pc { 
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 0 15px;
+  }
+  .hamster4 { 
+    flex: 1; 
+    min-width: 320px; 
+    background: #fff; 
+    padding: 15px; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+  }
+  .hamster4 h3 { 
+    color: #cc6099; 
+    border-bottom: 2px solid #ffe6f2; 
+    font-size: 1.1em; 
+    text-transform: lowercase; 
+    font-style: italic; 
+    padding-bottom: 5px; 
+  }
+  .hamster { 
+    display: flex; 
+    flex-direction: column; 
+    margin-bottom: 12px; 
+  }
+
+  .hamster label { 
+    font-size: 0.75em; 
+    font-weight: bold; 
+    text-transform: lowercase; 
+    color: #cc6099; 
+    margin-bottom: 3px; 
+  }
+  .gn-inp { 
+    border: 1px solid #f5a8d0; 
+    font-size: 0.9em; 
+    background: #fff; 
+    outline-color: #cc6099; 
+    color: #555; 
+    padding: 5px; 
+    border-radius: 4px; 
+  }
+  #stats-summary { 
+    max-width: 1000px; 
+    margin: 20px auto; 
+    background: #fffafa; 
+    border-left: 4px solid #cc6099; 
+    padding: 15px; 
+    border-radius: 0 8px 8px 0; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+  .offspring-display { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px; 
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 0 20px 40px 20px; 
+  }
+  .hamster2 { 
+    background: #ffffff; 
+    font-size: 0.85em; 
+    border: 1px solid #ffe6f2; 
+    border-radius: 8px; 
+    overflow: hidden; 
+    transition: transform 0.2s; 
+  }
+  .hamster2:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+  }
+  .img-placeholder { 
+    width: 100%; 
+    height: 100px; 
+    background: #ffe6f2; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #cc6099; 
+    font-weight: bold; 
+    flex-direction: column; 
+    border-bottom: 1px solid #ffe6f2; 
+  }
+  .pupcard-content { 
+    padding: 12px; 
+  }
+  .pnm { 
+    font-weight: bold; 
+    color: #cc6099; 
+    display: block; 
+    font-size: 1.1em; 
+    margin-bottom: 4px; 
+  }
+  .pgn { 
+    font-size: 0.7em; 
+    color: #777; 
+    display: block; 
+    font-family: 'Courier New'; 
+    background: #f9f9f9; 
+    padding: 6px; 
+    margin-top: 8px; 
+    border: 1px inset #eee; 
+    word-break: break-all; 
+    border-radius: 4px; 
+  }
+  .wrnbnnr { 
+    font-weight: bold; 
+    display: none; 
+    text-align: center; 
+    background: #ffebeb; 
+    color: #b91c1c; 
+    padding: 12px; 
+    border-radius: 8px; 
+    margin: 0 auto 20px auto; 
+    max-width: 1000px; 
+    border: 1px solid #fecaca; 
+  }
+  .eye-tag { 
+    font-size: 0.7em; 
+    background: #eee; 
+    padding: 2px 6px; 
+    border-radius: 4px; 
+    margin-top: 5px; 
+    display: inline-block; 
+    font-weight: normal; 
+  }
+  .stats-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .stats-list li {
+    padding: 3px 0;
+    border-bottom: 1px dashed #ffe6f2;
+  }
+</style>
+</head>
+<body>
+<div class="pc">
+  <div class="hamster4">
+    <h3>Father (Male)</h3>
+    <div class="hamster"><label>Base Color 1 </label><select class="gn-inp" id="father-c1"></select></div>
+    <div class="hamster"><label>Base Color 2 </label><select class="gn-inp" id="father-c2"></select></div>
+    <div class="hamster"><label>Base Color 3 </label><select class="gn-inp" id="father-c3"></select></div>
+    <div class="hamster"><label>Dilutions/Modifiers </label><select class="gn-inp" id="father-dil"></select></div>
+    <div class="hamster"><label>Patterns </label><select class="gn-inp" id="father-pat"></select></div>
+    <div class="hamster"><label>Coat & Texture </label><select class="gn-inp" id="father-coat"></select></div>
+  </div>
+
+  <div class="hamster4">
+    <h3>Mother (Female)</h3>
+    <div class="hamster"><label>Base Color 1 </label><select class="gn-inp" id="mother-c1"></select></div>
+    <div class="hamster"><label>Base Color 2 </label><select class="gn-inp" id="mother-c2"></select></div>
+    <div class="hamster"><label>Base Color 3</label><select class="gn-inp" id="mother-c3"></select></div>
+    <div class="hamster"><label>Dilutions/Modifiers </label><select class="gn-inp" id="mother-dil"></select></div>
+    <div class="hamster"><label>Patterns </label><select class="gn-inp" id="mother-pat"></select></div>
+    <div class="hamster"><label>Coat & Texture </label><select class="gn-inp" id="mother-coat"></select></div>
+  </div>
+</div>
+
+<div id="lethal-popup" class="wrnbnnr">LETHAL GENE COMBINATION DETECTED: Dominant Spot (DsDs) is lethal in-utero. Litter size reduced by 25%.</div>
+
+<div id="stats-summary">
+  <h3 style="color: #cc6099; margin-top: 0;">Litter Expectations</h3>
+  <div id="stats-list" class="stats-list"></div>
+</div>
+
+<div id="offspring-display" class="offspring-display"></div>
+
+<script>
+let buildingUI = true;
+const locusham = {
+pl: { n: "Patternless", a: ["pl","+"] },
+  A: { n: "Black", a: ["a", "+"] },
+  B: { n: "Rust", a: ["b", "+"] },
+  P: { n: "Cinnamon", a: ["p", "+"] },
+  E: { n: "Cream", a: ["e", "+"] },
+  fg: { n: "Dark Grey", a: ["fg", "+"] },
+  Sg: { n: "Silver Grey", a: ["sg", "+"] },
+  Lg: { n: "Light Grey", a: ["lg", "+"] },
+  D: { n: "Dilute", a: ["d", "+"] },
+  To: { n: "Yellow", a: ["to", "+"], sex: true },
+  
+nm: { n: "No Modifier", a: ["nm","+"] },
+
+  cd: { n: "Dark Eared White", a: ["cd", "+"] },
+  ce: { n: "Extreme Dilute", a: ["ce", "+"] },
+  U: { n: "Umbrous", a: ["u", "+"] },
+  
+  
+  Wh: { n: "Roan/White Bellied", a: ["wh", "+"] },
+  Ds: { n: "Dominant Spot", a: ["ds", "+"] },
+  Ba: { n: "Banded", a: ["ba", "+"] },
+  rd: { n: "Recessive Dappled", a: ["rd", "+"] },
+  s: { n: "Piebald", a: ["s", "+"] },
+  
+   Sa: { n: "Satin", a: ["sa", "+"] },
+  rx: { n: "Rex", a: ["rx", "+"] },
+  l: { n: "Longhair", a: ["l", "+"] },
+  hr: { n: "Hairless", a: ["hr", "+"] }
+};
+
+const m = { 
+  "c1": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
+  "c2": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
+  "c3": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
+  "dil": ["cd","ce","U","D"], 
+  "pat": ["Wh","Ds","Ba","rd","s"], 
+  "coat": ["Sa","rx","l","hr"] 
+};
+
+const phenotypeorder = [
+{ n: "Anophthalmic White (Lethal/Blind)", p: 1000, f: g => isHomozygous(g, "Wh", "wh") },
+  { n: "Dominant Spot White (Lethal in Utero)", p: 990, f: g => isHomozygous(g, "Ds", "ds") },
+  { n: "Flesh Eared White", p: 950, f: g => isHomozygous(g, "cd", "cd") && isHomozygous(g, "P", "p") },
+  { n: "Dark Eared White", p: 940, f: g => isHomozygous(g, "cd", "cd") && !isHomozygous(g, "P", "p") },
+  { n: "Extreme Dilute", p: 930, f: g => isHomozygous(g, "ce", "ce") },
+  { n: "Extreme Dilute Rust", p: 932, f: g => isHomozygous(g, "B", "b") && isHomozygous(g, "ce", "ce") },
+  { n: "Extreme Dilute Black", p: 931, f: g => isHomozygous(g, "A", "a") && isHomozygous(g, "ce", "ce") },
+  { n: "Extreme Dilute Black Eyed Cream", p: 930, f: g => isHomozygous(g, "E", "e") && isHomozygous(g, "ce", "ce") },
+  { n: "Extreme Dilute Melanistic Yellow", p: 929, f: g => isHomozygous(g, "A", "a") && (isHomozygous(g, "To", "to") || isHeterozygous(g, "To", "to")) && isHomozygous(g, "ce", "ce") },
+  { n: "Extreme Dilute Black Tortoiseshell", p: 928, f: (g, sex) => sex === "female" && isHomozygous(g, "A", "a") && isHomozygous(g, "To", "to") && isHomozygous(g, "ce", "ce") }, 
+{ n: "Homo Extreme Dilute Golden", p: 933, f: g => isHomozygous(g, "ce", "ce") },
+{ n: "Het Extreme Dilute Golden", p: 934, f: g => g.cd && (g.cd.toLowerCase() === "cd/ce") },
+{ n: "Extreme Dilute Golden", p: 935, f: g => isHomozygous(g, "ce", "ce") && !isHomozygous(g, "A", "a") },
+{ n: "Black Eyed White", p: 920, f: g => isHomozygous(g, "e", "e") && isHomozygous(g, "Sg", "sg") },
+{ n: "Blue Mink", p: 900, f: g => isHomozygous(g, "fg", "fg") && isHomozygous(g, "E", "e") && isHomozygous(g, "P", "p") && hasAllele(g, "U", "u") },
+{ n: "Copper", p: 890, f: g => isHomozygous(g, "B", "b") && isHomozygous(g, "E", "e") && isHomozygous(g, "P", "p") && hasAllele(g, "U", "u") },
+{ n: "Red Eyed Ivory", p: 880, f: g => isHomozygous(g, "E", "e") && isHomozygous(g, "P", "p") && (isHomozygous(g, "fg", "fg") || hasAllele(g, "Lg", "lg") || hasAllele(g, "Sg", "sg")) },
+{ n: "Black Eyed Ivory", p: 870, f: g => isHomozygous(g, "E", "e") && (isHomozygous(g, "fg", "fg") || hasAllele(g, "Lg", "lg") || hasAllele(g, "Sg", "sg")) },
+{ n: "Champagne", p: 860, f: g => isHomozygous(g, "A", "a") && isHomozygous(g, "B", "b") && isHomozygous(g, "P", "p") },
+{ n: "Lilac Pearl", p: 850, f: g => isHomozygous(g, "fg", "fg") && isHomozygous(g, "P", "p") && (isHomozygous(g, "To", "to") || isHeterozygous(g, "To", "to")) },
+{ n: "Umbrous Silver Pearl", p: 845, f: g => hasAllele(g, "Sg", "sg") && hasAllele(g, "U", "u") && (isHomozygous(g, "To", "to") || isHeterozygous(g, "To", "to")) },
+{ n: "Silver Chocolate Sable", p: 842, f: g => hasAllele(g, "Sg", "sg") && hasAllele(g, "U", "u") && isHomozygous(g, "E", "e") && isHomozygous(g, "B", "b") },
+{ n: "Dark Grey Sable", p: 840, f: g => isHomozygous(g, "fg", "fg") && isHomozygous(g, "E", "e") && hasAllele(g, "U", "u") },
+{ n: "Light Grey Sable", p: 835, f: g => isHomozygous(g, "e", "e") && hasAllele(g, "Lg", "lg") && hasAllele(g, "U", "u") },
+{ n: "Silver Sable", p: 830, f: g => isHomozygous(g, "e", "e") && hasAllele(g, "Sg", "sg") && hasAllele(g, "U", "u") },
+{ n: "Mink (Caramel)", p: 820, f: g => isHomozygous(g, "e", "e") && isHomozygous(g, "P", "p") && hasAllele(g, "U", "u") },
+{ n: "Chocolate (Sable var.)", p: 810, f: g => isHomozygous(g, "b", "b") && isHomozygous(g, "e", "e") && hasAllele(g, "u", "u") },
+{ n: "Beige", p: 800, f: g => isHomozygous(g, "b", "b") && isHomozygous(g, "fg", "fg") },
+{ n: "Lilac", p: 790, f: g => isHomozygous(g, "fg", "fg") && isHomozygous(g, "p", "p") },
+{ n: "Dove", p: 780, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "p", "p") },
+{ n: "Chocolate (Black var.)", p: 770, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "b", "b") },
+{ n: "Pale Eared Cream", p: 760, f: g => isHomozygous(g, "b", "b") && isHomozygous(g, "e", "e") },
+{ n: "Dingy Black", p: 750, f: g => isHomozygous(g, "a", "a") && hasAllele(g, "sg", "sg") },
+{ n: "Umbrous Black Dilute", p: 690, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "d", "d") && hasAllele(g, "u", "u") },
+{ n: "Golden Dilute", p: 720, f: g => isHomozygous(g, "d", "d") && !isHomozygous(g, "a", "a") },
+{ n: "Blue", p: 710, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "d", "d") },
+{ n: "Lavender", p: 705, f: g => isHomozygous(g, "b", "b") && isHomozygous(g, "d", "d") },
+{ n: "Dove Dilute", p: 700, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "d", "d") && isHomozygous(g, "p", "p") },
+{ n: "Blue Yellow", p: 695, f: g => isHomozygous(g, "a", "a") && isHomozygous(g, "d", "d") && (isHomozygous(g, "To", "to") || isHeterozygous(g, "To", "to")) },
+{ n: "Smoke Pearl", p: 650, f: g => isHomozygous(g, "fg", "fg") && (isHomozygous(g, "To", "to") || isHeterozygous(g, "To", "to")) },
+{ n: "Sable", p: 600, f: g => isHomozygous(g, "e", "e") && hasAllele(g, "U", "u") },
+{ n: "Black", p: 500, f: g => isHomozygous(g, "a", "a") },
+{ n: "Red Eyed Cream", p: 495, f: g => isHomozygous(g, "e", "e") && isHomozygous(g, "p", "p") },
+{ n: "Black Eyed Cream", p: 490, f: g => isHomozygous(g, "e", "e") },
+{ n: "Cinnamon", p: 480, f: g => isHomozygous(g, "p", "p") },
+{ n: "Rust", p: 470, f: g => isHomozygous(g, "b", "b") },
+{ n: "Yellow", p: 460, f: g => hasAllele(g, "To", "to") },
+{ n: "Dark Grey", p: 450, f: g => isHomozygous(g, "fg", "fg") },
+{ n: "Silver Grey", p: 440, f: g => isHomozygous(g, "e", "e") && hasAllele(g, "Sg", "sg") },
+{ n: "Light Grey", p: 430, f: g => hasAllele(g, "Lg", "lg") },
+{ n: "Black Eyed Blonde", p: 690, f: g => isHomozygous(g, "b", "b") && hasAllele(g, "Lg", "lg") },
+{ n: "Blonde (Sg var.)", p: 685, f: g => isHomozygous(g, "p", "p") && isHomozygous(g, "Sg", "sg") },
+{ n: "Blonde", p: 680, f: g => isHomozygous(g, "p", "p") && hasAllele(g, "Lg", "lg") },
+{ n: "Black Eyed Honey", p: 675, f: g => isHomozygous(g, "b", "b") && hasAllele(g, "To", "to") },
+{ n: "Honey", p: 670, f: g => isHomozygous(g, "p", "p") && hasAllele(g, "To", "to") },
+{ n: "Yellow Black", p: 660, f: g => isHomozygous(g, "a", "a") && hasAllele(g, "To", "to") },
+{ n: "Golden", p: 0, f: g => true },
+{ n: "Banded", f: g => g.ba.includes("ba") },
+{ n: "Dominant Spot", f: g => isHomozygous(g, "Ds", "ds") },
+{ n: "Recessive Dappled", f: g => isHomozygous(g, "Rd", "rd") },
+{ n: "Roan", f: g => isHomozygous(g, "Wh", "wh") && !g.e.includes("e") },
+{ n: "White Bellied", f: g => isHomozygous(g, "Wh", "wh") && g.e.includes("e") },
+{ n: "Piebald", f: g => isHomozygous(g, "S", "s") },
+{ n: "Tortoiseshell", f: (g, sex) => sex === "female" && isHomozygous(g, "To", "to") }
+];
+function create() {
+  ["father", "mother"].forEach(p => {
+    Object.entries(m).forEach(([id, list]) => {
+      const s = document.getElementById(`${p}-${id}`);
+
+           if (id === "c2" || id === "c3") {
+        s.innerHTML = '<option value="">— None —</option>';
+      } else if (id === "pat") {
+        s.innerHTML = '<option value="">Patternless</option>';
+      } else if (id === "coat") {
+        s.innerHTML = '<option value="">Shorthair</option>';
+      } else if (id === "dil") {
+        s.innerHTML = '<option value="">— None —</option>';
+      } else {
+        s.innerHTML = '<option value="">Golden (Wildtype)</option>';
+      }
+
+      list.forEach(l => {
+               if (!locusham[l]) return;
+
+        const option = document.createElement("option");
+        option.value = l;
+        option.textContent = locusham[l].n;
+        s.appendChild(option);
+      });
+
+      s.value = "";
+
+     
+      s.addEventListener("change", () => {
+        if (!buildingUI) start();
+      });
+    });
+  });
+
+  buildingUI = false;
+  start();
+}
+function grab(pId) {
+    const result = {};
+    
+    
+    Object.keys(locusham).forEach(locus => {
+        result[locus] = [locusham[locus].a[1], locusham[locus].a[1]];
+        if (pId === "father" && locusham[locus].sex) result[locus][1] = "Y";
+    });
+
+    
+    ["c1", "c2", "c3", "dil", "pat", "coat"].forEach(category => {
+        const el = document.getElementById(`${pId}-${category}`);
+        if (el && el.value) {
+            const locus = el.value;
+            const mutantAllele = locusham[locus].a[0];
+            
+            
+            result[locus][0] = mutantAllele;
+            
+            
+            if (pId === "father" && locusham[locus].sex) {
+                result[locus][1] = "Y"; 
+            } else {
+                result[locus][1] = mutantAllele;
+            }
+        }
+    });
+
+    const finalResult = {};
+    Object.keys(result).forEach(locus => {
+        finalResult[locus] = result[locus].join("/");
+    });
+
+    return finalResult;
+}
+
+function formatGenotype(pupObj) {
+    const result = [];
+    const carries = [];
+    
+    const recessiveGenes = ["a", "b", "p", "e", "fg", "d", "cd", "ce", "sa", "rx", "l", "hr"]; 
+
+    Object.entries(pupObj).forEach(([locus, val]) => {
+        if (!locusham[locus] || locus === "sex") return;
+        const alleles = val.split("/");
+        const mutant = locusham[locus].a[0];
+        const wildtype = locusham[locus].a[1];
+
+        
+        if (alleles.includes(mutant)) {
+            const isHomozygous = alleles.filter(a => a === mutant).length === 2;
+            const isHemizygous = alleles.includes("Y");
+            
+           
+            if (!isHomozygous && !isHemizygous && recessiveGenes.includes(mutant)) {
+                carries.push(locusham[locus].n);
+            }
+            result.push(`${locus}:${val}`);
+        }
+    });
+
+    let html = `<span class="pgn-text">${result.join(" ")}</span>`;
+    if (carries.length > 0) {
+        html += `<div style="margin-top:4px;"><small style="color:#d97706;">Carries: ${carries.join(", ")}</small></div>`;
+    }
+    return html;
+}
+
+function combineGametes(fGametes, mGametes) {
+    const probTable = {};
+    
+    fGametes.forEach(fg => {
+        mGametes.forEach(mg => {
+            const g = {};
+            let sex = Math.random() > 0.5 ? "Male" : "Female";
+
+            Object.keys(locusham).forEach(locus => {
+                const da = fg[locus], ma = mg[locus];
+                if(da === "Y" || ma === "Y") {
+                    g[locus] = (da==="Y"?ma:da) + "/Y";
+                    sex = "Male";
+                } else {
+                    g[locus] = [da, ma].sort().join("/");
+                }
+            });
+
+            const key = JSON.stringify(g) + "|" + sex;
+            probTable[key] = (probTable[key] || 0) + 1;
+        });
+    });
+
+       const total = Object.values(probTable).reduce((a,b)=>a+b,0);
+    return Object.entries(probTable).map(([k,v])=>{
+        const [genotypeStr, sex] = k.split("|");
+        return { g: JSON.parse(genotypeStr), sex, prob: v/total };
+    });
+}
+function pupGenLower(pup) {
+  const lower = {};
+  Object.entries(pup).forEach(([locus, val]) => {
+    if (typeof val === "string") lower[locus] = val.toLowerCase();
+    else lower[locus] = val;
+  });
+  return lower;
+}
+function isHomozygous(g, locus, allele) {
+    const val = g[locus] || "";
+    const [a1, a2] = val.split("/");
+   
+    return a1.toLowerCase() === allele.toLowerCase() && a2.toLowerCase() === allele.toLowerCase();
+}
+
+function hasAllele(g, locus, allele) {
+    const val = (g[locus] || "").toLowerCase();
+    return val.includes(allele.toLowerCase());
+}
+
+function isHeterozygous(g, locus, allele) {
+    const val = g[locus] || "";
+    const [a1, a2] = val.split("/").map(a => a.toLowerCase());
+    return (a1 === allele.toLowerCase() && a2 !== allele.toLowerCase()) ||
+           (a2 === allele.toLowerCase() && a1 !== allele.toLowerCase());
+}
+function assignCoat(pup, lowerPup) {
+   
+    if (isHomozygous(lowerPup, "rx", "rx")) pup.coat = "Rex";
+    else if (isHomozygous(lowerPup, "l", "l")) pup.coat = "Longhair";
+    else if (isHomozygous(lowerPup, "hr", "hr")) pup.coat = "Hairless";
+    else if (isHomozygous(lowerPup, "sa", "sa")) pup.coat = "Satin";
+    else pup.coat = "Shorthair";
+}
+
+function start() {
+    const father = grab("father");
+    const mother = grab("mother");
+    const loci = Object.keys(locusham);
+
+    const litter = [];
+    const litterSize = 12;
+
+  
+    const sortedPhenotypes = [...phenotypeorder].sort((a, b) => (b.p || 0) - (a.p || 0));
+
+    for (let i = 0; i < litterSize; i++) {
+        const pup = {};
+        pup.sex = Math.random() > 0.5 ? "Male" : "Female";
+
+       
+        loci.forEach(locus => {
+            const fAlleles = father[locus].split("/");
+            const mAlleles = mother[locus].split("/");
+            pup[locus] = fAlleles[Math.floor(Math.random() * fAlleles.length)] + "/" +
+                         mAlleles[Math.floor(Math.random() * mAlleles.length)];
+        });
+
+        const lowerPup = pupGenLower(pup);  
+
+                
+        const match = sortedPhenotypes.find(ph => ph.f(lowerPup, pup.sex));
+        pup.p = match ? match.n : "Golden";
+
+        
+        pup.eye = isHomozygous(lowerPup, "e", "e") || isHomozygous(lowerPup, "p", "p") ? "Red" : "Black";
+
+        
+        pup.g = formatGenotype(pup);
+        assignCoat(pup, lowerPup);
+        
+        litter.push(pup);
+    }
+
+    
+    rr(litter, false, false, litter);
+}
+
+
+function rr(litter, lethal, whiteWarn, allPossible) {
+    const popup = document.getElementById("lethal-popup");
+    if (lethal) {
+        popup.style.display = "block";
+        popup.style.background = "#ffebeb";
+        popup.style.color = "#b91c1c";
+        popup.innerText = "LETHAL GENE DETECTED: Dominant Spot (DsDs) is lethal in utero. Litter size reduced.";
+    } else if (whiteWarn) {
+        popup.style.display = "block";
+        popup.style.background = "#fffbeb";
+        popup.style.color = "#92400e";
+        popup.innerText = "WARNING: Anophthalmic White (WhWh) detected. Pups may be born eyeless.";
+    } else {
+        popup.style.display = "none";
+    }
+
+ const counts = {};
+litter.forEach(p => {
+    counts[p.p] = (counts[p.p] || 0) + 1;
+});
+const total = litter.length;
+    const l = document.getElementById("stats-list");
+    l.innerHTML = "<ul>";
+    Object.entries(counts).sort((a,b) => b[1]-a[1]).forEach(([name, count]) => {
+        const perc = ((count / total) * 100).toFixed(1);
+        if (name.includes("Dominant Spot White")) return;
+        l.innerHTML += `<li><strong>${perc}%</strong> ${name}</li>`;
+    });
+    l.innerHTML += "</ul>";
+
+    
+    const cont = document.getElementById("offspring-display");
+    cont.innerHTML = "";
+
+    litter.forEach(p => {
+        const pupcard = document.createElement("div");
+        pupcard.className = "hamster2";
+        pupcard.innerHTML = `
+        <div class="img-placeholder">
+            <span>${p.sex}</span>
+            <span class="eye-tag" style="background:${p.eye==='Red'?'#ffcccc':(p.eye==='Ruby'?'#cc0000':'#eee')}; 
+            color:${p.eye==='Black'?'#444':(p.eye==='Brown'?'#fff':'#b91c1c')}">${p.eye} Eyes</span>
+        </div>
+        <div class="pupcard-content">
+            <span class="pnm">${p.p}</span>
+            <small style="color:#888">${p.coat}</small>
+            <span class="pgn">${p.g}</span>
+        </div>`;
+        cont.appendChild(pupcard);
+    });
+}
+
+window.onload = create;
+</script>
+</body>
+</html>
