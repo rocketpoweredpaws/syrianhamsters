@@ -213,19 +213,20 @@ nm: { n: "No Modifier", a: ["nm","+"] },
   rd: { n: "Recessive Dappled", a: ["rd", "+"] },
   s: { n: "Piebald", a: ["s", "+"] },
   
-   Sa: { n: "Satin", a: ["sa", "+"] },
-  rx: { n: "Rex", a: ["rx", "+"] },
-  l: { n: "Longhair", a: ["l", "+"] },
-  hr: { n: "Hairless", a: ["hr", "+"] }
+Sa: { n: "Satin", a: ["sa", "+"] },
+rx: { n: "Rex", a: ["rx", "+"] },
+l: { n: "Longhair", a: ["l", "+"] },
+hr: { n: "Hairless", a: ["hr", "+"] },
+Tu: { n: "Chushy", a: ["tu", "+"] }  
 };
 
 const m = { 
-  "c1": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
-  "c2": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
-  "c3": ["A","B","P","E","fg","Sg","Lg","To","U","d"], 
-  "dil": ["cd","ce","U","D"], 
+  "c1": ["A","B","P","E","fg","Sg","Lg","To"], 
+  "c2": ["A","B","P","E","fg","Sg","Lg","To"], 
+  "c3": ["A","B","P","E","fg","Sg","Lg","To"], 
+  "dil": ["cd","ce","U","d"], 
   "pat": ["Wh","Ds","Ba","rd","s"], 
-  "coat": ["Sa","rx","l","hr"] 
+ "coat": ["Sa","rx","l","hr","Tu"]
 };
 
 const phenotypeorder = [
@@ -308,7 +309,7 @@ function create() {
       } else if (id === "dil") {
         s.innerHTML = '<option value="">— None —</option>';
       } else {
-        s.innerHTML = '<option value="">Golden (Wildtype)</option>';
+        s.innerHTML = '<option value="">Golden (Agouti)</option>';
       }
 
       list.forEach(l => {
@@ -456,7 +457,8 @@ function isHeterozygous(g, locus, allele) {
            (a2 === allele.toLowerCase() && a1 !== allele.toLowerCase());
 }
 function assignCoat(pup, lowerPup) {
-   
+
+   if (isHomozygous(lowerPup, "Tu", "Tu")) pup.coat = "Chushy";
     if (isHomozygous(lowerPup, "rx", "rx")) pup.coat = "Rex";
     else if (isHomozygous(lowerPup, "l", "l")) pup.coat = "Longhair";
     else if (isHomozygous(lowerPup, "hr", "hr")) pup.coat = "Hairless";
